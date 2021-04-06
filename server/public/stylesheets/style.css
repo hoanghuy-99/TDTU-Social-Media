@@ -1,0 +1,431 @@
+body{
+    font-family: 'Times New Roman', Times, serif;
+}
+/* HEADER */
+    header{
+        position: relative;
+        top: 0;
+        border-bottom: 3px solid #0061AD;
+    }
+    #logo{
+        height: 5rem;
+        width: 10rem;
+    }
+    #title_header{
+        float: left;
+        font-size: 20px;
+        margin-top: 20px;
+        font-weight: bold;
+        padding-left: 20px;
+    }
+    #header_logo_div{
+        float: left;
+    }
+    #info{
+        float: right;
+        font-size: 20px;
+        margin-top: 20px;
+        padding-left:20px;
+        padding-right: 20px;
+    }
+    #info_div{
+        float: left;
+        padding-right: 20px;
+    }
+    #info_name{
+        margin-bottom: 0px;
+    }
+    #btn_logout{
+        color: black;
+        float: right;
+        font-size: 16px;
+    }
+    #info_avatar_div{
+        float: right;
+    }
+    #info_avatar{
+        border-radius: 100%;
+        width: 2rem;
+        height: 2rem
+    }
+    #search{    
+        width: 75%;
+        border-radius: 30px;
+        height: 33px;
+        margin-top: 20px;
+        text-align: center;
+        font-size: 20px;
+    }
+    #search_contain{
+        text-align: right;
+        float: right;
+    }
+    #btn_search{
+        color: black;
+    }
+    #img_search{
+        font-size: 25px;
+        margin-left: 10px;
+    }
+    #date{
+        float: right;
+        font-size: 20px;
+        margin-top: 20px;
+        padding-left:20px;
+        padding-right: 20px;
+    }
+/* ----- */
+
+/* BODY */
+
+    /* NAVIGATION */
+        #navigation_div{
+            background-color: #33485c;
+            color: white;
+            position: fixed;
+            height: 100%
+        }
+        #navigation_title{
+            background-color: #2f4355;
+            text-align: center;
+            font-weight: bold;
+            padding: 10px;
+        }
+    /* ----- */
+
+    /* MAIN_BODY */
+
+        /* BREADCRUMB */
+            #body_div{
+                position: fixed;
+                height:80%;
+                left:16.7%;
+                overflow-y: scroll;
+                background-color: #f0f2f5;
+            }
+            #nav_breadcrumb{
+                --bs-breadcrumb-divider: '>';
+            }
+            #ol_breadcrumb{
+                padding:25px;
+                font-size: 23px;
+                background-color: #0061AD;
+                color: white;
+                box-shadow: 0px 2px 6px grey;
+            }
+        /* ----- */
+
+        /* ADMIN PAGE */
+            #registerFaculty{
+                width: 60%;
+                box-shadow: 2px 2px 5px;
+                border-radius: 5px;
+                background-color: white;
+            }
+            .list_checkbox{
+            list-style-type: none;
+            }
+            #btn_registerFaculty{
+                margin-bottom: 10px;
+                float: right;
+            }
+        /* ----- */
+
+        /* NOTIFICATION PAGE */
+            #noti_search_div{
+                width: 80%;
+                padding: 20px;
+                box-shadow: 2px 2px 5px;
+                border-radius: 5px;
+                background-color: white;
+            }
+            #select_facutly{
+                margin-left: 5px;
+            }
+            #noti_list_div{
+                width: 90%;
+                margin-top: 20px;
+                padding: 20px;
+                box-shadow: 2px 2px 5px;
+                border-radius: 5px;
+                background-color: white;
+            }
+            .noti_text{
+                height: 25px;
+                overflow: hidden;
+            }
+            #faculty_time{
+                float: right;
+            }
+            .last_component{
+                margin-bottom: 10px;
+            }
+        /* ----- */
+            
+        /* FACULTY NOTIFICATION HOME PAGE*/
+            #faculty_noti_home_div{
+                width: 60%;
+                padding: 20px;
+                box-shadow: 2px 2px 5px;
+                border-radius: 5px;
+                background-color: white;
+            }
+            #select_facutly_home_div{
+                display: flex;
+            }
+            #select_facutly_home{
+                font-size: 20px;
+                margin-left: 5px;
+            }
+            #btn_add_noti{
+                margin-bottom: 10px;
+            }
+            #noti_title{
+                float: left;
+            }
+            #fix_delete_noti{
+                float: right;
+            }
+            #btn_delete_noti{
+                font-size: 20px;
+                margin-left: 10px;
+                color: red;
+            }
+        /* ----- */
+
+        /* DETAIL NOTIFICATION  */
+            #detai_noti_title{
+                text-align: center;
+            }
+        /* ----- */
+
+        /* ADD NOTIFICATION  */
+            #cancel_post_noti_div{
+                justify-content: flex-end;
+            }
+            #post_noti_btn{
+                margin-left: 10px;
+            }
+        /* ----- */
+
+        /* STUDENT INFO PAGE*/
+            #student_info_div{
+                width: 80%;
+                padding: 20px;
+                box-shadow: 2px 2px 5px;
+                border-radius: 5px;
+                background-color: white;
+            }
+            #student_info_avatar_div{
+                text-align: center;
+            }
+            #student_info_avatar{
+                border-radius: 100%;
+                height: 12rem;
+                width: 12rem;
+            }
+            #btn_student_info_avatar{
+                text-decoration: unset;
+                color: black;
+                font-weight: bold;
+            }
+            #btn_student_info_avatar:hover{
+                color: red;
+            }
+        /* ----- */
+
+        /* HOME */
+            #xahoi{
+                position: fixed;height:80%;
+                overflow-y: scroll;
+            }
+            #home_notification{
+                position: fixed;
+                height: 100%;
+                left: 75%;
+                padding-left: 20px;
+                background-color: white;
+            }
+            #home_title_notification{
+                font-size: 25px;
+                font-weight: bold;
+            }
+            .home_notification_card{
+                width: 53%;
+            }
+            .home_notification_card_text{
+                height: 50px;
+                overflow: hidden;
+            }
+            .btn_home_detail_noti{
+                float: left;
+            }
+            .home_faculty_date{
+                float: right;
+                font-size: 12px;
+                font-style: italic
+            }
+        /* ----- */
+
+        /* MODAL CHANGE AVATAR */
+            .w3-teal{
+                color: black !important;
+                background-color: white !important;
+                border-radius: 5px;
+            }
+            #btn_close_modal{
+                font-size: 20px;
+                color: red;
+            }
+            .w3-display-topright{
+                border-radius: 5px;
+            }
+            .w3-modal-content{
+                border-radius: 5px;
+                box-shadow:1px 1px 10px;
+            }
+            #change_avatar_img{
+                border-radius: 100%;
+                height: 16rem;
+                width: 16rem;
+            }
+            #avatar_file{
+                display: none;
+            }
+            #btn_up_avatar{
+                margin-top: 10px;
+            }
+            #change_avatar_div{
+                text-align: center;
+            }
+            #confirm_avatar_div{
+                text-align: right;
+                margin-bottom: 10px;
+            }
+        /* ----- */
+
+        /* DÙNG CHUNG */
+            .space_btn{
+                justify-content: space-evenly;
+            }
+            .row{
+                --bs-gutter-x:0px;
+            }
+            .container{
+                padding-left: 20px;
+            }
+            .button{
+                text-decoration: unset;
+                color: white;
+                font-weight: bold;
+                background-color: transparent;
+                cursor: pointer;
+            }
+            .card:hover{
+                background: aliceblue;
+            }
+            .list-group-item{
+                color: white;
+                background-color: transparent;
+                border: 13px solid rgba(0,0,0,.125);
+            }
+            .form-check{
+                padding-left: 0px;
+            }
+            .clear{
+                clear: both;
+            }
+        /* ----- */
+    /* ----- */
+/* ----- */
+
+/* FOOTER */
+    footer{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #0061AD;
+        color: white;
+        text-align: center;
+        padding: 15px;
+    }
+/* ----- */
+
+/* RESPONSIVE */
+@media only screen and (max-width: 1444px) {
+    #body_div{
+        height: 74%;
+    }
+}
+@media only screen and (max-width: 1023px) {
+    #title{
+        font-size: 24px!important;
+    }
+    .col-12{
+        position: unset!important;
+    }
+    footer{
+        position: unset!important;
+    }
+    .container{
+        margin-top: 2%!important;
+    }
+    #home_notification{
+        display: none;
+    }
+    #xahoi{
+        position: unset!important;
+    }
+    #registerFaculty{
+        width: 100%!important;
+        border-radius: 0px;
+    }
+    #btn_registerFaculty{
+        margin-right: 20px;
+    }
+    #select_facutly{
+        margin-left: 0px;
+    }
+    #faculty_noti_home_div{
+        width: 100%;
+    }
+    #noti_list_div{
+        width: 100%;
+    }
+    #post_noti_btn{
+        margin-left: 0px;
+    }
+}
+@media only screen and (max-width: 767px) {
+    #cmt{
+        width: 80%!important;
+    }
+    #title_header{
+        float: none !important;;
+        margin-top: 0px !important;
+    }
+    #date{
+        float: none;
+        margin-top: 0px;
+    }
+    #account{
+        margin-top: 0px;
+    }
+    #search{
+        margin-top: 0px;
+        margin-bottom: 10px;
+    }
+    #search_contain{
+        float: none;
+        text-align: center;
+    }
+    #info{
+        margin-top: 0px;
+    }
+}
+@media only screen and (max-width: 360px) {
+    #cmt{
+        width: 68%!important;
+    }
+}
+/* ----- */
