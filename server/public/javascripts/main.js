@@ -1,7 +1,4 @@
 // LẤY NGÀY
-d = new Date().toDateString()
-t = new Date().toLocaleTimeString()
-document.getElementById("date").innerHTML = d+","+t;
 // -----
 // Modal change Avatar
 function openModal(){
