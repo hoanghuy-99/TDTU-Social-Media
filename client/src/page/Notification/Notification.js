@@ -1,3 +1,4 @@
+const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
 const Notification = () =>{
     return(
         <div>
@@ -93,3 +94,4 @@ const Notification = () =>{
         </div>
     )
 }
+export default Notification

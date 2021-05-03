@@ -1,4 +1,9 @@
+const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
+
 const FacultyInfo = ({children}) =>{
+    function openModal(){
+        document.getElementById('modal_change_avatar').style.display='block'
+    }
     return(
         <div>
            <div>
@@ -50,3 +55,4 @@ const FacultyInfo = ({children}) =>{
         </div>
     )
 }
+export default FacultyInfo

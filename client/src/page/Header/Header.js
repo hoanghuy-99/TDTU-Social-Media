@@ -1,3 +1,5 @@
+const {useEffect,useState} = React
+const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
 const Header = () =>{   
     useEffect(()=>{
         var d = new Date().toDateString()
@@ -37,3 +39,4 @@ const Header = () =>{
         </header>
     )
 }
+export default Header
