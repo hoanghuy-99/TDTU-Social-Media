@@ -1,3 +1,5 @@
+const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
+
 const FacultyHome = () =>{
     return(
         <div>
@@ -56,3 +58,4 @@ const FacultyHome = () =>{
         </div>
     )
 }
+export default FacultyHome

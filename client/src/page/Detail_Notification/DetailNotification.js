@@ -30,3 +30,4 @@ const DetailNotification = () =>{
         </div>
     )
 }
+export default DetailNotification

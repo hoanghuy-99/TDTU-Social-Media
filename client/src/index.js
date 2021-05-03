@@ -1,5 +1,5 @@
-function add(a, b){
-    return a + b
-}
-
-console.log(add(2, 3))
+import App from './App.js'
+ReactDOM.render(
+      <App />,
+    document.getElementById('root')
+);

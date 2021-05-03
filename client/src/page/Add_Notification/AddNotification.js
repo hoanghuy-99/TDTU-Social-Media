@@ -54,3 +54,4 @@ const AddNotification = () =>{
         </div>
     )
 }
+export default AddNotification

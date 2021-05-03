@@ -1,3 +1,5 @@
+const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
+
 const Navigation = ({children}) =>{
     return(
         <div className="row">
@@ -20,3 +22,4 @@ const Navigation = ({children}) =>{
             </div>
     )
 }
+export default Navigation
