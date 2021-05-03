@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec npm run dev",
-    "dev": "npm run build && node devServer.js",
+    "start": "nodemon --exec npm run build",
+    "dev": "node devServer.js",
     "buildToServer": "npm run build && ncp ./public/ ./server/public/ ",
     "build": "webpack --mode production"
   },
