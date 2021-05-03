@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --exec npm run dev",
-    "dev": "webpack --mode development && node devServer.js"
+    "dev": "npm run build && node devServer.js",
+    "buildToServer": "npm run build && ncp ./public/ ./server/public/ -v ",
+    "build": "webpack --mode production"
   },
   "keywords": [],
   "author": "",
@@ -17,9 +19,9 @@
     "@babel/preset-react": "^7.13.13",
     "babel-loader": "^8.2.2",
     "concat": "^1.0.3",
-    "cpx": "^1.5.0",
     "css-loader": "^5.2.4",
     "express": "^4.17.1",
+    "ncp": "^2.0.0",
     "nodemon": "^2.0.7",
     "webpack": "^5.36.2",
     "webpack-merge-and-include-globally": "^2.3.4"
