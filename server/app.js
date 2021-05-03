@@ -18,6 +18,7 @@ app.use((req, res)=>{
     console.log('view')
     res.sendFile(path.join(__dirname,'./public/index.html'))
 })
+
 app.use(()=>{
     console.log('error')
 })
