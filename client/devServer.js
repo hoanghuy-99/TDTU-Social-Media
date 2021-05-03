@@ -10,5 +10,5 @@ server.use((req, res)=>{
 })
 
 server.listen(port, ()=>{
-    console.log('React is running on port'+port)
+    console.log('React is running on http://localhost:'+port)
 })
