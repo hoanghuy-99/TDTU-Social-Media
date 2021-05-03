@@ -1,26 +1,39 @@
 
-
 const App = () => {
-    const [count, setCount] = useState(0)
-    const click = ()=>{
-        setCount(c => c + 1)
-    }
     return (
+        <div>
         <BrowserRouter>
-            <div>{count}</div>
-            <button onClick={click}>Add count 2</button>
-            <ul>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/register">Register</Link></li>
-            </ul>
-            <Switch>
-                <Route path="/login" component={Login} />
-                <Route path="/register" component={Register} />
-            </Switch>
+            <Header/>
+            <Navigation>
+                <Route path="/studentInfo">
+                    <Student_Info>
+                        <Modal_Change_Avatar/>
+                    </Student_Info>
+                </Route>
+                <Route path="/addFaculty">
+                    <Admin></Admin>
+                </Route>
+                <Route path="/noti">
+                    <Notification/>
+                </Route>
+                <Route path="/addNoti">
+                    <AddNotification/>
+                </Route>
+                <Route path="/detailNoti">
+                    <DetailNotification/>
+                </Route>
+                <Route path="/faculty">
+                    <FacultyHome/>
+                </Route>
+                <Route path="/facultyInfo">
+                    <FacultyInfo>
+                        <Modal_Change_Avatar/>
+                    </FacultyInfo>
+                </Route>
+            </Navigation>
+            <Footer/>
         </BrowserRouter>
+        </div>
 )}
-
-const Login = () => <h1>Login</h1>
-const Register = () => <h1>Register</h1>
 
 ReactDOM.render(<App/>, document.querySelector('#root'));
