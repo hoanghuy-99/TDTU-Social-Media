@@ -20,9 +20,11 @@ body{
     #title_header{
         float: left;
         font-size: 20px;
-        margin-top: 20px;
         font-weight: bold;
-        padding-left: 20px;
+        text-align: center;
+        margin: 10px 75px;
+        justify-content: center;
+        vertical-align: middle;
     }
     #header_logo_div{
         float: left;

@@ -8,7 +8,7 @@ const Header = () =>{
         setInterval(() => {
             var d = new Date().toDateString()
             var t = new Date().toLocaleTimeString()
-            setDate(d+","+t)
+            setDate(d + ", " + t)
         }, 1000);
     },[])
     const [date,setDate] = useState('')
@@ -18,7 +18,8 @@ const Header = () =>{
                 <img src="/img/logoTDT.png" id="logo"/>
             </div>
             <div id="title_header">
-                <p>HỆ THỐNG THÔNG BÁO/MẠNG XÃ HỘI SINH VIÊN</p>
+                <div>HỆ THỐNG THÔNG BÁO</div>
+                <div>MẠNG XÃ HỘI SINH VIÊN</div>
             </div>
             <div id="info">
                 <div id="info_div">
