@@ -28,8 +28,9 @@ const Admin = () =>{
                                 </div>
                                 <div className="form-check">
                                     <div className="row">
-                                        <div className="col-lg-3">
-                                            <ul className="list_checkbox">
+                                        <div className="col-lg-12">
+                                            <label htmlFor="exampleInputPassword1"><strong>Chọn phòng ban quản lý:</strong></label>
+                                            <ul className="list_checkbox" id="list_checkbox">
                                                 <li>
                                                     <input type="checkbox" className="form-check-input" id="CTHSSV"/>
                                                     Phòng CTHSSV
@@ -54,10 +55,6 @@ const Admin = () =>{
                                                     <input type="checkbox" className="form-check-input" id="EnterpriseRoom"/>
                                                     Doanh nghiệp, cựu sinh viên
                                                 </li>
-                                            </ul>
-                                        </div>
-                                        <div className="col-lg-3">
-                                            <ul className="list_checkbox">
                                                 <li>
                                                     <input type="checkbox" className="form-check-input" id="FinanceRoom"/>
                                                     Phòng tài chính
@@ -82,10 +79,6 @@ const Admin = () =>{
                                                     <input type="checkbox" className="form-check-input" id="Law"/>
                                                     Khoa Luật
                                                 </li>
-                                            </ul>
-                                        </div>
-                                        <div className="col-lg-3">
-                                            <ul className="list_checkbox">
                                                 <li>
                                                     <input type="checkbox" className="form-check-input" id="EIF"/>
                                                 Ngoại ngữ-Tin học-Bồi dưỡng
@@ -110,10 +103,6 @@ const Admin = () =>{
                                                     <input type="checkbox" className="form-check-input" id="QTKD"/>
                                                 Khoa Quản trị kinh doanh
                                                 </li>
-                                            </ul>
-                                        </div>
-                                        <div className="col-lg-3">
-                                            <ul className="list_checkbox">
                                                 <li>
                                                     <input type="checkbox" className="form-check-input" id="MT_BHLD"/>
                                                 Môi trường và bảo hộ lao động
