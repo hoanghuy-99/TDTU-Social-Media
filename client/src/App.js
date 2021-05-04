@@ -10,7 +10,12 @@ import AddNotification from './page/Add_Notification/AddNotification'
 import DetailNotification from './page/Detail_Notification/DetailNotification'
 import FacultyHome from './page/FacultyHome/FacultyHome'
 import FacultyInfo from './page/Faculty_Info/FacultyInfo'
+<<<<<<< Updated upstream
 import Home from './page/Home/Home'
+=======
+import Login from './page/Login/Login'
+
+>>>>>>> Stashed changes
 const App = () =>{
     return (
         <div>
@@ -18,10 +23,17 @@ const App = () =>{
             <Header/>
             <Navigation>
                 <Switch>
+<<<<<<< Updated upstream
                     <Route path="/home">
                         <Home></Home>
                     </Route>
                     <Route path="/student">
+=======
+                    <Route path="/login">
+                        <Login></Login>
+                    </Route>
+                    <Route path="/studentInfo">
+>>>>>>> Stashed changes
                         <Student_Info>
                             <Modal_Change_Avatar/>
                         </Student_Info>
