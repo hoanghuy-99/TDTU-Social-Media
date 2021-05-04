@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon -w .env app.js"
+    "dev": "nodemon -w . -w .env app.js"
   },
   "keywords": [],
   "author": "",

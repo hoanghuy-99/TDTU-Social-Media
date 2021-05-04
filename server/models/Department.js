@@ -5,5 +5,5 @@ const schema = new mongoose.Schema({
     name: { type:String, required: true},
 })
 
-module.exports = mongoose.model('Category', schema)
+module.exports = mongoose.model('Department', schema)
 
