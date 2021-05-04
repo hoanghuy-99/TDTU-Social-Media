@@ -123,7 +123,11 @@ body{
                 background-color: white;
             }
             .list_checkbox{
-            list-style-type: none;
+                list-style-type: none;
+                border-radius: 3px;
+                box-shadow: 1px 1px 2px;
+                overflow-y: scroll;
+                height: 200px;
             }
             #btn_registerFaculty{
                 margin-bottom: 10px;

@@ -10,6 +10,9 @@ import AddNotification from './page/Add_Notification/AddNotification'
 import DetailNotification from './page/Detail_Notification/DetailNotification'
 import FacultyHome from './page/FacultyHome/FacultyHome'
 import FacultyInfo from './page/Faculty_Info/FacultyInfo'
+import Home from './page/Home/Home'
+import Login from './page/Login/Login'
+
 const App = () =>{
     return (
         <div>
@@ -17,6 +20,13 @@ const App = () =>{
             <Header/>
             <Navigation>
                 <Switch>
+                    <Route path="/home">
+                        <Home></Home>
+                    </Route>
+                    <Route path="/student">
+                    <Route path="/login">
+                        <Login></Login>
+                    </Route>
                     <Route path="/studentInfo">
                         <Student_Info>
                             <Modal_Change_Avatar/>
@@ -25,13 +35,13 @@ const App = () =>{
                     <Route path="/admin">
                         <Admin></Admin>
                     </Route>
-                    <Route path="/noti">
+                    <Route path="/notification">
                         <Notification/>
                     </Route>
-                    <Route path="/addNoti">
+                    <Route path="/addNotification">
                         <AddNotification/>
                     </Route>
-                    <Route path="/detailNoti">
+                    <Route path="/detailNotification">
                         <DetailNotification/>
                     </Route>
                     <Route path="/faculty">
