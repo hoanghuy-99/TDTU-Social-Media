@@ -6,10 +6,10 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 //Kết nối database
-const connectDatabase = require('./db')
-connectDatabase().then(()=>{
-    require('./demo')()
-})
+// const connectDatabase = require('./db')
+// connectDatabase().then(()=>{
+//     require('./demo')()
+// })
 
 
 app.use(express.static(path.join(__dirname,'./public')))
