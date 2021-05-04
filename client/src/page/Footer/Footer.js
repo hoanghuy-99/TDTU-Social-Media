@@ -3,7 +3,7 @@ const Footer = () =>{
         <footer>
             <div>
                         ©2021 Đại học Tôn Đức Thắng <br/>
-            Ứng dụng được phát triển Vũ Hoàng Huy, Đoàn Tuấn Kiệt, Dương Hữu Nguyên
+            Ứng dụng được phát triển bởi Vũ Hoàng Huy, Đoàn Tuấn Kiệt, Dương Hữu Nguyên
             </div>
         </footer>
     )

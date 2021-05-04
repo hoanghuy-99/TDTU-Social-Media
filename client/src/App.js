@@ -1,4 +1,4 @@
-const { Link,Redirect, Route, BrowserRouter, Switch } = ReactRouterDOM;
+const { Link, Redirect, Route, BrowserRouter, Switch } = ReactRouterDOM;
 import Student_Info from './page/Student_Info/index'
 import Header from './page/Header/Header'
 import Navigation from './page/Navigation/Navigation'
@@ -17,45 +17,49 @@ const App = () =>{
     return (
         <div>
         <BrowserRouter>
-                <Switch>
-                    <Route path="/" exact>
-                        <Redirect to="/home"></Redirect>
-                    </Route>
-                    <Route path="/login">
-                            <Login></Login>
-                    </Route>
+            <Switch>
+                <Route path="/login" exact>
+                    <Login></Login>
+                </Route>
+                <Route path="/" exact>
+                    <Redirect to="/home"/>
+                </Route>
+                <Route path="/">
                     <Header/>
                     <Navigation>
-                        <Route path="/home">
-                            <Home></Home>
-                        </Route>
-                        <Route path="/student">
-                            <Student_Info>
-                                <Modal_Change_Avatar/>
-                            </Student_Info>
-                        </Route>
-                        <Route path="/admin">
-                            <Admin></Admin>
-                        </Route>
-                        <Route path="/notification">
-                            <Notification/>
-                        </Route>
-                        <Route path="/addNotification">
-                            <AddNotification/>
-                        </Route>
-                        <Route path="/detailNotification">
-                            <DetailNotification/>
-                        </Route>
-                        <Route path="/faculty">
-                            <FacultyHome/>
-                        </Route>
-                        <Route path="/facultyInfo">
-                            <FacultyInfo>
-                                <Modal_Change_Avatar/>
-                            </FacultyInfo>
-                        </Route>
+                        <Switch>
+                            <Route path="/home" exact>
+                                <Home></Home>
+                            </Route>
+                            <Route path="/student" exact>
+                                <Student_Info>
+                                    <Modal_Change_Avatar/>
+                                </Student_Info>
+                            </Route>
+                            <Route path="/admin">
+                                <Admin></Admin>
+                            </Route>
+                            <Route path="/notification" exact>
+                                <Notification/>
+                            </Route>
+                            <Route path="/addNotification" exact>
+                                <AddNotification/>
+                            </Route>
+                            <Route path="/detailNotification" exact>
+                                <DetailNotification/>
+                            </Route>
+                            <Route path="/faculty" exact>
+                                <FacultyHome/>
+                            </Route>
+                            <Route path="/facultyInfo" exact>
+                                <FacultyInfo>
+                                    <Modal_Change_Avatar/>
+                                </FacultyInfo>
+                            </Route>
+                        </Switch>
                     </Navigation>
-                </Switch>
+                </Route>
+            </Switch>
             <Footer/>
         </BrowserRouter>
         </div>
