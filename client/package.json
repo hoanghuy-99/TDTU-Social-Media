@@ -8,7 +8,7 @@
     "start": "nodemon --exec npm run dev",
     "dev": "node devServer.js",
     "preinstall": "npm install -D webpack-cli",
-    "build": "webpack --mode production"
+    "build": "npm install -D webpack-cli && webpack --mode production"
   },
   "keywords": [],
   "author": "",
