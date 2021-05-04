@@ -4,26 +4,26 @@ const path = require('path')
 const app = express()
 
 const PORT = process.env.PORT || 3000
-
-//Kết nối database
-// const connectDatabase = require('./db')
-// connectDatabase().then(()=>{
-//     require('./demo')()
-// })
+const connectDatabase = require('./db')
 
 
 app.use(express.static(path.join(__dirname,'./public')))
 
 
 app.use((req, res)=>{
-    console.log('view')
     res.sendFile(path.join(__dirname,'./public/index.html'))
 })
 
-app.use(()=>{
-    console.log('error')
-})
+//Chạy server
+const start = async ()=>{
+    //Kết nối database
+    await connectDatabase().then(()=>{
+        console.log('Database connected')
+    })
+    
+    app.listen(PORT, ()=>{
+        console.log('server running on http://localhost:'+PORT);
+    })
+}
 
-app.listen(PORT, ()=>{
-    console.log('server running on http://localhost:'+PORT);
-})
+start()
