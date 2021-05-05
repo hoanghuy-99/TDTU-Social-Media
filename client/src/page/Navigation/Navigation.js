@@ -12,7 +12,7 @@ const Navigation = ({children}) =>{
                         <Link to="#" className="list-group-item list-group-item-action"><i className="fas fa-bell"></i>Thông báo</Link>
                         <Link to="#" className="list-group-item list-group-item-action"><i className="fas fa-key"></i>Đổi mật khẩu</Link>
                         <Link to="#" className="list-group-item list-group-item-action"><i className="fas fa-user"></i>Đổi thông tin</Link>
-                        <Link to="#" className="list-group-item list-group-item-action"><i className="fas fa-tasks-alt"></i>Quản lý thông báo</Link>
+                        <Link to="#" className="list-group-item list-group-item-action"><i className="fas fa-tasks"></i>Quản lý thông báo</Link>
                         <Link to="#" className="list-group-item list-group-item-action"><i className="fas fa-user-plus"></i>Tạo tài khoản Phòng/Ban</Link>
                     </div>
                 </div>

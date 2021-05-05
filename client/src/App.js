@@ -58,9 +58,9 @@ const App = () =>{
                             </Route>
                         </Switch>
                     </Navigation>
+                    <Footer/>
                 </Route>
             </Switch>
-            <Footer/>
         </BrowserRouter>
         </div>
     )
