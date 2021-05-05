@@ -755,6 +755,7 @@ i {
             #btn_close_modal{
                 font-size: 20px;
                 color: red;
+                padding: 0;
             }
             .w3-display-topright{
                 border-radius: 5px;
