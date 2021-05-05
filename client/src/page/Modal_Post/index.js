@@ -38,7 +38,7 @@ const Modal_Post = ()=>{
                     </div>
                     <div>
                         <textarea placeholder="Bạn đang nghĩ gì?" id="value_post"></textarea>
-                        <img src="" id="img_modal_post" hidden/>
+                        <img src="" id="img_modal_post" />
                         <video hidden>
                             <source src="" id="vid_modal_post"></source>
                         </video>
@@ -50,7 +50,7 @@ const Modal_Post = ()=>{
                         </div>
                         <div className="col-lg-6">
                             <input id="video-file" type="file" hidden/>
-                            <button className="btn btn-danger btn_social    " onClick={activeVideo}><i className="fas fa-video"></i>Video</button>
+                            <button className="btn btn-danger btn_social" onClick={activeVideo}><i className="fas fa-video"></i>Video</button>
                         </div>
                     </div>
                     <hr/>
