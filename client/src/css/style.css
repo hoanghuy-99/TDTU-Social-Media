@@ -110,6 +110,7 @@ i {
                 height:81%;
                 left:16.7%;
                 overflow-y: scroll;
+                padding-bottom: 20px;
                 background-color: #f0f2f5;
             }
             #nav_breadcrumb{

@@ -1,25 +1,12 @@
 import {getToken} from '../cookie.js'
 var host = window.location.protocol + "//" + window.location.host
 
-async function requestUserById() {
-    const response = await fetch(host + '/api/student/me',{
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': getToken(),
-        },
-    })
-    const data = await response.json()
-    return data
-}
-async function requestChangeInfoById(name,classroom,faculty){
+async function requestNewTeacher(emai,username,password,name,department) {
     const req = {
-        name,
-        class:classroom,
-        faculty
+        emai,username,password,name,department
     }
-    const response = await fetch(host + '/api/users/student/me',{
-        method: "PATCH",
+    const response = await fetch(host + '/api/teachers',{
+        method: "POST",
         headers: {
             'Content-Type': 'application/json',
             'Authorization': getToken(),
@@ -30,8 +17,8 @@ async function requestChangeInfoById(name,classroom,faculty){
     return data
 }
 
-async function requestPostById(){
-    const response = await fetch(host + '/api/users/student/post',{
+async function requestTeacherById() {
+    const response = await fetch(host + '/api/teachers/me',{
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -42,8 +29,8 @@ async function requestPostById(){
     return data
 }
 
-async function requestImageById(){
-    const response = await fetch(host + '/api/users/student/avatar',{
+async function requestAvatarTeacher() {
+    const response = await fetch(host + '/api/teachers/me/avatar',{
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -54,13 +41,29 @@ async function requestImageById(){
     return data
 }
 
-async function requestChangeImageById(){
-    const response = await fetch(host + '/api/student/me/avatar',{
+async function requestChangeAvatarTeacher() {
+    const response = await fetch(host + '/api/teachers/me/avatar',{
         method: "PUT",
         headers: {
             'Content-Type': 'application/json',
             'Authorization': getToken(),
         },
+    })
+    const data = await response.json()
+    return data
+}
+
+async function requestChangePasswordTeacher(oldpass,newpass) {
+    const req = {
+        oldpass,newpass
+    }
+    const response = await fetch(host + '/api/teachers/me/avatar',{
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getToken(),
+        },
+        body: JSON.stringify(req)
     })
     const data = await response.json()
     return data

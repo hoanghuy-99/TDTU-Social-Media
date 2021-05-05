@@ -16,7 +16,7 @@ const Admin = () =>{
                             <form>
                                 <div className="form-group">
                                     <label htmlFor="exampleInputEmail1"><strong>Tài khoản:</strong></label>
-                                    <input type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Nhập tài khoản"/>
+                                    <input type="text" className="form-control" id="username"  placeholder="Nhập tài khoản"/>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="exampleInputPassword1"><strong>Mật khẩu:</strong></label>
@@ -25,6 +25,14 @@ const Admin = () =>{
                                 <div className="form-group">
                                     <label htmlFor="exampleInputPassword1"><strong>Xác nhận mật khẩu:</strong></label>
                                     <input type="password" className="form-control" id="re_password" placeholder="Nhập lại mật khẩu"/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputEmail1"><strong>Email:</strong></label>
+                                    <input type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Nhập email"/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputPassword1"><strong>Họ&Tên:</strong></label>
+                                    <input type="text" className="form-control" id="name" placeholder="Nhập Họ và Tên"/>
                                 </div>
                                 <div className="form-check">
                                     <div className="row">
