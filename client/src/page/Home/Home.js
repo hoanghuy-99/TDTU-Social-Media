@@ -21,6 +21,7 @@ const Home = ({children}) =>{
                             </div>
                         </div> 
                     </div>
+                    {/* Mỗi bài post */}
                     <div className="row justify-content-center">
                         <div className="col-lg-11" id="div_post_social">
                             <div className="form-group">
@@ -67,6 +68,7 @@ const Home = ({children}) =>{
                             </div>
                         </div> 
                     </div>
+                    {/* ----- */}
                 </div>
                 <div  className="col-lg-5" id="home_notification">
                     <div id="home_title_notification">
