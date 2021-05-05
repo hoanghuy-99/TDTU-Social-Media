@@ -47,10 +47,10 @@ const Home = ({children}) =>{
                                         <img src="/img/avatar.jpg" id="avatar_comment"/>
                                     </div>
                                     <div className="col-lg-11" id="div_comment_post">
-                                    <div class="input-group">
-                                        <input id="comment_post" type="text" class="form-control" placeholder="Viết bình luận..." aria-label="Recipient's username" aria-describedby="basic-addon2"/>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">Bình luận</button>
+                                    <div className="input-group">
+                                        <input id="comment_post" type="text" className="form-control" placeholder="Viết bình luận..." aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                                        <div className="input-group-append">
+                                            <button className="btn btn-primary" type="button">Bình luận</button>
                                         </div>  
                                     </div>
                                     </div>
