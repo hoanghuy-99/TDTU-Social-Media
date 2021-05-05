@@ -256,6 +256,7 @@ i {
             #xahoi{
                 position: fixed;height:80%;
                 overflow-y: scroll;
+                padding-bottom: 20px;
             }
             #home_notification{
                 position: fixed;
@@ -270,6 +271,7 @@ i {
             }
             .home_notification_card{
                 width: 53%;
+                margin-bottom: 5px;
             }
             .home_notification_card_text{
                 height: 50px;
@@ -283,7 +285,72 @@ i {
                 font-size: 12px;
                 font-style: italic
             }
+            #avatar_post{
+                height: 3rem;
+                width: 3rem;
+                border-radius: 100%;
+            }
+            #div_post_social{
+                margin-top: 10px;
+                background: white;
+                box-shadow: 1px 1px 5px;
+                border-radius: 5px;
+                padding: 10px;
+            }
+            #div_modal_post{
+                padding: 5px;
+                cursor: pointer;
+                border-radius: 20px;
+                font-size: 20px;
+                color: grey;
+                background: #f0f2f5;
+            }
+            #img_post{
+                height: 24rem;
+                width: 100%; 
+            }
+            #avatar_comment{
+                height: 3rem;
+                width: 3rem;
+                border-radius: 100%;
+            }
+            #div_comment_post{
+                padding: 5px;
+                border-radius: 20px;
+                font-size: 16px;
+                color: grey;
+                background: #f0f2f5;
+            }
+            #comment_post{
+                border: none;
+                background: #f0f2f5;
+            }
+
         /* ----- */
+
+        /* MODAL POST*/
+            #value_post{
+                border: none;
+                margin-top: 10px;
+                width: 100%;
+                font-size: 23px;
+            }
+            .btn_social{
+                width: 250px;
+            }
+            #div_modal_post_social{
+                text-align: center;
+            }
+            #btn_modal_post{
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            #img_modal_post{
+                height: 20rem;
+                width: 20rem;
+                margin-bottom: 10px;
+            }
+         /* ----- */
 
         /* MODAL CHANGE AVATAR */
             .w3-teal{
@@ -367,6 +434,7 @@ i {
         color: white;
         text-align: center;
         padding: 15px;
+        z-index: 99;
     }
 /* ----- */
 
