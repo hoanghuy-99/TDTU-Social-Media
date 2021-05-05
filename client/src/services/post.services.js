@@ -31,6 +31,63 @@ async function requestNewPost(content,video) {
 
 async function requestPostById(id) {
     const response = await fetch(host + '/api/posts/'+id,{
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getToken(),
+        },
+        body: JSON.stringify(req)
+    })
+    const data = await response.json()
+    return data
+}
+
+async function requestChangePostById(id,content,video) {
+    const req= {
+        content,video
+    }
+    const response = await fetch(host + '/api/posts/'+id,{
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getToken(),
+        },
+        body: JSON.stringify(req)
+    })
+    const data = await response.json()
+    return data
+}
+
+async function requestDeletePost(id) {
+    const response = await fetch(host + '/api/posts/'+id,{
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getToken(),
+        },
+        body: ''
+    })
+    const data = await response.json()
+    return data
+}
+
+async function requestCommentPost(id) {
+    const response = await fetch(host + '/api/posts/'+id+'/comments',{
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getToken(),
+        },
+    })
+    const data = await response.json()
+    return data
+}
+
+async function requestNewCommentPost(id,content) {
+    const req={
+        content
+    }
+    const response = await fetch(host + '/api/posts/'+id+'/comments',{
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -42,9 +99,26 @@ async function requestPostById(id) {
     return data
 }
 
-async function requestChangePostById(id) {
-    const response = await fetch(host + '/api/posts/'+id,{
-        method: "PATCH",
+
+async function requestChangeComment(id,content) {
+    const req={
+        content
+    }
+    const response = await fetch(host + '/api/comments/'+id,{
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getToken(),
+        },
+        body: JSON.stringify(req)
+    })
+    const data = await response.json()
+    return data
+}
+
+async function requestDeleteComment(id) {
+    const response = await fetch(host + '/api/comments/'+id,{
+        method: "DELETE",
         headers: {
             'Content-Type': 'application/json',
             'Authorization': getToken(),
@@ -54,3 +128,42 @@ async function requestChangePostById(id) {
     const data = await response.json()
     return data
 }
+
+async function requestImagePost(id) {
+    const response = await fetch(host + '/api/posts/'+id+'/image',{
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getToken(),
+        },
+    })
+    const data = await response.json()
+    return data
+}
+
+async function requestChangeImagePost(id) {
+    const response = await fetch(host + '/api/posts/'+id+'/image',{
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getToken(),
+        },
+        body: ''
+    })
+    const data = await response.json()
+    return data
+}
+
+async function requestDeleteImagePost(id) {
+    const response = await fetch(host + '/api/posts/'+id+'/image',{
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getToken(),
+        },
+        body: ''
+    })
+    const data = await response.json()
+    return data
+}
+
