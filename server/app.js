@@ -6,6 +6,10 @@ const app = express()
 const PORT = process.env.PORT || 3000
 const connectDatabase = require('./db')
 
+app.use(express.json())
+
+const api = require('./routers/api')
+app.use('/api', api)
 
 app.use(express.static(path.join(__dirname,'./public')))
 
