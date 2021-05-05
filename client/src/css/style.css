@@ -3,8 +3,13 @@
 }
 
 body {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Arial', Times, serif;
 }
+
+i {
+    padding-right: 5px;
+}
+
 /* HEADER */
     header{
         position: relative;
@@ -58,7 +63,7 @@ body {
         margin-top: 20px;
         font-size: 20px;
         outline: none;
-        padding: 5px;
+        padding: 10px;
     }
     #search_contain{
         text-align: right;
