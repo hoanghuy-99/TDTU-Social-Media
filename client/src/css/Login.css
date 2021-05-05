@@ -1,15 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 
-input {
+.input-login {
   font-family: "Poppins", sans-serif;
-}
-
-.container {
-  position: relative;
-  width: 100%;
-  background-color: #fff;
-  min-height: 100vh;
-  overflow: hidden;
 }
 
 .forms-container {
@@ -32,7 +24,7 @@ input {
   z-index: 5;
 }
 
-form {
+.sign-in-form {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,11 +34,6 @@ form {
   overflow: hidden;
   grid-column: 1 / 2;
   grid-row: 1 / 2;
-}
-
-form.sign-up-form {
-  opacity: 0;
-  z-index: 1;
 }
 
 form.sign-in-form {
@@ -132,7 +119,7 @@ form.sign-in-form {
   border-color: #4481eb;
 }
 
-.btn {
+.btn-login {
   width: 150px;
   background-color: #5995fd;
   border: none;
@@ -147,9 +134,10 @@ form.sign-in-form {
   transition: 0.5s;
 }
 
-.btn:hover {
+.btn-login:hover {
   background-color: #4d84e2;
 }
+
 .panels-container {
   position: absolute;
   height: 100%;
@@ -374,7 +362,7 @@ form.sign-in-form {
 }
 
 @media (max-width: 570px) {
-  form {
+  .sign-in-form {
     padding: 0 1.5rem;
   }
 

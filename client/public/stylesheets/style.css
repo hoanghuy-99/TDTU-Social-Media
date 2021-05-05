@@ -3,16 +3,8 @@ h1 {
 }
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 
-input {
+.input-login {
   font-family: "Poppins", sans-serif;
-}
-
-.container {
-  position: relative;
-  width: 100%;
-  background-color: #fff;
-  min-height: 100vh;
-  overflow: hidden;
 }
 
 .forms-container {
@@ -35,7 +27,7 @@ input {
   z-index: 5;
 }
 
-form {
+.sign-in-form {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,11 +37,6 @@ form {
   overflow: hidden;
   grid-column: 1 / 2;
   grid-row: 1 / 2;
-}
-
-form.sign-up-form {
-  opacity: 0;
-  z-index: 1;
 }
 
 form.sign-in-form {
@@ -135,7 +122,7 @@ form.sign-in-form {
   border-color: #4481eb;
 }
 
-.btn {
+.btn-login {
   width: 150px;
   background-color: #5995fd;
   border: none;
@@ -150,9 +137,10 @@ form.sign-in-form {
   transition: 0.5s;
 }
 
-.btn:hover {
+.btn-login:hover {
   background-color: #4d84e2;
 }
+
 .panels-container {
   position: absolute;
   height: 100%;
@@ -377,7 +365,7 @@ form.sign-in-form {
 }
 
 @media (max-width: 570px) {
-  form {
+  .sign-in-form {
     padding: 0 1.5rem;
   }
 
@@ -404,9 +392,18 @@ form.sign-in-form {
 h2 {
     column-count: auto;
 }
-body{
-    font-family: 'Times New Roman', Times, serif;
+*, *:after, *:before{
+    box-sizing: border-box;
 }
+
+body {
+    font-family: 'Arial', Times, serif;
+}
+
+i {
+    padding-right: 5px;
+}
+
 /* HEADER */
     header{
         position: relative;
@@ -420,9 +417,8 @@ body{
     #title_header{
         float: left;
         font-size: 20px;
-        margin-top: 20px;
         font-weight: bold;
-        padding-left: 20px;
+        margin: 10px 75px
     }
     #header_logo_div{
         float: left;
@@ -459,8 +455,9 @@ body{
         border-radius: 30px;
         height: 33px;
         margin-top: 20px;
-        text-align: center;
         font-size: 20px;
+        outline: none;
+        padding: 10px;
     }
     #search_contain{
         text-align: right;
@@ -507,6 +504,7 @@ body{
                 height:81%;
                 left:16.7%;
                 overflow-y: scroll;
+                padding-bottom: 20px;
                 background-color: #f0f2f5;
             }
             #nav_breadcrumb{
@@ -653,6 +651,7 @@ body{
             #xahoi{
                 position: fixed;height:80%;
                 overflow-y: scroll;
+                padding-bottom: 20px;
             }
             #home_notification{
                 position: fixed;
@@ -667,6 +666,7 @@ body{
             }
             .home_notification_card{
                 width: 53%;
+                margin-bottom: 5px;
             }
             .home_notification_card_text{
                 height: 50px;
@@ -680,7 +680,72 @@ body{
                 font-size: 12px;
                 font-style: italic
             }
+            #avatar_post{
+                height: 3rem;
+                width: 3rem;
+                border-radius: 100%;
+            }
+            #div_post_social{
+                margin-top: 10px;
+                background: white;
+                box-shadow: 1px 1px 5px;
+                border-radius: 5px;
+                padding: 10px;
+            }
+            #div_modal_post{
+                padding: 5px;
+                cursor: pointer;
+                border-radius: 20px;
+                font-size: 20px;
+                color: grey;
+                background: #f0f2f5;
+            }
+            #img_post{
+                height: 24rem;
+                width: 100%; 
+            }
+            #avatar_comment{
+                height: 3rem;
+                width: 3rem;
+                border-radius: 100%;
+            }
+            #div_comment_post{
+                padding: 5px;
+                border-radius: 5px;
+                font-size: 16px;
+                color: grey;
+                background: #f0f2f5;
+            }
+            #comment_post{
+                border: none;
+                background: #f0f2f5;
+            }
+
         /* ----- */
+
+        /* MODAL POST*/
+            #value_post{
+                border: none;
+                margin-top: 10px;
+                width: 100%;
+                font-size: 23px;
+            }
+            .btn_social{
+                width: 250px;
+            }
+            #div_modal_post_social{
+                text-align: center;
+            }
+            #btn_modal_post{
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            #img_modal_post{
+                height: 20rem;
+                width: 20rem;
+                margin-bottom: 10px;
+            }
+         /* ----- */
 
         /* MODAL CHANGE AVATAR */
             .w3-teal{
@@ -691,6 +756,7 @@ body{
             #btn_close_modal{
                 font-size: 20px;
                 color: red;
+                padding: 0;
             }
             .w3-display-topright{
                 border-radius: 5px;
@@ -764,6 +830,7 @@ body{
         color: white;
         text-align: center;
         padding: 15px;
+        z-index: 99;
     }
 /* ----- */
 

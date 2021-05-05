@@ -1,8 +1,8 @@
 import {getToken} from '../cookie.js'
 var host = window.location.protocol + "//" + window.location.host
 
-async function requestUserById() {
-    const response = await fetch(host + '/api/student/me',{
+async function requestNotification() {
+    const response = await fetch(host + '/api/notifications',{
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -12,13 +12,40 @@ async function requestUserById() {
     const data = await response.json()
     return data
 }
-async function requestChangeInfoById(name,classroom,faculty){
+
+async function requestNewNotification(title,content,departmentId) {
     const req = {
-        name,
-        class:classroom,
-        faculty
+        title,content,departmentId
     }
-    const response = await fetch(host + '/api/users/student/me',{
+    const response = await fetch(host + '/api/notifications',{
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getToken(),
+        },
+        body: JSON.stringify(req)
+    })
+    const data = await response.json()
+    return data
+}
+
+async function requestNotificationById(id) {
+    const response = await fetch(host + '/api/notifications/'+id,{
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getToken(),
+        },
+    })
+    const data = await response.json()
+    return data
+}
+
+async function requestNotificationById(id,title,content,departmentId) {
+    const req = {
+        title,content,departmentId
+    }
+    const response = await fetch(host + '/api/notifications/'+id,{
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json',
@@ -30,38 +57,16 @@ async function requestChangeInfoById(name,classroom,faculty){
     return data
 }
 
-async function requestPostById(){
-    const response = await fetch(host + '/api/users/student/post',{
-        method: "GET",
+async function requestDeleteNotification(id) {
+    const response = await fetch(host + '/api/notifications/'+id,{
+        method: "DELETE",
         headers: {
             'Content-Type': 'application/json',
             'Authorization': getToken(),
         },
+        body: ''
     })
     const data = await response.json()
     return data
 }
 
-async function requestImageById(){
-    const response = await fetch(host + '/api/users/student/avatar',{
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': getToken(),
-        },
-    })
-    const data = await response.json()
-    return data
-}
-
-async function requestChangeImageById(){
-    const response = await fetch(host + '/api/student/me/avatar',{
-        method: "PUT",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': getToken(),
-        },
-    })
-    const data = await response.json()
-    return data
-}

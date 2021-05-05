@@ -12,7 +12,7 @@ import FacultyHome from './page/FacultyHome/FacultyHome'
 import FacultyInfo from './page/Faculty_Info/FacultyInfo'
 import Home from './page/Home/Home'
 import Login from './page/Login/Login'
-
+import Modal_Post from './page/Modal_Post/index'
 const App = () =>{
     return (
         <div>
@@ -29,7 +29,9 @@ const App = () =>{
                     <Navigation>
                         <Switch>
                             <Route path="/home" exact>
-                                <Home></Home>
+                                <Home>
+                                <Modal_Post/>
+                                </Home>
                             </Route>
                             <Route path="/student" exact>
                                 <Student_Info>
@@ -58,9 +60,9 @@ const App = () =>{
                             </Route>
                         </Switch>
                     </Navigation>
+                    <Footer/>
                 </Route>
             </Switch>
-            <Footer/>
         </BrowserRouter>
         </div>
     )
