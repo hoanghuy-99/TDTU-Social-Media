@@ -1,4 +1,11 @@
+const {useState,useEffect} = React
 const AddNotification = () =>{
+    const addNotification = () =>{
+        const title = document.getElementById('noti_add_title').value
+        const content = document.getElementById('noti_add_content').value
+        const faculty = document.getElementById('select_facutly_home').value
+        console.log(title,content,faculty);
+    }
     return(
         <div>
             <div>
@@ -16,8 +23,8 @@ const AddNotification = () =>{
                         <div className="row justify-content-center">
                         <div className="col-lg-8" id="select_facutly_home_div">
                                 <h2>Phòng/Khoa:</h2>
-                                <select id="select_facutly_home" className="form-select" disabled aria-label="Default select example">
-                                    <option value="CTHSSV" selected>Phòng CTHSSV</option>
+                                <select id="select_facutly_home" className="form-select" disabled>
+                                    <option value="CTHSSV">Phòng CTHSSV</option>
                                 </select>
                             </div>
                         </div>
@@ -36,14 +43,14 @@ const AddNotification = () =>{
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="className"><strong>Nội dung:</strong></label>
-                                    <textarea type="text" className="form-control" id="student_class" placeholder="Nhập nội dung"></textarea>
+                                    <textarea type="text" className="form-control" id="noti_add_content" placeholder="Nhập nội dung"></textarea>
                                 </div>
                                 <div className="row" id="cancel_post_noti_div">
                                     <div className="col-lg-2">
                                         <button type="button" className="btn btn-danger form-control">Hủy</button>
                                     </div>
                                     <div className="col-lg-2">
-                                        <button type="button" className="btn btn-success form-control" id="post_noti_btn">Đăng</button>
+                                        <button type="button" onClick={addNotification} className="btn btn-success form-control" id="post_noti_btn">Đăng</button>
                                     </div>
                                 </div>
                             </form>
