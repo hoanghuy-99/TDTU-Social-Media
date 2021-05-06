@@ -326,7 +326,9 @@ i {
                 border: none;
                 background: #f0f2f5;
             }
-
+            #youtube_post{
+                width: 100%;
+            }
         /* ----- */
 
         /* MODAL POST*/

@@ -39,7 +39,10 @@ const Home = ({children}) =>{
                                     <p>Hôm nay tôi buồn vcl!</p>
                                 </div>
                                 <div className="row">
-                                    <img src="/img/landing-background.jpg" id="img_post"></img>
+                                    <img src="/img/landing-background.jpg" id="img_post" hidden></img>
+                                </div>
+                                <div>
+                                    <iframe id="youtube_post"  height="400"  src="https://www.youtube.com/embed/vVhKA9Av6vA?controls=1" allowfullscreen></iframe>
                                 </div>
                                 <hr/>
                                 <div className="row">
