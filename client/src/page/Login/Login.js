@@ -1,22 +1,53 @@
+const {useState} = React
+const {useDispatch, useSelector} = ReactRedux
+const { Redirect } = ReactRouterDOM
+import { login } from '../../redux/actions/user.actions'
+
 function Login(){
+  const dispatch = useDispatch()
+  const checkLogin = useSelector(state => state.user?.loggedIn)
+  const [form, setForm] = useState({
+    username: '', 
+    password: ''
+  })
+  const { username, password } = form
+
+  function handleChange(event) {
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value
+    })
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault()
+    if(username && password) {
+      dispatch(login(username, password))
+    }
+  }
+
+  if(checkLogin){
+    return <Redirect to='/home'/>
+  }
+
   return (
     <div className="container">
       <div className="forms-container">
         <div className="signin-signup">
-          <form className="sign-in-form">
+          <form className="sign-in-form" onSubmit={handleSubmit}>
             <h2 className="title">ĐĂNG NHẬP</h2>
             <div className="input-field">
               <i className="fas fa-user"></i>
-              <input type="text" placeholder="Tài Khoản" className="input-login"/>
+              <input type="text" name="username" placeholder="Tài Khoản" className="input-login" value={username} onChange={handleChange} required/>
             </div>
             <div className="input-field">
               <i className="fas fa-lock"></i>
-              <input type="password" placeholder="Mật Khẩu" className="input-login"/>
+              <input type="password" name="password" placeholder="Mật Khẩu" className="input-login" value={password} onChange={handleChange} required/>
             </div>
             <input type="submit" value="Đăng Nhập" className="btn-login solid" />
             <p className="social-text">Hoặc đăng nhập với tài khoản Google</p>
             <div className="google-login">
-              <button className="google-login-button"><i className="fas fa-home"></i>Đăng Nhập với Google</button>
+              <button className="google-login-button"><i className="fab fa-google"></i>Đăng Nhập với Google</button>
             </div>
           </form>
         </div>

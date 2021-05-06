@@ -1,4 +1,6 @@
-import userConstants from "../constants/user.constants";
+import userConstants from "../constants/user.constants"
+import setAlert  from './alert.actions'
+
 const fetchUser = () => {
     function request(){
         return { type: userConstants.FETCH_USER }
@@ -93,6 +95,13 @@ function login(username, password){
         } else {
             const message = res.message
             dispatch(failure(message))
+            dispatch(setAlert(message, 'danger'))
         }
     }
 }
+
+const logout = () => ({
+    type: userConstants.LOGOUT
+})
+
+export { login }
