@@ -1,4 +1,19 @@
 const Admin = () =>{
+    const handleClick = () =>{
+        const name = document.getElementById('name').value
+        const email = document.getElementById('email').value
+        const username = document.getElementById('username').value
+        const password = document.getElementById('password').value
+        const checkbox = document.getElementsByName('faculty')
+        var result = []
+        for(var i=0;i<checkbox.length;i++){
+            if(checkbox[i].checked === true){
+                result.push(checkbox[i].value)
+            }
+        }
+        console.log(result);
+        console.log(name,email,username,password);
+    }
     return(
         <div>
             <div>
@@ -40,98 +55,98 @@ const Admin = () =>{
                                             <label htmlFor="exampleInputPassword1"><strong>Chọn phòng ban quản lý:</strong></label>
                                             <ul className="list_checkbox" id="list_checkbox">
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="CTHSSV"/>
+                                                    <input type="checkbox" name="faculty" value="Phòng CTHSSV" className="form-check-input" id="CTHSSV"/>
                                                     Phòng CTHSSV
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="UniRoom"/>
+                                                    <input type="checkbox" name="faculty" value="Phòng Đại học" className="form-check-input" id="UniRoom"/>
                                                     Phòng Đại học
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="AfterUniRoom"/>
+                                                    <input type="checkbox" name="faculty" value="Phòng Sau đại học" className="form-check-input" id="AfterUniRoom"/>
                                                     Phòng Sau đại học
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="ComputerRoom"/>
+                                                    <input type="checkbox" name="faculty" value="Phòng Điện toán và máy tính" className="form-check-input" id="ComputerRoom"/>
                                                     Phòng Điện toán và máy tính
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="SurveyRoom"/>
+                                                    <input type="checkbox" name="faculty" value="Phòng khảo khí và kiểm định chất lượng" className="form-check-input" id="SurveyRoom"/>
                                                     Phòng khảo khí và kiểm định chất lượng
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="EnterpriseRoom"/>
+                                                    <input type="checkbox" name="faculty" value="Doanh nghiệp, cựu sinh viên" className="form-check-input" id="EnterpriseRoom"/>
                                                     Doanh nghiệp, cựu sinh viên
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="FinanceRoom"/>
+                                                    <input type="checkbox" name="faculty" value="Phòng tài chính" className="form-check-input" id="FinanceRoom"/>
                                                     Phòng tài chính
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="CLCRoom"/>
+                                                    <input type="checkbox" name="faculty" value="TDT Creative Language Center" className="form-check-input" id="CLCRoom"/>
                                                     TDT Creative Language Center
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="ITRoom"/>
-                                                Trung tâm tin học
+                                                    <input type="checkbox" name="faculty" value="Trung tâm tin học" className="form-check-input" id="ITRoom"/>
+                                                    Trung tâm tin học
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="SDTC"/>
-                                                Đào tạo phát triển xã hội
+                                                    <input type="checkbox" name="faculty" value="Đào tạo phát triển xã hội" className="form-check-input" id="SDTC"/>
+                                                    Đào tạo phát triển xã hội
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="ATEM"/>
-                                                Khoa học quản lý, Ứng dụng công nghệ
+                                                    <input type="checkbox" name="faculty" value="Khoa học quản lý, Ứng dụng công nghệ" className="form-check-input" id="ATEM"/>
+                                                    Khoa học quản lý, Ứng dụng công nghệ
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="Law"/>
+                                                    <input type="checkbox" name="faculty" value=" Khoa Luật" className="form-check-input" id="Law"/>
                                                     Khoa Luật
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="EIF"/>
-                                                Ngoại ngữ-Tin học-Bồi dưỡng
+                                                    <input type="checkbox" name="faculty" value="Ngoại ngữ-Tin học-Bồi dưỡng" className="form-check-input" id="EIF"/>
+                                                    Ngoại ngữ-Tin học-Bồi dưỡng
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="EB"/>
-                                                Kinh tế và Kinh doanh
+                                                    <input type="checkbox" name="faculty" value="Kinh tế và Kinh doanh" className="form-check-input" id="EB"/>
+                                                    Kinh tế và Kinh doanh
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="MTCN"/>
-                                                Khoa Mỹ thuật công nghiệp
+                                                    <input type="checkbox" name="faculty" value="Khoa Mỹ thuật công nghiệp" className="form-check-input" id="MTCN"/>
+                                                    Khoa Mỹ thuật công nghiệp
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="Electrical"/>
+                                                    <input type="checkbox" name="faculty" value="Khoa Điện-Điện tử" className="form-check-input" id="Electrical"/>
                                                     Khoa Điện-Điện tử
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="CNTT"/>
+                                                    <input type="checkbox" name="faculty" value="Khoa Công nghệ thông tin" className="form-check-input" id="CNTT"/>
                                                     Khoa Công nghệ thông tin
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="QTKD"/>
-                                                Khoa Quản trị kinh doanh
+                                                    <input type="checkbox" name="faculty" value="Khoa Quản trị kinh doanh" className="form-check-input" id="QTKD"/>
+                                                    Khoa Quản trị kinh doanh
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="MT_BHLD"/>
-                                                Môi trường và bảo hộ lao động
+                                                    <input type="checkbox" name="faculty" value="Môi trường và bảo hộ lao động" className="form-check-input" id="MT_BHLD"/>
+                                                    Môi trường và bảo hộ lao động
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="LDCD"/>
-                                                Khoa Lao động công đoàn
+                                                    <input type="checkbox" name="faculty" value=" Khoa Lao động công đoàn" className="form-check-input" id="LDCD"/>
+                                                    Khoa Lao động công đoàn
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="TCNH"/>
+                                                    <input type="checkbox" name="faculty" value="Khoa Tài chính ngân hàng" className="form-check-input" id="TCNH"/>
                                                     Khoa Tài chính ngân hàng
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" className="form-check-input" id="QDQT"/>
+                                                    <input type="checkbox" name="faculty" value="Khoa Giáo dục quốc tế" className="form-check-input" id="QDQT"/>
                                                     Khoa Giáo dục quốc tế
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" className="btn btn-danger" id="btn_registerFaculty">Tạo tài khoản</button>
+                                <button type="button" onClick={handleClick} className="btn btn-danger" id="btn_registerFaculty">Tạo tài khoản</button>
                             </form>
                         </div>
                     </div>
