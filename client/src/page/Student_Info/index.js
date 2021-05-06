@@ -8,6 +8,13 @@ const Student_Info = ({children}) =>{
     const OpenChangeInfo = ()=>{
         setBoo(false)
     }
+    const ChangeInfo = () =>{
+        const student_name = document.getElementById('student_name').value
+        const student_className = document.getElementById('student_className').value
+        const student_faculty = document.getElementById('student_faculty').value
+        setBoo(true)
+        console.log(student_name,student_className,student_faculty);
+    }
     return(
         <div>
             <div>
@@ -46,7 +53,7 @@ const Student_Info = ({children}) =>{
                                             <button type="button" onClick={OpenChangeInfo} className="btn btn-primary form-control">Chỉnh sửa</button>
                                         </div>
                                         <div className="col-lg-4">
-                                            <button type="button" className="btn btn-success form-control" disabled={boo}>Lưu</button>
+                                            <button type="button"onClick={ChangeInfo} className="btn btn-success form-control" disabled={boo}>Lưu</button>
                                         </div>
                                     </div>
                             </div>
