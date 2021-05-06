@@ -1,8 +1,8 @@
 const {useState,useEffect} = React
 const {useParams} = ReactRouterDOM
 const EditNotification = () =>{ 
-    const {noti_id} = useParams()
-    console.log(noti_id);
+    const {id} = useParams()
+    console.log(id);
     const editNotification = () =>{
         const title = document.getElementById('noti_add_title').value
         const content = document.getElementById('noti_add_content').value
