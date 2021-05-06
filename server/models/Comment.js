@@ -4,7 +4,8 @@ const opt = { timestamps: true }
 
 const schema = new mongoose.Schema({
     content: { type:String, required: true},
-    author: { type: mongoose.Types.ObjectId, ref: 'User' }
+    author: mongoose.Types.ObjectId,
+    authorRole: { type:String, enum:['admin', 'teacher'] },
 }, opt)
 
 module.exports = mongoose.model('Comment', schema)
