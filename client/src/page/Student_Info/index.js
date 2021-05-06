@@ -1,7 +1,12 @@
 const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
+const {useState,useEffect} = React
 const Student_Info = ({children}) =>{
     function openModal(){
         document.getElementById('modal_change_avatar').style.display='block'
+    }
+    const [boo,setBoo] = useState(true)
+    const OpenChangeInfo = ()=>{
+        setBoo(false)
     }
     return(
         <div>
@@ -26,22 +31,22 @@ const Student_Info = ({children}) =>{
                             <div className="col-lg-6">
                                     <div className="form-group">
                                         <label htmlFor="name"><strong>Tên:</strong></label>
-                                        <input type="text" className="form-control" id="student_name" placeholder="Nhập họ tên"/>
+                                        <input type="text" className="form-control" id="student_name" placeholder="Nhập họ tên" disabled={boo}/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="className"><strong>Lớp:</strong></label>
-                                        <input type="text" className="form-control" id="student_className" placeholder="Nhập lớp"/>
+                                        <input type="text" className="form-control" id="student_className" placeholder="Nhập lớp" disabled={boo}/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="faculty"><strong>Khoa:</strong></label>
-                                        <input type="text" className="form-control" id="student_faculty" placeholder="Nhập khoa"/>
+                                        <input type="text" className="form-control" id="student_faculty" placeholder="Nhập khoa" disabled={boo}/>
                                     </div>
                                     <div className="row space_btn">
                                         <div className="col-lg-4">
-                                            <button type="button" className="btn btn-primary form-control">Chỉnh sửa</button>
+                                            <button type="button" onClick={OpenChangeInfo} className="btn btn-primary form-control">Chỉnh sửa</button>
                                         </div>
                                         <div className="col-lg-4">
-                                            <button type="button" className="btn btn-success form-control" disabled>Lưu</button>
+                                            <button type="button" className="btn btn-success form-control" disabled={boo}>Lưu</button>
                                         </div>
                                     </div>
                             </div>
