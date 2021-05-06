@@ -1,10 +1,11 @@
 const { createStore, applyMiddleware, compose } = Redux
-const thunk = ReduxThunk
+const thunk = ReduxThunk.default
 import rootReducer from '../reducers/index.js'
 
 const configureStore = () => {
-  const middleware = []
-  const store = createStore(rootReducer)
+  
+  const middleware = [thunk]
+  const store = createStore(rootReducer, compose(applyMiddleware(...middleware)))
   return store
 }
 

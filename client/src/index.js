@@ -1,5 +1,5 @@
 import App from './App.js'
-const { Provider } = Redux
+const { Provider } = ReactRedux
 import configureStore from './redux/store/store'
 const store = configureStore()
 

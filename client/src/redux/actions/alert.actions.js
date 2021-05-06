@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid'
 import alert  from '../constants/alert.constants'
 
 const setAlert = (message, alertType, timeout = 5000) => dispatch => {
