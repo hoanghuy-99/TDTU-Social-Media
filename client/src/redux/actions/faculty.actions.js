@@ -1,4 +1,4 @@
-import facultyConstants from "../constants/faculty.contans";
+import facultyConstants from "../constants/faculty.constants";
 
 function fetchFaculty(){
     function request(){

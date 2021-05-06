@@ -13,6 +13,7 @@ import FacultyInfo from './page/Faculty_Info/FacultyInfo'
 import Home from './page/Home/Home'
 import Login from './page/Login/Login'
 import Modal_Post from './page/Modal_Post/index'
+
 const App = () =>{
     return (
         <div>

@@ -1,5 +1,5 @@
-import Cookie from 'js-cookie'
-import jwtDecode from 'jwt-decode'
+const Cookie = Cookies
+const jwtDecode = jwt_decode
 
 function setToken(token){
     let {exp} = jwtDecode(token)
