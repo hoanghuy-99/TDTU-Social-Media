@@ -3,7 +3,7 @@ const jwtUtil = require('../utils/jwt')
 
 const privateKey = process.env.PRIVATE_KEY
 
-module.exports.requireToken = (req, res, next) => {
+exports.requireToken = (accessibleRoles = []) => (req, res, next) => {
     const token = req.headers.authorization
     if(!token){
         return res.status(403).json({
@@ -24,16 +24,36 @@ module.exports.requireToken = (req, res, next) => {
         isValid = false
     }
 
-    if(isValid){
-        req['token'] = {
-            user_id: payload.user_id,
-            role: payload.role
-        }
-        next()
-    }else{
-        res.json({
+    if(!isValid){
+        return res.json({
             code: 101,
             message: 'Token is invalid'
         })
     }
+
+    if(accessibleRoles.length != 0 && accessibleRoles.includes(payload.role)){
+        return res.json({
+            code: 102,
+            message: 'No permission'
+        })
+    }
+
+    req['token'] = {
+        user_id: payload.user_id,
+        role: payload.role
+    }
+    next()
+}
+
+exports.requireYour = (Model) => async (req, res, next)=>{
+    let item = await Model.findById(req.params.id)
+    if(item.author !== req.token.user_id){
+        
+        return res.json({
+            code: 102,
+            message: 'No permission'
+        })
+    }
+
+    next()
 }
