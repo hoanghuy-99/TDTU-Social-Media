@@ -13,6 +13,7 @@ import FacultyInfo from './page/Faculty_Info/FacultyInfo'
 import Home from './page/Home/Home'
 import Login from './page/Login/Login'
 import Modal_Post from './page/Modal_Post/index'
+import EditNotification from './page/Edit_Notification/EditNotification'
 
 const App = () =>{
     return (
@@ -47,6 +48,9 @@ const App = () =>{
                             </Route>
                             <Route path="/addNotification" exact>
                                 <AddNotification/>
+                            </Route>
+                            <Route path="/editNotification/:id" exact>
+                                <EditNotification/>
                             </Route>
                             <Route path="/detailNotification" exact>
                                 <DetailNotification/>

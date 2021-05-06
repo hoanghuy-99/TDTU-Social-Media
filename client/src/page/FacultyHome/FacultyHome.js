@@ -44,7 +44,7 @@ const FacultyHome = () =>{
                                 <div className="card-body">
                                     <h5 className="card-title" id="noti_title"><strong>Tiêu đề</strong></h5>
                                     <div id="fix_delete_noti">
-                                        <Link ><i className="fas fa-wrench"></i></Link>
+                                        <Link><i className="fas fa-wrench"></i></Link>
                                         <Link  id="btn_delete_noti" onClick={openModal("123")}><i className="fas fa-times"></i></Link>
                                     </div>
                                     <div className="clear"></div>
