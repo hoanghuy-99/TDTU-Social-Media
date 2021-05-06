@@ -1,14 +1,16 @@
 const {useState,useEffect} = React
 const {useParams} = ReactRouterDOM
 const EditNotification = () =>{
-    console.log('render')
-    console.log(ReactRouterDOM);
     const {id} = useParams()
-    console.log(id);
+    const [boo,setBoo] = useState(true)
+    const openChange = () =>{
+        setBoo(false)
+    }
     const editNotification = () =>{
         const title = document.getElementById('noti_add_title').value
         const content = document.getElementById('noti_add_content').value
         const faculty = document.getElementById('select_facutly_home').value
+        setBoo(true)
         console.log(title,content,faculty);
     }
     return(
@@ -17,7 +19,7 @@ const EditNotification = () =>{
                 <nav id="nav_breadcrumb" aria-label="breadcrumb">
                     <ol className="breadcrumb" id="ol_breadcrumb">
                       <li className="breadcrumb-item" >Trang chủ</li>
-                      <li className="breadcrumb-item" >Thêm thông báo</li>
+                      <li className="breadcrumb-item" >Sửa thông báo</li>
                     </ol>
                   </nav>
             </div>
@@ -44,18 +46,18 @@ const EditNotification = () =>{
                             <form>
                                 <div className="form-group">
                                     <label htmlFor="title"><strong>Tiêu đề:</strong></label>
-                                    <input type="text" className="form-control" id="noti_add_title" placeholder="Nhập Tiêu đề"/>
+                                    <input type="text" className="form-control" id="noti_add_title" placeholder="Nhập Tiêu đề" disabled={boo}/>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="className"><strong>Nội dung:</strong></label>
-                                    <textarea type="text" className="form-control" id="noti_add_content" placeholder="Nhập nội dung">hahaha</textarea>
+                                    <textarea type="text" className="form-control" id="noti_add_content" placeholder="Nhập nội dung" disabled={boo}></textarea>
                                 </div>
                                 <div className="row" id="cancel_post_noti_div">
                                     <div className="col-lg-2">
-                                        <button type="button" className="btn btn-danger form-control">Chỉnh sửa</button>
+                                        <button type="button" onClick={openChange} className="btn btn-danger form-control">Chỉnh sửa</button>
                                     </div>
                                     <div className="col-lg-2">
-                                        <button type="button" onClick={editNotification} className="btn btn-success form-control" id="post_noti_btn">Lưu</button>
+                                        <button type="button" onClick={editNotification} className="btn btn-success form-control" id="post_noti_btn" disabled={boo}>Lưu</button>
                                     </div>
                                 </div>
                             </form>

@@ -330,6 +330,12 @@ i {
         /* ----- */
 
         /* MODAL POST*/
+            .modal_post{
+                padding-top: 10px;
+            }
+            .modal_post_content{
+                margin-bottom: 100px;
+            }
             #value_post{
                 border: none;
                 margin-top: 10px;
@@ -338,6 +344,7 @@ i {
             }
             .btn_social{
                 width: 250px;
+                margin-top: 10px;
             }
             #div_modal_post_social{
                 text-align: center;
@@ -349,8 +356,20 @@ i {
             }
             #img_modal_post{
                 height: 20rem;
-                width: 20rem;
+                width: 30rem;
                 margin-bottom: 10px;
+                margin-top:10px;
+                position: relative;
+            }
+            #btn_cancel_img{
+                position: absolute;
+                left: 49%;
+                top: 35%;
+                background: transparent;
+                display: none;
+                border: none;
+                color: red;
+                font-size: 21px;
             }
          /* ----- */
 
