@@ -1,6 +1,9 @@
 const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
-
+import Modal_Delete from '../Modal_Delete/index'
 const FacultyHome = () =>{
+    const openModal= (id)=>(e)=>{
+        document.getElementById(id).style.display='block'
+    }
     return(
         <div>
             <div>
@@ -41,8 +44,8 @@ const FacultyHome = () =>{
                                 <div className="card-body">
                                     <h5 className="card-title" id="noti_title"><strong>Tiêu đề</strong></h5>
                                     <div id="fix_delete_noti">
-                                        <Link to="#"><i className="fas fa-wrench"></i></Link>
-                                        <Link to="#" id="btn_delete_noti"><i className="fas fa-times"></i></Link>
+                                        <Link ><i className="fas fa-wrench"></i></Link>
+                                        <Link  id="btn_delete_noti" onClick={openModal("123")}><i className="fas fa-times"></i></Link>
                                     </div>
                                     <div className="clear"></div>
                                     <p className="card-text noti_text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -50,6 +53,7 @@ const FacultyHome = () =>{
                                     <p id="faculty_time">Công nghệ thông tin | Ngày đăng: 02/04/2021</p>
                                     <div className="clear"></div>
                                 </div>
+                                <Modal_Delete props={{id:"123"}}/>
                             </div>
                         </div>
                     </div>

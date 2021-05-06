@@ -52,7 +52,8 @@ const App = () =>{
                                 <DetailNotification/>
                             </Route>
                             <Route path="/faculty" exact>
-                                <FacultyHome/>
+                                <FacultyHome>
+                                </FacultyHome>
                             </Route>
                             <Route path="/facultyInfo" exact>
                                 <FacultyInfo>
