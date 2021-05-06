@@ -1,6 +1,8 @@
 const {useState,useEffect} = React
 const {useParams} = ReactRouterDOM
-const EditNotification = () =>{ 
+const EditNotification = () =>{
+    console.log('render')
+    console.log(ReactRouterDOM);
     const {id} = useParams()
     console.log(id);
     const editNotification = () =>{

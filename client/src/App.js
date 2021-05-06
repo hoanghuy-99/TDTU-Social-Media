@@ -49,7 +49,7 @@ const App = () =>{
                             <Route path="/addNotification" exact>
                                 <AddNotification/>
                             </Route>
-                            <Route path="/editNotification/:id" exact>
+                            <Route path="/editNotification/:id">
                                 <EditNotification/>
                             </Route>
                             <Route path="/detailNotification" exact>
