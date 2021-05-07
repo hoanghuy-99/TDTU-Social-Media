@@ -3,12 +3,19 @@ const Student = require('../models/Student')
 const Notification = require('../models/Notification')
 const Comment = require('../models/Comment')
 
-exports.createNotification = async (req, res)=>{
 
+async function getName(id,role){
+    return role === 'student' ? (await Student.findById(id)).name : (await User.findById(id)).name
+}
+
+
+exports.createNotification = async (req, res)=>{
+    let department = (await Department.find({id:req.body.department}))._id 
     let notification = await Notification.create({
         ...req.body,
         author: req.token.user_id,
-        authorRole: req.token.role
+        authorRole: req.token.role,
+        department
     })
     let user
     if(req.token.role === 'student'){
@@ -67,17 +74,8 @@ exports.getManyNotification = async (req, res)=>{
                 role: notification.authorRole,
                 name: notification.authorRole === 'student' ? (await Student.findById(notification.author)).name : (await User.findById(notification.author)).name
             },
-            comments: notification.comments.map(comment =>({
-                id: comment._id,
-                content: comment.content,
-                author:{
-                    id: comment.author,
-                    role: comment.authorRole,
-                    name: comment.authorRole === 'student' ? (await Student.findById(notification.author)).name : (await User.findById(notification.author)).name
-                }
-            })),
+            title: notification.title,
             content: notification.content,
-            video: notification.video
           })))
         }
       })
@@ -96,23 +94,16 @@ exports.getSingleNotification = async (req, res)=>{
                 role: notification.authorRole,
                 name: notification.authorRole === 'student' ? (await Student.findById(notification.author)).name : (await User.findById(notification.author)).name
             },
-            comments: notification.comments.map(comment =>({
-                id: comment._id,
-                content: comment.content,
-                author:{
-                    id: comment.author,
-                    role: comment.authorRole,
-                    name: comment.authorRole === 'student' ? (await Student.findById(notification.author)).name : (await User.findById(notification.author)).name
-                }
-            })),
+            title: notification.title,
             content: notification.content,
-            video: notification.video
         }
     })
 }
 
 exports.editNotification = async (req, res)=>{
-    
+    if(req.body.department){
+        req.body.department = (await Department.find({id:req.body.department}))._id 
+    }
     let notification = await Notification.findByIdAndUpdate(req.params.id, req.body).populate('comments')
     res.json({
         code: 0,
@@ -125,17 +116,8 @@ exports.editNotification = async (req, res)=>{
                 role: notification.authorRole,
                 name: notification.authorRole === 'student' ? (await Student.findById(notification.author)).name : (await User.findById(notification.author)).name
             },
-            comments: notification.comments.map(comment =>({
-                id: comment._id,
-                content: comment.content,
-                author:{
-                    id: comment.author,
-                    role: comment.authorRole,
-                    name: comment.authorRole === 'student' ? (await Student.findById(notification.author)).name : (await User.findById(notification.author)).name
-                }
-            })),
-            content: notification.content,
-            video: notification.video
+            title: notification.title,
+            content: notification.content
         }
     })
 }

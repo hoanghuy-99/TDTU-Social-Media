@@ -7,24 +7,37 @@ async function getName(id,role){
 
 exports.createTeachers =  async (req, res)=>{
     let password = await hasher.hash(req.body.password)
-    let newTeacher = await User.create({...req.body, role:'teacher', password})
+    let teacher = await User.create({...req.body, role:'teacher', password})
+    teacher = await User.findById(req.params.id).populate('departments')
     res.json({
         code: 0,
-        data
+        data :{
+            id: teacher._id,
+            email: teacher.email,
+            username: teacher.username,
+            name: teacher.name,
+            departments: teacher.departments.map(d =>({
+                id: d.id,
+                name: d.name
+            }))
+        }
     })
 }
 
 exports.getSingleTeacher = async (req, res)=>{
-    let teacher = User.findById(req.params.id)
+    let teacher = await User.findById(req.params.id).populate('departments')
     res.json({
-        id: teacher._id,
-        email: teacher.email,
-        username: teacher.username,
-        name: teacher.name,
-        departments: teacher.departments.map(d =>({
-            id: d._id,
-            name: d.name
-        }))
+        code: 0,
+        data :{
+            id: teacher._id,
+            email: teacher.email,
+            username: teacher.username,
+            name: teacher.name,
+            departments: teacher.departments.map(d =>({
+                id: d.id,
+                name: d.name
+            }))
+        }
     })
 }
 
