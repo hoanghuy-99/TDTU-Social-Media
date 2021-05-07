@@ -13,7 +13,7 @@ exports.createToken = async (req, res)=>{
     if(!user){
         return res.json({
             code: 1,
-            massage: 'Username hoặc password không chính xác '
+            massage: 'Username không tồn tại'
         })
     }
     const hashed_password = user.password
@@ -33,7 +33,7 @@ exports.createToken = async (req, res)=>{
     if(!is_equal){
         return res.json({
             code: 1,
-            massage: 'Username hoặc password không chính xác '
+            massage: 'Password không chính xác '
         })
     }
     
