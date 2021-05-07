@@ -8,7 +8,7 @@ const privateKey = process.env.PRIVATE_KEY
 const tokenExpIn = Number(process.env.TOKEN_EXP_IN) 
 
 exports.createToken = async (req, res)=>{
-    let {username, password} = req.body.username
+    let {username, password} = req.body
     const user = await User.findOne({username:username})
     if(!user){
         return res.json({
