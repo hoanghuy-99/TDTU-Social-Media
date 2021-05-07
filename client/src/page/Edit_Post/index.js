@@ -10,12 +10,12 @@ const Edit_Post = () =>{
     }
     const handleChange = ()=>{
         const uploadAvatarFile = document.getElementById("pic-file")
-        const avatar = document.getElementById("img_modal_post")
+        const avatar = document.getElementById("img_edit_post")
           if(uploadAvatarFile.value){
             const img = event.target.files[0];
             const imgUrl = URL.createObjectURL(img);
             avatar.src =imgUrl
-            document.getElementById('btn_cancel_img').style.display ='block'
+            document.getElementById('btn_cancel_img_edit').style.display ='block'
             setHiddenImg(false)
             setDisableVid(true)
           }
@@ -42,8 +42,8 @@ const Edit_Post = () =>{
         const link_ytb = document.getElementById('youtube_embed').getAttribute('src')
     }
     const handleCancelImg = () =>{
-        document.getElementById("img_modal_post").setAttribute('src','')
-        document.getElementById('btn_cancel_img').style.display ='none'
+        document.getElementById("img_edit_post").setAttribute('src','')
+        document.getElementById('btn_cancel_img_edit').style.display ='none'
         setHiddenImg(true)
         setDisableVid(false)
     }
@@ -71,9 +71,9 @@ const Edit_Post = () =>{
                                 <input onChange={handleChangeVideo} type="text" disabled={disableVid} className="form-control" id="embed_video" 
                                 placeholder="Thêm đường dẫn youtube"/>
                             </div>
-                            <div>
-                                <img src="" id="img_modal_post" hidden={hiddenImg}/>
-                                <button id="btn_cancel_img" onClick={handleCancelImg}><i className="fas fa-times"/></button>
+                            <div id="div_edit_image_post">
+                                <img src="" id="img_edit_post" hidden={hiddenImg}/>
+                                <button id="btn_cancel_img_edit" onClick={handleCancelImg}><i className="fas fa-times"/></button>
                             </div>
                             <div>
                                 <iframe id="youtube_embed" width="560" height="315" src={urlYTB} allowFullScreen hidden={hiddenVid} 
