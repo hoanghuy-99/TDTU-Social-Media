@@ -1,3 +1,4 @@
+const {useState,useEffect}  = React
 const Modal_Post = ()=>{
     function closeModal(){
         document.getElementById('modal_change_avatar').style.display='none'
@@ -6,26 +7,52 @@ const Modal_Post = ()=>{
         const defautBtnPic = document.querySelector("#pic-file")
         defautBtnPic.click()
     }
-    function activeVideo() {
-        const defautBtnVid = document.querySelector("#video-file")
-        defautBtnVid.click()
-    }
     const handleChange = ()=>{
         const uploadAvatarFile = document.getElementById("pic-file")
         const avatar = document.getElementById("img_modal_post")
           if(uploadAvatarFile.value){
-              const img = event.target.files[0];
-              const imgUrl = URL.createObjectURL(img);
-              avatar.src =imgUrl
+            const img = event.target.files[0];
+            const imgUrl = URL.createObjectURL(img);
+            avatar.src =imgUrl
+            document.getElementById('btn_cancel_img').style.display ='block'
+            setHiddenImg(false)
+            setDisableVid(true)
           }
-      }
+    }
+    const [urlYTB,setUrlYTB] = useState()
+    const [hiddenVid,setHiddenVid] = useState(true)
+    const [hiddenImg,setHiddenImg] = useState(true)
+    const [disableVid,setDisableVid] = useState(false)
+    const [disableImg,setDisableImg] = useState(false)
+    const handleChangeVideo = (e) =>{
+        const uploadVideo = document.getElementById("youtube_embed")
+        const url_ytb = e.target.value
+        const test ="https://www.youtube.com/embed/"+url_ytb.slice(32)+"?controls=1"
+        setUrlYTB(test)
+        setHiddenVid(false)
+        setDisableImg(true)
+        if(url_ytb.length == 0){
+            setHiddenVid(true)
+            setDisableImg(false)
+        }
+    }
+    const addPost = () => {
+        const content = document.getElementById('value_post').value
+        const link_ytb = document.getElementById('youtube_embed').getAttribute('src')
+    }
+    const handleCancelImg = () =>{
+        document.getElementById("img_modal_post").setAttribute('src','')
+        document.getElementById('btn_cancel_img').style.display ='none'
+        setHiddenImg(true)
+        setDisableVid(false)
+    }
     return(
-        <div id="modal_change_avatar" className="w3-modal w3-animate-opacity">
-                <div className="w3-modal-content">
+        <div id="modal_change_avatar" className="w3-modal w3-animate-opacity modal_post">
+                <div className="w3-modal-content modal_post_content">
                   <div className="w3-container w3-teal"> 
                     <span onClick={closeModal}
                     className="w3-button w3-display-topright"><i className="fas fa-times" id="btn_close_modal"></i></span>
-                    <h2>Tạo bài đăng</h2>
+                    <center><h2>Tạo bài đăng</h2></center>
                 </div>
                 <div className="w3-container">
                     <div className="row">
@@ -38,25 +65,30 @@ const Modal_Post = ()=>{
                     </div>
                     <div>
                         <textarea placeholder="Bạn đang nghĩ gì?" id="value_post"></textarea>
-                        <img src="" id="img_modal_post" />
-                        <video hidden>
-                            <source src="" id="vid_modal_post"></source>
-                        </video>
+                    </div>
+                    <div className="form-group">
+                        <input onChange={handleChangeVideo} type="text" disabled={disableVid} className="form-control" id="embed_video" 
+                        placeholder="Thêm đường dẫn youtube"/>
+                    </div>
+                    <div>
+                        <img src="" id="img_modal_post" hidden={hiddenImg}/>
+                        <button id="btn_cancel_img" onClick={handleCancelImg}><i className="fas fa-times"/></button>
+                    </div>
+                    <div>
+                        <iframe id="youtube_embed" width="560" height="315" src={urlYTB} allowFullScreen hidden={hiddenVid} 
+                        ></iframe>
                     </div>
                     <div className="row" id="div_modal_post_social">
-                        <div className="col-lg-6">
+                        <div className="col-lg-12">
                             <input onChange={handleChange} id="pic-file" type="file" hidden/>
-                            <button id="custom_btn_pic" onClick={activeImage} className="btn btn-success btn_social"><i className="far fa-images"></i>Ảnh</button>
-                        </div>
-                        <div className="col-lg-6">
-                            <input id="video-file" type="file" hidden/>
-                            <button className="btn btn-danger btn_social" onClick={activeVideo}><i className="fas fa-video"></i>Video</button>
+                            <button id="custom_btn_pic" onClick={activeImage} disabled={disableImg} className="btn btn-success btn_social">
+                                <i className="far fa-images"></i>Ảnh</button>
                         </div>
                     </div>
                     <hr/>
                     <div className="row">
                         <div className="col-lg-12">
-                        <button id="btn_modal_post" className="btn btn-primary">Đăng</button>
+                        <button id="btn_modal_post" onClick={addPost} className="btn btn-primary">Đăng</button>
                         </div>
                     </div>
                 </div>

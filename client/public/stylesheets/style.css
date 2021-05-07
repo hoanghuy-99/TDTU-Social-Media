@@ -659,6 +659,7 @@ i {
                 left: 75%;
                 padding-left: 20px;
                 background-color: white;
+                z-index: -1;
             }
             #home_title_notification{
                 font-size: 25px;
@@ -720,10 +721,78 @@ i {
                 border: none;
                 background: #f0f2f5;
             }
+            #youtube_post{
+                width: 100%;
+            }
+            .dropdown{
+                text-align: end;
+            }
+            #dropdownMenuButton1{
+                background: transparent;
+                color: black;
+                border: none;
+            }
+        /* ----- */
+        
+        /* EDIT POST*/
+            #div_edit_post{
+                background: white;
+                box-shadow: 1px 1px 5px;
+                border-radius: 5px;
+                margin-top: 20px;
+                padding: 10px;
+            }
+            #div_edit_image_post{
+                position: relative;
+                width: 60%;
+            }
+            #btn_cancel_img_edit{
+                position: absolute;
+                left: 100%;
+                top: 2%;
+                background: transparent;
+                display: none;
+                border: none;
+                color: red;
+                font-size: 21px;
+            }
+            #img_edit_post{
+                height: 20rem;
+                width: 100%;
+                margin-bottom: 10px;
+                margin-top: 10px;
+            }
+        /* ----- */
 
+        /* MODAL POST DELETE*/
+            #comment{
+                margin-bottom: 0px;
+            }
+            .edit_cmt{
+                color: darkgrey;
+                text-decoration: none;
+                margin-right: 5px;
+                background: transparent;
+                border:none
+            }
+            .edit_cmt:hover{
+                color: black;
+            }
+        /* ----- */
+
+        /* MODAL POST DELETE*/
+            #modal_post_delete{
+                width: 700px;
+            }
         /* ----- */
 
         /* MODAL POST*/
+            .modal_post{
+                padding-top: 10px;
+            }
+            .modal_post_content{
+                margin-bottom: 100px;
+            }
             #value_post{
                 border: none;
                 margin-top: 10px;
@@ -732,6 +801,7 @@ i {
             }
             .btn_social{
                 width: 250px;
+                margin-top: 10px;
             }
             #div_modal_post_social{
                 text-align: center;
@@ -743,8 +813,20 @@ i {
             }
             #img_modal_post{
                 height: 20rem;
-                width: 20rem;
+                width: 30rem;
                 margin-bottom: 10px;
+                margin-top:10px;
+                position: relative;
+            }
+            #btn_cancel_img{
+                position: absolute;
+                left: 49%;
+                top: 35%;
+                background: transparent;
+                display: none;
+                border: none;
+                color: red;
+                font-size: 21px;
             }
          /* ----- */
 

@@ -1,5 +1,6 @@
 import userConstants from "../constants/user.constants"
 import setAlert  from './alert.actions'
+import { removeToken } from '../../cookie'
 
 const fetchUser = () => {
     function request(){
@@ -100,8 +101,11 @@ function login(username, password){
     }
 }
 
-const logout = () => ({
-    type: userConstants.LOGOUT
-})
+function logout(){
+    removeToken()
+    return {
+        type: userConstants.LOGOUT
+    }
+}
 
-export { login }
+export { login, logout }
