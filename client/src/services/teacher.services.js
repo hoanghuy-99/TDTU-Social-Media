@@ -1,9 +1,9 @@
 import {getToken} from '../cookie.js'
 var host = window.location.protocol + "//" + window.location.host
 
-async function requestNewTeacher(emai,username,password,name,department) {
+async function requestNewTeacher(username, password, email, name, department) {
     const req = {
-        emai,username,password,name,department
+        username, password, email, name, department
     }
     const response = await fetch(host + '/api/teachers',{
         method: "POST",

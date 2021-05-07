@@ -1,4 +1,4 @@
-const { Link, Redirect, Route, BrowserRouter, Switch } = ReactRouterDOM;
+const { Link, Redirect, Route, BrowserRouter, Switch } = ReactRouterDOM
 import Student_Info from './page/Student_Info/index'
 import Header from './page/Header/Header'
 import Navigation from './page/Navigation/Navigation'
@@ -15,6 +15,7 @@ import Login from './page/Login/Login'
 import Modal_Post from './page/Modal_Post/index'
 import EditNotification from './page/Edit_Notification/EditNotification'
 import EditPost from './page/Edit_Post/index'
+
 const App = () =>{
     return (
         <div>

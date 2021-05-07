@@ -89,10 +89,46 @@ function login(username, password){
     }
     return async (dispatch) =>{
         dispatch(request())
-        const res = await requestToken(username, password)
+        const res = await requestToken(username,password)
         if(res.code === 0){
             const token = res.data.token
             dispatch(success(token, ''))
+        } else {
+            const message = res.message
+            dispatch(failure(message))
+            dispatch(setAlert(message, 'danger'))
+        }
+    }
+}
+
+function register(username, password, email, name, department){
+    function request(){
+        return { 
+            type: userConstants.REGISTER
+        }
+    }
+
+    function success(message){
+        return {
+            type: userConstants.REGISTER_SUCCESS,
+            message
+        }
+    }
+
+    function failure(message){
+        return {
+            type: userConstants.REGISTER_FAILURE,
+            message
+        }
+    }
+
+    return async (dispatch) => {
+        dispatch(request())
+        const res = await requestNewTeacher(username, password, email, name, department)
+        if(res.code === 0){
+            const message = res.message
+            dispatch(success(message))
+            dispatch(setAlert(message, 'success'))
         } else {
             const message = res.message
             dispatch(failure(message))
@@ -108,4 +144,4 @@ function logout(){
     }
 }
 
-export { login, logout }
+export { login, logout, register }

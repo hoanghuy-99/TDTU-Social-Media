@@ -13,7 +13,7 @@ function Login(){
   const { username, password } = form
 
   function handleChange(event) {
-    setForm({
+    setForm({ 
       ...form,
       [event.target.name]: event.target.value
     })

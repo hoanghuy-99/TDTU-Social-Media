@@ -49,6 +49,23 @@ export default (state = initialState, action)=>{
                 token: undefined,
                 message: action.message
             }
+        case userConstants.REGISTER:
+            return {
+                ...state,
+                requesting: true,
+            }
+        case userConstants.REGISTER_SUCCESS:
+            return {
+                ...state,
+                requesting: false,
+                message: action.message
+            }
+        case userConstants.REGISTER_FAILURE:
+            return {
+                ...state,
+                requesting: false,
+                message: action.message
+            }
         case userConstants.LOGOUT:
             return{
                 ...state,

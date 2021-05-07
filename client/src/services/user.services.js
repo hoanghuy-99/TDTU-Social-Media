@@ -12,6 +12,7 @@ async function requestUserById() {
     const data = await response.json()
     return data
 }
+
 async function requestChangeInfoById(name,classroom,faculty){
     const req = {
         name,

@@ -1,19 +1,31 @@
+import setAlert from '../../redux/actions/alert.actions'
+import { register } from '../../redux/actions/user.actions'
+//const {useDispatch} = ReactRedux
+
 const Admin = () =>{
-    const handleClick = () =>{
+    //const dispatch = useDispatch()
+    const handleClick = (event) =>{
+        event.preventDefault();
         const name = document.getElementById('name').value
         const email = document.getElementById('email').value
         const username = document.getElementById('username').value
         const password = document.getElementById('password').value
+        const rePassword = document.getElementById('re_password').value
         const checkbox = document.getElementsByName('faculty')
-        var result = []
+        var department = []
         for(var i=0;i<checkbox.length;i++){
             if(checkbox[i].checked === true){
-                result.push({id:checkbox[i].value})
+                department.push({id:checkbox[i].value})
             }
         }
-        console.log(result);
-        console.log(name,email,username,password);
+        if(password !== rePassword){
+            setAlert('Mật khẩu không trùng nhau', 'danger')
+        } else {
+            dispatch(register(username, username, password, email, name, department))
+        }
+    
     }
+    
     return(
         <div>
             <div>
