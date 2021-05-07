@@ -1,7 +1,7 @@
 const Comment = require('../models/Comment')
 
 exports.editComment = async (req, res)=>{
-    const comment = await Comment.findByIdAndUpdate(req.params.id, req.body)
+    const comment = await Comment.findByIdAndUpdate(req.params.id, {content:req.body.content})
 
     res.json({
         code: 0,

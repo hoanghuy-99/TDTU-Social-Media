@@ -181,3 +181,18 @@ exports.commentPost = async (req, res)=>{
         }
     })
 }
+
+exports.getImage = async (req, res)=>{
+    let post = await Post.findById(req.params.id)
+    res.sendFile(path.join(__dirname, '../uploads/'+ post.image))
+}
+
+exports.uploadImage = async (req, res)=>{
+    let post = await Post.findById(req.params.id)
+    post.image = req.image
+    post.save()
+    res.json({
+        code: 0,
+        message:'Tải hình ảnh thành công'
+    })
+}

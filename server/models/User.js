@@ -5,9 +5,10 @@ const schema = new mongoose.Schema({
     avatar: String,
     username: { type:String, required: true },
     password: { type:String, required: true },
-    departments: { type:[mongoose.Types.ObjectId], ref: 'Department' },
+    departments: { type:[String], ref: 'Department', default:[] },
     role: { type:String, enum:['admin', 'teacher'] },
-    post: { type:[mongoose.Types.ObjectId], ref: 'Post' },
+    posts: { type:[mongoose.Types.ObjectId], ref: 'Post' },
+    notification: { type:[String], ref: 'Department' },
 }) 
 module.exports = mongoose.model('User', schema)
 
