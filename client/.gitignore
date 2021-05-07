@@ -1,6 +1,6 @@
-public/javascripts
-public/stylesheets
-.env
+/public/javascripts
+/public/stylesheets
+/public/index.html
 # Logs
 logs
 *.log
