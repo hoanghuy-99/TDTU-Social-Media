@@ -4,8 +4,8 @@ const { Redirect } = ReactRouterDOM
 import { login } from '../../redux/actions/user.actions'
 
 function Login(){
-  //const dispatch = useDispatch()
-  //const checkLogin = useSelector(state => state.user?.loggedIn)
+  const dispatch = useDispatch()
+  const checkLogin = useSelector(state => state.user?.loggedIn)
   const [form, setForm] = useState({
     username: '', 
     password: ''
@@ -26,9 +26,9 @@ function Login(){
     }
   }
 
-  /*if(checkLogin){
+  if(checkLogin){
     return <Redirect to='/home'/>
-  }*/
+  }
 
   return (
     <div className="container">

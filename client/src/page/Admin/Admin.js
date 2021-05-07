@@ -1,9 +1,9 @@
 import setAlert from '../../redux/actions/alert.actions'
 import { register } from '../../redux/actions/user.actions'
-//const {useDispatch} = ReactRedux
+const {useDispatch} = ReactRedux
 
 const Admin = () =>{
-    //const dispatch = useDispatch()
+    const dispatch = useDispatch()
     const handleClick = (event) =>{
         event.preventDefault();
         const name = document.getElementById('name').value
