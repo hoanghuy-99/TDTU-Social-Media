@@ -1,0 +1,67 @@
+const Student = require("../models/Student")
+const User = require('../models/User')
+
+exports.getSingleStudent = async (req, res)=>{
+    let teacher = User.findById(req.params.id)
+    res.json({
+        id: teacher._id,
+        email: teacher.email,
+        username: teacher.username,
+        name: teacher.name,
+        departments: teacher.departments.map(d =>({
+            id: d.id,
+            name: d.name
+        }))
+    })
+}
+
+exports.getPosts = async (req, res)=>{
+    const {page, limit, olderThan} = req.query
+    limit = parseInt(limit)
+    page = parseInt(page)
+    olderThan = parseInt(olderThan)
+    let postsQuery = Post.find({author:req.params.id}).populate('comments')
+    if(olderThan){
+        postsQuery = postsQuery.where('createdAt').lte(olderThan)
+    }
+    if(page && limit){
+        postsQuery = postsQuery.skip(page*limit).limit(limit)
+    }
+    const [posts, count] = await Promise.all(postsQuery.exec(), Post.find().countDocuments())
+    
+    res.json({
+        code:0,
+        data:{
+          totalPages: page || 1,
+          totalItems: count, 
+          page: page || 1,
+          limit: 2,
+          items: await Promise.all(posts.map(async (post) =>({
+            id: post._id,
+            createdAt: post.createdAt,
+            updatedAt: post.updatedAt,
+            author:{
+                id: post.author,
+                role: post.authorRole,
+                name: post.authorRole === 'student' ? (await Student.findById(post.author)).name : (await User.findById(post.author)).name
+            },
+            comments: post.comments.map(comment =>({
+                id: comment._id,
+                content: comment.content,
+                author:{
+                    id: comment.author,
+                    role: comment.authorRole,
+                    name: comment.authorRole === 'student' ? (await Student.findById(post.author)).name : (await User.findById(post.author)).name
+                }
+            })),
+            content: post.content,
+            video: post.video
+          })))
+        }
+      })
+}
+
+exports.getAvatar = async (req, res)=>{
+    let student = await Student.findById(req.params.id)
+    res.sendFile(path.join(__dirname, '../uploads/'+ student.image))
+}
