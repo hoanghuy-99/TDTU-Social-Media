@@ -735,6 +735,22 @@ i {
         /* ----- */
         
         /* MODAL POST DELETE*/
+            #comment{
+                margin-bottom: 0px;
+            }
+            .edit_cmt{
+                color: darkgrey;
+                text-decoration: none;
+                margin-right: 5px;
+                background: transparent;
+                border:none
+            }
+            .edit_cmt:hover{
+                color: black;
+            }
+        /* ----- */
+
+        /* MODAL POST DELETE*/
             #modal_post_delete{
                 width: 700px;
             }

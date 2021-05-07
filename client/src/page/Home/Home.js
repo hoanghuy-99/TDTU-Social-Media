@@ -1,11 +1,19 @@
 const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM
 import formatDate from '../../utils/FormatDate'
 import Modal_Delete_Post from '../Modal_Delete_Post/index'
+import Modal_Edit_Comment from '../Modal_Edit_Comment/index'
+import Modal_Delete_Comment from '../Modal_Delete_Comment/index'
 const Home = ({children}) =>{
     function openModal(){
         document.getElementById('modal_change_avatar').style.display='block'
     }
     const openModalDeletePost= (id)=>(e)=>{
+        document.getElementById(id).style.display='block'
+    }
+    const openModalEditComment= (edit)=>(e)=>{
+        document.getElementById(edit).style.display='block'
+    }
+    const openModalDeleteComment= (id)=>(e)=>{
         document.getElementById(id).style.display='block'
     }
     return(
@@ -77,18 +85,24 @@ const Home = ({children}) =>{
                                     </div>
                                 </div>
                                 <hr/>
+                                {/* Comment */}
                                 <div className="row">
                                     <div className="col-lg-1">
                                         <img src="/img/avatar.jpg" id="avatar_comment"/>
                                     </div>
                                     <div className="col-lg-10">
                                        <strong>Tuấn Kiệt</strong>
-                                       <p>Mày ăn cơm chưa</p>
+                                       <p id="comment">Mày ăn cơm chưa</p>
+                                       <button onClick={openModalEditComment("CMT1edit")} className="edit_cmt">Chỉnh sửa</button>
+                                       <button onClick={openModalDeleteComment("CMT1")} className="edit_cmt">Xóa</button>
                                     </div>
+                                    <Modal_Edit_Comment props={{id:"CMT1"+"edit",content:"Mày ăn cơm chưa"}}></Modal_Edit_Comment>
+                                    <Modal_Delete_Comment props={{id:"CMT1"}}></Modal_Delete_Comment>
                                     <div className="col-lg-1">
                                         <p>12/06/1999</p>
                                     </div>
                                 </div>
+                                {/* ------ */}
                             </div>
                         </div> 
                     </div>
