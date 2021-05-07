@@ -1,4 +1,6 @@
-const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
+const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM
+import formatDate from '../../utils/FormatDate'
+
 const Home = ({children}) =>{
     function openModal(){
         document.getElementById('modal_change_avatar').style.display='block'
@@ -32,7 +34,7 @@ const Home = ({children}) =>{
                                     </div>
                                     <div className="col-lg-11">
                                         <strong>Tuấn Kiệt</strong>
-                                        <p>time:</p>
+                                        <p>Posted on {/*formatDate(date)*/}</p>
                                     </div>
                                 </div>
                                 <div className="row">
@@ -63,9 +65,12 @@ const Home = ({children}) =>{
                                     <div className="col-lg-1">
                                         <img src="/img/avatar.jpg" id="avatar_comment"/>
                                     </div>
-                                    <div className="col-lg-11">
+                                    <div className="col-lg-10">
                                        <strong>Tuấn Kiệt</strong>
                                        <p>Mày ăn cơm chưa</p>
+                                    </div>
+                                    <div className="col-lg-1">
+                                        <p>12/06/1999</p>
                                     </div>
                                 </div>
                             </div>

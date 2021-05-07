@@ -1,6 +1,11 @@
 const {useEffect,useState} = React
-const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
-const Header = () =>{   
+const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM
+//const {useDispatch, useSelector} = ReactRedux
+import { logout } from '../../redux/actions/user.actions'
+
+const Header = () =>{
+    //const dispatch = useDispatch()   
+    const [date,setDate] = useState('')
     useEffect(()=>{
         var d = new Date().toDateString()
         var t = new Date().toLocaleTimeString()
@@ -11,7 +16,11 @@ const Header = () =>{
             setDate(d + ", " + t)
         }, 1000);
     },[])
-    const [date,setDate] = useState('')
+    
+    /*function handleLogout(){
+        dispatch(logout())
+    }*/
+    
     return(
         <header>
             <div id="header_logo_div">
@@ -24,7 +33,7 @@ const Header = () =>{
             <div id="info">
                 <div id="info_div">
                     <p id="info_name">Đoàn Tuấn Kiệt</p>
-                    <Link className="button" id="btn_logout" to="#"><i className="fas fa-sign-out-alt"></i>Thoát</Link>
+                    <Link className="button" id="btn_logout" /*onclick={handleLogout}*/><i className="fas fa-sign-out-alt"></i>Thoát</Link>
                 </div>
                 <div id="info_avatar_div">
                     <img src="/img/avatar.jpg" id="info_avatar"/>
