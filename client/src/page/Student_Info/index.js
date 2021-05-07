@@ -50,10 +50,10 @@ const Student_Info = ({children}) =>{
                                     </div>
                                     <div className="row space_btn">
                                         <div className="col-lg-4">
-                                            <button type="button" onClick={OpenChangeInfo} className="btn btn-primary form-control">Chỉnh sửa</button>
+                                            <button type="button" onClick={OpenChangeInfo} className="btn btn-primary btn-form-control">Chỉnh sửa</button>
                                         </div>
                                         <div className="col-lg-4">
-                                            <button type="button"onClick={ChangeInfo} className="btn btn-success form-control" disabled={boo}>Lưu</button>
+                                            <button type="button"onClick={ChangeInfo} className="btn btn-success btn-form-control" disabled={boo}>Lưu</button>
                                         </div>
                                     </div>
                             </div>

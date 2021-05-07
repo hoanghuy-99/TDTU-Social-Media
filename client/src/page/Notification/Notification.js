@@ -62,10 +62,10 @@ const Notification = () =>{
                         <div className="col-lg-6">
                             <div className="row space_btn">
                                 <div className="col-lg-4">
-                                    <button type="button" className="btn btn-primary form-control">Làm mới</button>
+                                    <button type="button" className="btn btn-primary btn-form-control">Làm mới</button>
                                 </div>
                                 <div className="col-lg-4">
-                                    <button type="button" className="btn btn-success form-control">Tìm kiếm</button>
+                                    <button type="button" className="btn btn-success btn-form-control">Tìm kiếm</button>
                                 </div>
                             </div>
                         </div>

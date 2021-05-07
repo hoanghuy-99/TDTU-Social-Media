@@ -55,7 +55,7 @@ const FacultyInfo = ({children}) =>{
                                     <div className="row space_btn">
                                         <div className="col-lg-4">
                                             <label htmlFor=""></label>
-                                            <button type="button" onClick={ChangePassword} className="btn btn-success form-control">Xác nhận</button>
+                                            <button type="button" onClick={ChangePassword} className="btn btn-success btn-form-control">Xác nhận</button>
                                         </div>
                                     </div>
                             </div>

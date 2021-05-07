@@ -478,7 +478,9 @@ i {
         /* ----- */
 
         /* DÙNG CHUNG */
-            
+            .btn-form-control{
+                width: 100%;
+            }
             .row{
                 --bs-gutter-x:0px;
             }

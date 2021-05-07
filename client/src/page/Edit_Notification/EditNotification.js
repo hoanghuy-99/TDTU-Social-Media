@@ -54,10 +54,10 @@ const EditNotification = () =>{
                                 </div>
                                 <div className="row" id="cancel_post_noti_div">
                                     <div className="col-lg-2">
-                                        <button type="button" onClick={openChange} className="btn btn-danger form-control">Chỉnh sửa</button>
+                                        <button type="button" onClick={openChange} className="btn btn-danger btn-form-control">Chỉnh sửa</button>
                                     </div>
                                     <div className="col-lg-2">
-                                        <button type="button" onClick={editNotification} className="btn btn-success form-control" id="post_noti_btn" disabled={boo}>Lưu</button>
+                                        <button type="button" onClick={editNotification} className="btn btn-success btn-form-control" id="post_noti_btn" disabled={boo}>Lưu</button>
                                     </div>
                                 </div>
                             </form>
