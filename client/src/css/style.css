@@ -265,6 +265,7 @@ i {
                 left: 75%;
                 padding-left: 20px;
                 background-color: white;
+                z-index: -1;
             }
             #home_title_notification{
                 font-size: 25px;
@@ -328,6 +329,20 @@ i {
             }
             #youtube_post{
                 width: 100%;
+            }
+            .dropdown{
+                text-align: end;
+            }
+            #dropdownMenuButton1{
+                background: transparent;
+                color: black;
+                border: none;
+            }
+        /* ----- */
+        
+        /* MODAL POST DELETE*/
+            #modal_post_delete{
+                width: 700px;
             }
         /* ----- */
 

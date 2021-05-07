@@ -36,7 +36,6 @@ const Modal_Post = ()=>{
             setDisableImg(false)
         }
     }
-    console.log(disableImg);
     const addPost = () => {
         const content = document.getElementById('value_post').value
         const link_ytb = document.getElementById('youtube_embed').getAttribute('src')
