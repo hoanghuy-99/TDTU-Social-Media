@@ -1,6 +1,10 @@
 const User = require('../models/User')
 const hasher = require('../utils/hasher')
 
+async function getName(id,role){
+    return role === 'student' ? (await Student.findById(id)).name : (await User.findById(id)).name
+}
+
 exports.createTeachers =  async (req, res)=>{
     let password = await hasher.hash(req.body.password)
     let newTeacher = await User.create({...req.body, role:'teacher', password})
@@ -52,17 +56,19 @@ exports.getPosts = async (req, res)=>{
             author:{
                 id: post.author,
                 role: post.authorRole,
-                name: post.authorRole === 'student' ? (await Student.findById(post.author)).name : (await User.findById(post.author)).name
+                name: await getName(post.author, post.authorRole)
             },
-            comments: post.comments.map(comment =>({
+            comments:Promise.all(post.comments.map(async comment =>{
+                let name = await getName(comment.author, comment.authorRole)
+                return {
                 id: comment._id,
                 content: comment.content,
                 author:{
                     id: comment.author,
                     role: comment.authorRole,
-                    name: comment.authorRole === 'student' ? (await Student.findById(post.author)).name : (await User.findById(post.author)).name
+                    name: name
                 }
-            })),
+            }})),
             content: post.content,
             video: post.video
           })))
