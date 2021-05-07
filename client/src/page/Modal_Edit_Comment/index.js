@@ -10,7 +10,7 @@ const Modal_Edit_Comment = (props)=>{
         <div id={id.props.id} className="w3-modal w3-animate-opacity">
                 <div className="w3-modal-content" id="modal_post_delete">
                   <div className="w3-container w3-teal"> 
-                    <center><h2>Sửa comment</h2></center>
+                    <center><h2>Sửa bình luận</h2></center>
                 </div>
                 <div className="w3-container">
                     <input type="text" className="form-control" name="content" value={id.props.content}/>

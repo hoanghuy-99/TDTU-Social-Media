@@ -734,6 +734,16 @@ i {
             }
         /* ----- */
         
+        /* EDIT POST*/
+            #div_edit_post{
+                background: white;
+                box-shadow: 1px 1px 5px;
+                border-radius: 5px;
+                margin-top: 20px;
+                padding: 10px;
+            }
+        /* ----- */
+
         /* MODAL POST DELETE*/
             #comment{
                 margin-bottom: 0px;

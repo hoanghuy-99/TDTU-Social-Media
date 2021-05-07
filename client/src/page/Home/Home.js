@@ -54,7 +54,7 @@ const Home = ({children}) =>{
                                                 ...
                                             </button>
                                             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><Link className="dropdown-item" to="#"><i className="fas fa-wrench"></i>Chỉnh sửa</Link></li>
+                                                <li><Link className="dropdown-item" to={`/editPost/`+"BAIVIET1"}><i className="fas fa-wrench"></i>Chỉnh sửa</Link></li>
                                                 <li><Link className="dropdown-item" to="#" onClick={openModalDeletePost("BAIVIET1")}><i className="fas fa-times"></i>Xóa</Link></li>
                                             </ul>
                                         </div>

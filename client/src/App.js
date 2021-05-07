@@ -14,7 +14,7 @@ import Home from './page/Home/Home'
 import Login from './page/Login/Login'
 import Modal_Post from './page/Modal_Post/index'
 import EditNotification from './page/Edit_Notification/EditNotification'
-
+import EditPost from './page/Edit_Post/index'
 const App = () =>{
     return (
         <div>
@@ -48,6 +48,9 @@ const App = () =>{
                             </Route>
                             <Route path="/addNotification" exact>
                                 <AddNotification/>
+                            </Route>
+                            <Route path="/editPost/:id" exact>
+                                <EditPost></EditPost>
                             </Route>
                             <Route path="/editNotification/:id">
                                 <EditNotification/>
