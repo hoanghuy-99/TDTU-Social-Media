@@ -1,3 +1,4 @@
+const Department = require('../models/Department')
 const User = require('../models/User')
 const hasher = require('../utils/hasher')
 
@@ -7,8 +8,10 @@ async function getName(id,role){
 
 exports.createTeachers =  async (req, res)=>{
     let password = await hasher.hash(req.body.password)
-    let teacher = await User.create({...req.body, role:'teacher', password})
-    teacher = await User.findById(req.params.id).populate('departments')
+    let { departments } = req.body
+    departments = await Promise.all(departments.map(async d => (await Department.find({id:d.id}))._id ))
+    let teacher = await User.create({...req.body, role:'teacher', password, departments})
+    teacher = await User.findById(teacher._id).populate('departments')
     res.json({
         code: 0,
         data :{

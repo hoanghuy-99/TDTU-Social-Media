@@ -10,7 +10,7 @@ async function getName(id,role){
 
 
 exports.createNotification = async (req, res)=>{
-    let department = (await Department.find({id:req.body.department}))._id 
+    let department = (await Department.find({id:req.body.departmentId}))._id 
     let notification = await Notification.create({
         ...req.body,
         author: req.token.user_id,

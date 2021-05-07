@@ -17,13 +17,12 @@ exports.createPost = async (req, res)=>{
     let user
     if(req.token.role === 'student'){
         user = await Student.findById(req.token.user_id)
-        user.posts.push(post._id)
-        await user.save()
     }else{
         user = await User.findById(req.token.user_id)
-        user.posts.push(post._id)
-        await user.save()
     }
+    
+    user.posts.push(post._id)
+    await user.save()
 
     res.json({
         code: 0,
