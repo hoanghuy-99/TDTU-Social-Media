@@ -47,6 +47,6 @@ export default (state = initialState , action)=>{
                 message: action.message
             }
         default:
-            return sate
+            return state
     }
 }

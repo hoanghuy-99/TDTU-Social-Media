@@ -7,11 +7,11 @@ const initialState = {
     data: undefined,
 }
 
-export default (sate = initialState, action) =>{
+export default (state = initialState, action) =>{
     switch(action.type){
         case facultyConstants.FETCH_FACULTY:
             return{
-                ...sate,
+                ...state,
                 requesting:true
             }
         case facultyConstants.FETCH_FACULTY_SUCCESS:
@@ -34,14 +34,14 @@ export default (sate = initialState, action) =>{
             }
         case facultyConstants.REGISTER_FACULTY_SUCCESS:
             return{
-                ...sate,
+                ...state,
                 requesting:false,
                 message:action.message,
                 data: "chưa biết là có trả về hay không",
             }
         case facultyConstants.REGISTER_FACULTY_FAILURE:
             return{
-                ...sate,
+                ...state,
                 requesting:false,
                 message:action.message
             }

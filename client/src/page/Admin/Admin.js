@@ -1,9 +1,13 @@
 import setAlert from '../../redux/actions/alert.actions'
 import { register } from '../../redux/actions/user.actions'
-const {useDispatch} = ReactRedux
+import {fetchDepartment} from '../../redux/actions/department.actions'
+const {useDispatch,useSelector} = ReactRedux
+const {useState,useEffect} = React
 
 const Admin = () =>{
     const dispatch = useDispatch()
+    console.log("haha",fetchDepartment());
+    const departments = useSelector(state => state?.department?.data)
     const handleClick = (event) =>{
         event.preventDefault();
         const name = document.getElementById('name').value
