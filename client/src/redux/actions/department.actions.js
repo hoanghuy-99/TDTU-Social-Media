@@ -1,6 +1,6 @@
 import { requestDepartment } from "../../services/department.services";
 
-const departmentConstants = require("../constants/department.constants");
+import departmentConstants from "../constants/department.constants"
 
 function fetchDepartment(){
     function request(){

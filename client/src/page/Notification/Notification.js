@@ -1,5 +1,14 @@
 const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
+const {useDispatch,useSelector} = ReactRedux
+const {useState,useEffect} = React
+import {fetchDepartment} from '../../redux/actions/department.actions'
+
 const Notification = () =>{
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch(fetchDepartment())
+    },[])
+    const departments = useSelector(state => state?.department?.data)
     return(
         <div>
             <div>
@@ -21,28 +30,11 @@ const Notification = () =>{
                        <div className="col-lg-6">
                             <select id="select_facutly" className="form-select" aria-label="Default select example">
                                 <option value="" selected>Chọn Phòng/Khoa</option>
-                                <option value="CTHSSV">Phòng CTHSSV</option>
-                                <option value="UniRoom">Phòng Đại học</option>
-                                <option value="AfterUniRoom">Phòng Sau đại học</option>
-                                <option value="ComputerRoom">Phòng Điện toán và máy tính</option>
-                                <option value="SurveyRoom">Phòng khảo khí và kiểm định chất lượng</option>
-                                <option value="EnterpriseRoom"> Doanh nghiệp, cựu sinh viên</option>
-                                <option value="FinanceRoom">Phòng tài chính</option>
-                                <option value="CLCRoom">TDT Creative Language Center</option>
-                                <option value="SDTC">Đào tạo phát triển xã hội</option>
-                                <option value="ATEM">Khoa học quản lý, Ứng dụng công nghệ</option>
-                                <option value="Law">Khoa Luật</option>
-                                <option value="EIF">Ngoại ngữ-Tin học-Bồi dưỡng</option>
-                                <option value="EB"> Kinh tế và Kinh doanh</option>
-                                <option value="MTCN"> Khoa Mỹ thuật công nghiệp</option>
-                                <option value="Electrical">Khoa Điện-Điện tử</option>
-                                <option value="CNTT">Khoa Công nghệ thông tin</option>
-                                <option value="QTKD">Khoa Quản trị kinh doanh</option>
-                                <option value="MT_BHLD">Môi trường và bảo hộ lao động</option>
-                                <option value="MTCN">Khoa Lao động công đoàn</option>
-                                <option value="TCNH">Khoa Tài chính ngân hàng</option>
-                                <option value="QDQT">Khoa Giáo dục quốc tế</option>
-                                <option value="ITRoom">Trung tâm tin học</option>
+                                {departments?.map((value)=>{
+                                    return(
+                                        <option value={value.id}>{value.name}</option>
+                                    )
+                                })}
                             </select>
                         </div>
                     </div>

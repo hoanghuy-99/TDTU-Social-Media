@@ -8,7 +8,6 @@ async function requestDepartment() {
             'Content-Type': 'application/json',
         },
     })
-    console.log("haha");
     const data = await response.json()
     return data
 }
