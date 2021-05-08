@@ -5,8 +5,8 @@ const {useDispatch,useSelector} = ReactRedux
 const {useState,useEffect} = React
 
 const Admin = () =>{
+    console.log('dispatch')
     const dispatch = useDispatch()
-    console.log("haha",fetchDepartment());
     const departments = useSelector(state => state?.department?.data)
     const handleClick = (event) =>{
         event.preventDefault();

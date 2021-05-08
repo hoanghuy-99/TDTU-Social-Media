@@ -14,7 +14,8 @@ module.exports = {
             use: {
                 loader: 'babel-loader',
                 options: {
-                    presets: ['@babel/preset-env','@babel/preset-react']
+                    presets: [ ["@babel/preset-env", { "targets": "> 0.25%, not dead" }],'@babel/preset-react'],
+                    plugins: ['@babel/plugin-proposal-class-properties']
                 }
             }
             }
@@ -27,5 +28,6 @@ module.exports = {
                 "../stylesheets/style.css": ['./src/css/*.css']
             }
         }),
+        
     ]
 };

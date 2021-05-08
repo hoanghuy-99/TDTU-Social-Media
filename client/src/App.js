@@ -41,7 +41,7 @@ const App = () =>{
                                     <Modal_Change_Avatar/>
                                 </Student_Info>
                             </Route>
-                            <Route path="/admin">
+                            <Route path="/admin" exact>
                                 <Admin></Admin>
                             </Route>
                             <Route path="/notification" exact>
