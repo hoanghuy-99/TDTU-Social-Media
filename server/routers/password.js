@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const { requireToken } = require('../middlewares/authorization')
 
 const passwordCtrl = require('../controllers/password')
 

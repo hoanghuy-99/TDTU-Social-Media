@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const Notification = require('../models/Notification')
 const notificationCtrl = require('../controllers/notification')
+const { requireToken,requireYour } = require('../middlewares/authorization')
 
 router.get('/notifications', requireToken(), notificationCtrl.createNotification)
 router.post('/notifications',requireToken(['teacher']), notificationCtrl.createNotification)
