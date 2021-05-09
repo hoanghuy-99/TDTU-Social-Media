@@ -12,5 +12,5 @@ const schema = new mongoose.Schema({
         required: true
     }
 }, opt) 
-module.exports = mongoose.model('Post', schema)
+module.exports = mongoose.model('Notification', schema)
 
