@@ -31,7 +31,7 @@ exports.requireToken = (accessibleRoles = []) => (req, res, next) => {
         })
     }
 
-    if(accessibleRoles.length != 0 && accessibleRoles.includes(payload.role)){
+    if(accessibleRoles.length > 0 && accessibleRoles.includes(payload.role)){
         return res.json({
             code: 102,
             message: 'No permission'
