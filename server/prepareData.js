@@ -139,7 +139,7 @@ async function prepareData(){
         await docs[i].save()
     }
 }
-prepareData().then(()=>{
+prepareData().then(()=>{    
     console.log('Fake data were created')
 }).catch(error => {
     console.log(error)
