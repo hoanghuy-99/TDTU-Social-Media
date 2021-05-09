@@ -3,30 +3,17 @@ const Student = require('../models/Student')
 const Notification = require('../models/Notification')
 const Department = require('../models/Department')
 
-
-async function getName(id,role){
-    return role === 'student' ? (await Student.findById(id)).name : (await User.findById(id)).name
-}
-
-
 exports.createNotification = async (req, res)=>{
     let department = (await Department.find({id:req.body.departmentId}))._id 
     let notification = await Notification.create({
         ...req.body,
         author: req.token.user_id,
-        authorRole: req.token.role,
         department: department
     })
-    let user
-    if(req.token.role === 'student'){
-        user = await Student.findById(req.token.user_id)
-        user.notifications.push(notification._id)
-        await user.save()
-    }else{
-        user = await User.findById(req.token.user_id)
-        user.notifications.push(notification._id)
-        await user.save()
-    }
+    let user = await User.findById(req.token.user_id)
+    user.notifications.push(notification._id)
+    await user.save()
+    
     notification = await Notification.findById(notification._id).populate('department')
     res.json({
         code: 0,
@@ -34,7 +21,6 @@ exports.createNotification = async (req, res)=>{
             id: notification._id,
             author:{
                 id:user.id,
-                role:notification.authorRole,
                 name: user.name
             },
             department: {
@@ -75,8 +61,7 @@ exports.getManyNotification = async (req, res)=>{
             updatedAt: notification.updatedAt,
             author:{
                 id: notification.author,
-                role: notification.authorRole,
-                name: notification.authorRole === 'student' ? (await Student.findById(notification.author)).name : (await User.findById(notification.author)).name
+                name: (await User.findById(notification.author)).name
             },
             department: {
                 id: notification.department.id,
@@ -99,8 +84,7 @@ exports.getSingleNotification = async (req, res)=>{
             updatedAt: notification.updatedAt,
             author:{
                 id: notification.author,
-                role: notification.authorRole,
-                name: notification.authorRole === 'student' ? (await Student.findById(notification.author)).name : (await User.findById(notification.author)).name
+                name: (await User.findById(notification.author)).name
             },
             department: {
                 id: notification.department.id,
@@ -125,8 +109,7 @@ exports.editNotification = async (req, res)=>{
             updatedAt: notification.updatedAt,
             author:{
                 id: notification.author,
-                role: notification.authorRole,
-                name: notification.authorRole === 'student' ? (await Student.findById(notification.author)).name : (await User.findById(notification.author)).name
+                name: (await User.findById(notification.author)).name
             },
             department: {
                 id: notification.department.id,
@@ -140,12 +123,8 @@ exports.editNotification = async (req, res)=>{
 
 exports.deleteNotification = async (req, res)=>{
     const notification = await Notification.findByIdAndDelete(req.params.id)
-    let user
-    if(notification.authorRole === 'student'){
-        user = await Student.findById(notification.author)
-    }else{
-        user = await User.findById(notification.author)
-    }
+    let user = await User.findById(notification.author)
+    
     user.notifications = user.notifications.filter(notificationId => notificationId !== notification._id)
     await user.save()
     res.json({
