@@ -13,5 +13,6 @@ const schema = new mongoose.Schema({
     image: String,
     video: String
 }, opt) 
+
 module.exports = mongoose.model('Post', schema)
 

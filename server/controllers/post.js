@@ -47,7 +47,7 @@ exports.getManyPost = async (req, res)=>{
     limit = parseInt(limit)
     page = parseInt(page)
     olderThan = parseInt(olderThan)
-    let postsQuery = Post.find().populate('comments')
+    let postsQuery = await Post.find().populate('comments')
     if(olderThan){
         postsQuery = postsQuery.where('createdAt').lte(olderThan)
     }
