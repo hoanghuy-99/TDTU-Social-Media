@@ -15,7 +15,7 @@ exports.createNotification = async (req, res)=>{
         ...req.body,
         author: req.token.user_id,
         authorRole: req.token.role,
-        department
+        department: department
     })
     let user
     if(req.token.role === 'student'){

@@ -7,7 +7,7 @@ const schema = new mongoose.Schema({
     content: { type:String, required: true},
     author: { type: mongoose.Types.ObjectId, ref: 'User' },
     department: {
-        type: String,
+        type: mongoose.Types.ObjectId,
         ref: 'Department',
         required: true
     }
