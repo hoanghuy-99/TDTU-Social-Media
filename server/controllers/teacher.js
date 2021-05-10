@@ -9,7 +9,7 @@ async function getName(id,role){
 exports.createTeachers =  async (req, res)=>{
     let password = await hasher.hash(req.body.password)
     let { departments } = req.body
-    departments = await Promise.all(departments.map(async d => (await Department.find({id:d.id}))._id ))
+    departments = await Promise.all(departments.map(async d => (await Department.findOne({id:d.id}))._id ))
     let teacher = await User.create({...req.body, role:'teacher', password, departments})
     teacher = await User.findById(teacher._id).populate('departments')
     res.json({

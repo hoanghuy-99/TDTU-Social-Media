@@ -4,7 +4,7 @@ const Notification = require('../models/Notification')
 const Department = require('../models/Department')
 
 exports.createNotification = async (req, res)=>{
-    let department = (await Department.find({id:req.body.departmentId}))._id 
+    let department = (await Department.findOne({id:req.body.departmentId}))._id 
     let notification = await Notification.create({
         ...req.body,
         author: req.token.user_id,
