@@ -17,8 +17,8 @@ async function requestNewTeacher(username, password, email, name, department) {
     return data
 }
 
-async function requestTeacherById() {
-    const response = await fetch(host + '/api/teachers/me',{
+async function requestTeacherById(id) {
+    const response = await fetch('http://localhost:8080/api/teachers/'+id,{
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -68,3 +68,5 @@ async function requestChangePasswordTeacher(oldpass,newpass) {
     const data = await response.json()
     return data
 }
+
+export {requestTeacherById,requestAvatarTeacher,requestNewTeacher,requestChangePasswordTeacher,requestChangeAvatarTeacher}

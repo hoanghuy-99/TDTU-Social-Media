@@ -1,5 +1,8 @@
-const {useState,useEffect}  = React
+const {useDispatch,useSelector} = ReactRedux
+const {useState,useEffect} = React
+import {newPost} from '../../redux/actions/post.actions'
 const Modal_Post = ()=>{
+    const dispatch = useDispatch()
     function closeModal(){
         document.getElementById('modal_change_avatar').style.display='none'
     }
@@ -39,6 +42,8 @@ const Modal_Post = ()=>{
     const addPost = () => {
         const content = document.getElementById('value_post').value
         const link_ytb = document.getElementById('youtube_embed').getAttribute('src')
+        dispatch(newPost(content,link_ytb))
+        closeModal()
     }
     const handleCancelImg = () =>{
         document.getElementById("img_modal_post").setAttribute('src','')

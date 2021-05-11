@@ -1,10 +1,15 @@
+import { deletePost } from "../../redux/actions/post.actions"
+
+const {useDispatch,useSelector} = ReactRedux
 const Modal_Delete_Post = (props)=>{
     const id = props
+    const dispatch = useDispatch()
     function closeModal(){
         document.getElementById(id.props.id).style.display='none'
     }
     const handleClick = ()=>{
-        // delete(id)
+        dispatch(deletePost(id.props.id))
+        closeModal()
     }
     return(
         <div id={id.props.id} className="w3-modal w3-animate-opacity">
