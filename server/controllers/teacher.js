@@ -92,6 +92,50 @@ exports.getPosts = async (req, res)=>{
       })
 }
 
+exports.getManyNotification = async (req, res)=>{
+    const {page, limit, olderThan, departmentId} = req.query
+    let notificationsQuery = Notification.find({author: req.body.id}).populate('department')
+    if(olderThan){
+        olderThan = parseInt(olderThan)
+        notificationsQuery = notificationsQuery.where('createdAt').lte(olderThan)
+    }
+    if(department){
+        let department = await Department.findOne({id: departmentId})
+        notificationsQuery = notificationsQuery.where('department', department?._id)
+    }
+    if(page && limit){
+        limit = parseInt(limit)
+        page = parseInt(page)
+        notificationsQuery = notificationsQuery.skip(page*limit).limit(limit)
+    }
+    const [notifications, count] = await Promise.all([notificationsQuery.exec(), Notification.find().countDocuments()])
+    
+    res.json({
+        code:0,
+        data:{
+          totalPages: page || 1,
+          totalItems: count, 
+          page: page || 1,
+          limit: 2,
+          items: await Promise.all(notifications.map(async (notification) =>({
+            id: notification._id,
+            createdAt: notification.createdAt,
+            updatedAt: notification.updatedAt,
+            author:{
+                id: notification.author,
+                name: (await User.findById(notification.author)).name
+            },
+            department: {
+                id: notification.department.id,
+                name: notification.department.name
+            },
+            title: notification.title,
+            content: notification.content,
+          })))
+        }
+      })
+}
+
 exports.getAvatar = async (req, res)=>{
     res.sendFile(path.join(__dirname, '../public/img/avatar_mac_dinh.jpg'))
     //let user = await User.findById(req.params.id)

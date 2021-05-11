@@ -35,11 +35,15 @@ exports.createNotification = async (req, res)=>{
 }
 
 exports.getManyNotification = async (req, res)=>{
-    const {page, limit, olderThan} = req.query
+    const {page, limit, olderThan, departmentId} = req.query
     let notificationsQuery = Notification.find().populate('department')
     if(olderThan){
         olderThan = parseInt(olderThan)
         notificationsQuery = notificationsQuery.where('createdAt').lte(olderThan)
+    }
+    if(department){
+        let department = await Department.findOne({id: departmentId})
+        notificationsQuery = notificationsQuery.where('department', department?._id)
     }
     if(page && limit){
         limit = parseInt(limit)
