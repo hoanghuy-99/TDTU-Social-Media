@@ -1,6 +1,7 @@
 const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
-
+import {getRole} from '../../cookie'
 const Navigation = ({children}) =>{
+    console.log(getRole()); 
     return(
         <div className="row">
                 <div className="col-12 col-lg-2" id="navigation_div">

@@ -2,13 +2,17 @@ const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
 const {useDispatch,useSelector} = ReactRedux
 const {useState,useEffect} = React
 import {fetchDepartment} from '../../redux/actions/department.actions'
+import { fetchNotification } from '../../redux/actions/notification.actions';
 
 const Notification = () =>{
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(fetchDepartment())
+        dispatch(fetchNotification())
     },[])
     const departments = useSelector(state => state?.department?.data)
+    const notifications = useSelector(state => state?.notification?.data)
+    console.log(notifications);
     return(
         <div>
             <div>
@@ -70,15 +74,19 @@ const Notification = () =>{
                 <div className="row justify-content-center">
                     <div id="noti_list_div">
                         <div className="row justify-content-center">
-                            <div className="card">
-                                <div className="card-body">
-                                  <h5 className="card-title"><strong>Tiêu đề</strong></h5>
-                                  <p className="card-text noti_text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                  <Link to="#" className="btn btn-danger">Xem chi tiết thông báo</Link>
-                                  <p id="faculty_time">Công nghệ thông tin | Ngày đăng: 02/04/2021</p>
-                                  <div className="clear"></div>
-                                </div>
-                            </div>
+                            {notifications?.items?.map((value)=>{
+                                return(
+                                    <div className="card">
+                                        <div className="card-body">
+                                        <h5 className="card-title"><strong>Tiêu đề</strong></h5>
+                                        <p className="card-text noti_text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <Link to="#" className="btn btn-danger">Xem chi tiết thông báo</Link>
+                                        <p id="faculty_time">Công nghệ thông tin | Ngày đăng: 02/04/2021</p>
+                                        <div className="clear"></div>
+                                        </div>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                 </div>

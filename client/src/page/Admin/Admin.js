@@ -30,7 +30,6 @@ const Admin = () =>{
         } else {
             dispatch(register(username, username, password, email, name, department))
         }
-    
     }
     
     return(

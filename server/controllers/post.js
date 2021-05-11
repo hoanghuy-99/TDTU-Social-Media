@@ -44,17 +44,19 @@ exports.createPost = async (req, res)=>{
 
 exports.getManyPost = async (req, res)=>{
     const {page, limit, olderThan} = req.query
-    limit = parseInt(limit)
-    page = parseInt(page)
-    olderThan = parseInt(olderThan)
-    let postsQuery = await Post.find().populate('comments')
+   
+    
+    let postsQuery = Post.find().populate('comments')
     if(olderThan){
-        postsQuery = await postsQuery.where('createdAt').lte(olderThan)
+        olderThan = parseInt(olderThan)
+        postsQuery = postsQuery.where('createdAt').lte(olderThan)
     }
     if(page && limit){
-        postsQuery = await postsQuery.skip(page*limit).limit(limit)
+        limit = parseInt(limit)
+        page = parseInt(page)
+        postsQuery = postsQuery.skip(page*limit).limit(limit)
     }
-    const [posts, count] = await Promise.all(postsQuery.exec(), Post.find().countDocuments())
+    const [posts, count] = await Promise.all([postsQuery.exec(), Post.find().countDocuments()])
     
     res.json({
         code:0,

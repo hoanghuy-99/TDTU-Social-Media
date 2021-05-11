@@ -2,7 +2,7 @@ import {getToken} from '../cookie.js'
 var host = window.location.protocol + "//" + window.location.host
 
 async function requestNotification() {
-    const response = await fetch(host + '/api/notifications',{
+    const response = await fetch('http://localhost:8080/api/notifications',{
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ async function requestNewNotification(title,content,departmentId) {
 }
 
 async function requestNotificationById(id) {
-    const response = await fetch(host + '/api/notifications/'+id,{
+    const response = await fetch('http://localhost:8080/api/notifications/'+id,{
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ async function requestNotificationById(id) {
     return data
 }
 
-async function requestNotificationById(id,title,content,departmentId) {
+async function requestChangeNotificationById(id,title,content,departmentId) {
     const req = {
         title,content,departmentId
     }
@@ -70,3 +70,4 @@ async function requestDeleteNotification(id) {
     return data
 }
 
+export {requestNotification,requestNewNotification,requestChangeNotificationById,requestNotificationById,requestDeleteNotification}

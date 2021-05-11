@@ -1,10 +1,14 @@
 const {useState,useEffect} = React
+const {useDispatch,useSelector} = ReactRedux
+import {newNotification} from '../../redux/actions/notification.actions'
 const AddNotification = () =>{
+    const dispatch = useDispatch()
     const addNotification = () =>{
         const title = document.getElementById('noti_add_title').value
         const content = document.getElementById('noti_add_content').value
         const faculty = document.getElementById('select_facutly_home').value
         console.log(title,content,faculty);
+        dispatch(newNotification(title,content,faculty))
     }
     return(
         <div>
@@ -47,10 +51,10 @@ const AddNotification = () =>{
                                 </div>
                                 <div className="row" id="cancel_post_noti_div">
                                     <div className="col-lg-2">
-                                        <button type="button" className="btn btn-danger form-control">Hủy</button>
+                                        <button type="button" className="btn btn-danger btn-form-control">Hủy</button>
                                     </div>
                                     <div className="col-lg-2">
-                                        <button type="button" onClick={addNotification} className="btn btn-success form-control" id="post_noti_btn">Đăng</button>
+                                        <button type="button" onClick={addNotification} className="btn btn-success btn-form-control" id="post_noti_btn">Đăng</button>
                                     </div>
                                 </div>
                             </form>

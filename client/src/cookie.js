@@ -15,9 +15,13 @@ function getToken(){
 function removeToken(){
     Cookie.remove('token')
 }
-
+function getRole(){
+    const token = getToken()
+    return jwt_decode(token).role
+}
 export {
     setToken,
     getToken,
     removeToken,
+    getRole
 }

@@ -14,7 +14,7 @@ async function prepareData(){
 
     const account = new User({
         name:"TuanKiet",
-        avatar:"/img/avatar_mac_dinh.jpg",
+        avatar:"avatar_mac_dinh.jpg",
         username:"tuankiet",
         password: hashed_password,
         departments:[],
@@ -22,7 +22,7 @@ async function prepareData(){
         posts:[],
         notification:[]
     })
-
+    
     const faculty1 = new Department({
         id:"CTHSSV",
         name:"Phòng CTHSSV"

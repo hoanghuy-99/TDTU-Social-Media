@@ -1,7 +1,7 @@
 import userConstants from "../constants/user.constants"
 import setAlert  from './alert.actions'
 import { removeToken } from '../../cookie'
-
+import {requestToken} from '../../services/token.services'
 const fetchUser = () => {
     function request(){
         return { type: userConstants.FETCH_USER }

@@ -4,7 +4,7 @@ const Notification = require('../models/Notification')
 const Department = require('../models/Department')
 
 exports.createNotification = async (req, res)=>{
-    let department = (await Department.findOne({id:req.body.departmentId}))._id 
+    let department = (await Department.findOne({id:req.body.departmentId}))._id
     let notification = await Notification.create({
         ...req.body,
         author: req.token.user_id,
@@ -36,17 +36,17 @@ exports.createNotification = async (req, res)=>{
 
 exports.getManyNotification = async (req, res)=>{
     const {page, limit, olderThan} = req.query
-    limit = parseInt(limit)
-    page = parseInt(page)
-    olderThan = parseInt(olderThan)
     let notificationsQuery = Notification.find().populate('department')
     if(olderThan){
+        olderThan = parseInt(olderThan)
         notificationsQuery = notificationsQuery.where('createdAt').lte(olderThan)
     }
     if(page && limit){
+        limit = parseInt(limit)
+        page = parseInt(page)
         notificationsQuery = notificationsQuery.skip(page*limit).limit(limit)
     }
-    const [notifications, count] = await Promise.all(notificationsQuery.exec(), Notification.find().countDocuments())
+    const [notifications, count] = await Promise.all([notificationsQuery.exec(), Notification.find().countDocuments()])
     
     res.json({
         code:0,

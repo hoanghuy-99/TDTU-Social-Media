@@ -6,7 +6,7 @@ async function requestToken(username,password) {
         body: JSON.stringify({ username, password })
     }
 
-    let data = await fetch(host + '/api/tokens', requestOptions)
+    let data = await fetch('http://localhost:8080/api/tokens', requestOptions)
     data = await data.json()
     return data
 }
@@ -22,3 +22,5 @@ async function putToken(tokenId) {
     data = await data.json()
     return data
 }
+
+export {requestToken,putToken}

@@ -48,8 +48,7 @@ exports.requireToken = (accessibleRoles = []) => (req, res, next) => {
 
 exports.requireYour = (Model) => async (req, res, next)=>{
     let item = await Model.findById(req.params.id)
-    if(item.author !== req.token.user_id){
-        
+    if(item.author != req.token.user_id){
         return res.json({
             code: 102,
             message: 'No permission'
