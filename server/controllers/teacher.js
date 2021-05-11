@@ -92,3 +92,17 @@ exports.getPosts = async (req, res)=>{
       })
 }
 
+exports.getAvatar = async (req, res)=>{
+    let user = await User.findById(req.params.id)
+    res.sendFile(path.join(__dirname, '../uploads/'+ user.image))
+}
+
+exports.updateAvatar = async (req, res)=>{
+    let user = await User.findById(req.params.id)
+    user.avatar = req.image
+    user.save()
+    res.json({
+        code: 0,
+        message:'Tải hình ảnh thành công'
+    })
+}

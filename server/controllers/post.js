@@ -49,10 +49,10 @@ exports.getManyPost = async (req, res)=>{
     olderThan = parseInt(olderThan)
     let postsQuery = await Post.find().populate('comments')
     if(olderThan){
-        postsQuery = postsQuery.where('createdAt').lte(olderThan)
+        postsQuery = await postsQuery.where('createdAt').lte(olderThan)
     }
     if(page && limit){
-        postsQuery = postsQuery.skip(page*limit).limit(limit)
+        postsQuery = await postsQuery.skip(page*limit).limit(limit)
     }
     const [posts, count] = await Promise.all(postsQuery.exec(), Post.find().countDocuments())
     
@@ -134,7 +134,7 @@ exports.editPost = async (req, res)=>{
                 role: post.authorRole,
                 name: await getName(post.author, post.authorRole)
             },
-            comments: Promise.all(post.comments.map(async comment =>{
+            comments: await Promise.all(post.comments.map(async comment =>{
                 let name = await getName(comment.author, comment.authorRole)
                 return {
                 id: comment._id,
@@ -179,7 +179,7 @@ exports.commentPost = async (req, res)=>{
 
     res.json({
         code: 0,
-        data:Promise.all(post.comments.map(async comment =>{
+        data: await Promise.all(post.comments.map(async comment =>{
             let name = await getName(comment.author, comment.authorRole)
             return {
             id: comment._id,
