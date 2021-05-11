@@ -30,8 +30,6 @@ exports.requireToken = (accessibleRoles = []) => (req, res, next) => {
             message: 'Token is invalid'
         })
     }
-    console.log(accessibleRoles);
-    console.log(payload.role);
     if(accessibleRoles.length > 0 && !accessibleRoles.includes(payload.role)){
         return res.json({
             code: 102,
