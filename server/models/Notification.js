@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const opt = { timestamps: true }
+const opt = { timestamps: { currentTime: Date.now} }
 
 const schema = new mongoose.Schema({
     title: { type:String, required: true},
