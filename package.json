@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon server/app.js",
     "start": "cd ./server && npm start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd ./client && npm run build && ncp ./public/ ../server/public/",
@@ -22,5 +23,8 @@
   "homepage": "https://github.com/hoanghuy-99/TDTU-Social-Media#readme",
   "dependencies": {
     "ncp": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
