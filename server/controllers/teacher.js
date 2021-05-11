@@ -93,8 +93,9 @@ exports.getPosts = async (req, res)=>{
 }
 
 exports.getAvatar = async (req, res)=>{
-    let user = await User.findById(req.params.id)
-    res.sendFile(path.join(__dirname, '../uploads/'+ user.image))
+    res.sendFile(path.join(__dirname, '../public/img/avatar_mac_dinh.jpg'))
+    //let user = await User.findById(req.params.id)
+    //res.sendFile(path.join(__dirname, '../uploads/'+ user.image))
 }
 
 exports.updateAvatar = async (req, res)=>{
