@@ -1,5 +1,7 @@
 const Department = require('../models/Department')
 const User = require('../models/User')
+const Post = require('../models/Post')
+const Notification = require('../models/Notification')
 const hasher = require('../utils/hasher')
 
 async function getName(id,role){
