@@ -1,9 +1,20 @@
 const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
+const {useDispatch,useSelector} = ReactRedux
+const {useState,useEffect} = React
+import { getId } from '../../cookie';
+import { fetchFacultyById } from '../../redux/actions/faculty.actions';
 import Modal_Delete from '../Modal_Delete/index'
 const FacultyHome = () =>{
+    const dispatch = useDispatch()
     const openModal= (id)=>(e)=>{
         document.getElementById(id).style.display='block'
     }
+    const id_teacher = getId()
+    useEffect(()=>{
+        dispatch(fetchFacultyById(id_teacher))
+    },[])
+
+    const facultys = useSelector(state => state?.faculty?.data)
     return(
         <div>
             <div>
@@ -23,9 +34,11 @@ const FacultyHome = () =>{
                                 <h2>Phòng/Khoa:</h2>
                                 <select id="select_facutly_home" className="form-select" aria-label="Default select example">
                                     <option value="" selected>Chọn Phòng/Khoa</option>
-                                    <option value="CTHSSV">Phòng CTHSSV</option>
-                                    <option value="UniRoom">Phòng Đại học</option>
-                                    <option value="AfterUniRoom">Phòng Sau đại học</option>
+                                    {facultys?.departments?.map((value)=>{
+                                        return(
+                                            <option value={value.id}>{value.name}</option>
+                                        )
+                                    })}
                                 </select>
                             </div>
                         </div>
@@ -49,7 +62,7 @@ const FacultyHome = () =>{
                                     </div>
                                     <div className="clear"></div>
                                     <p className="card-text noti_text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <Link to="#" className="btn btn-danger">Xem chi tiết thông báo</Link>
+                                    <Link to={`/notification/`+ "123"} className="btn btn-danger">Xem chi tiết thông báo</Link>
                                     <p id="faculty_time">Công nghệ thông tin | Ngày đăng: 02/04/2021</p>
                                     <div className="clear"></div>
                                 </div>

@@ -1,6 +1,6 @@
 import postConstants from '../constants/post.constants'
 import setAlert  from './alert.actions'
-import { requestPost, requestNewPost } from '../../services/post.services'
+import { requestPost, requestNewPost, requestDeletePost } from '../../services/post.services'
 
 const fetchPost = () => {
   function request(){
@@ -35,7 +35,7 @@ const fetchPost = () => {
   }
 }
 
-const addPost = (content, video) => {
+const newPost = (content, video) => {
   function request(){
     return { 
       type: postConstants.ADD_POST
@@ -72,4 +72,35 @@ const addPost = (content, video) => {
   }
 }
 
-export {fetchPost, addPost}
+function deletePost(id){
+  function request(){
+    return { 
+      type: postConstants.DELETE_POST
+    }
+  }
+  function success(message,id){
+    return {
+      type: postConstants.DELETE_POST_SUCCESS,
+      message,
+      id
+    }
+  }
+  function failure(message){
+    return {
+      type: postConstants.DELETE_POST_FAILURE,
+      message
+    }
+  }
+  return async(dispatch) => {
+    dispatch(request())
+    const res = await requestDeletePost(id)
+    if(res.code == 0){
+      dispatch(success('Xóa thành công',id))
+    }
+    else{
+      dispatch(failure('Xóa thất bại'))
+    }
+  }
+}
+
+export {fetchPost, newPost,deletePost}

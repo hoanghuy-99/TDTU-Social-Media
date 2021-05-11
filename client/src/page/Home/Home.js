@@ -3,7 +3,21 @@ import formatDate from '../../utils/FormatDate'
 import Modal_Delete_Post from '../Modal_Delete_Post/index'
 import Modal_Edit_Comment from '../Modal_Edit_Comment/index'
 import Modal_Delete_Comment from '../Modal_Delete_Comment/index'
+import { fetchPost } from '../../redux/actions/post.actions'
+const {useDispatch,useSelector} = ReactRedux
+const {useState,useEffect} = React
 const Home = ({children}) =>{
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch(fetchPost())
+    },[])
+    let posts = useSelector(state => state?.post?.data)
+    posts?.items?.sort((a,b)=>{
+        const timeA = new Date(a.createdAt).getTime()
+        const timeB = new Date(b.createdAt).getTime()
+        return timeB - timeA
+    })
+    console.log(posts);
     function openModal(){
         document.getElementById('modal_change_avatar').style.display='block'
     }
@@ -16,6 +30,7 @@ const Home = ({children}) =>{
     const openModalDeleteComment= (id)=>(e)=>{
         document.getElementById(id).style.display='block'
     }
+    
     return(
         <div className=" col-12 col-lg-10" id="body_div">
             <div className="row">
@@ -35,7 +50,9 @@ const Home = ({children}) =>{
                         </div> 
                     </div>
                     {/* Mỗi bài post */}
-                    <div className="row justify-content-center">
+                    {posts?.items?.map((value)=>{
+                        return(
+                            <div className="row justify-content-center">
                         <div className="col-lg-11" id="div_post_social">
                             <div className="form-group">
                                 <div className="row">
@@ -44,8 +61,8 @@ const Home = ({children}) =>{
                                         <img src="/img/avatar.jpg" id="avatar_post"/>
                                     </div>
                                     <div className="col-lg-10">
-                                        <strong>Tuấn Kiệt</strong>
-                                        <p>Posted on {/*formatDate(date)*/}</p>
+                                        <strong>{value.author.name}</strong>
+                                        <p>Posted on {value.updatedAt}</p>
                                     </div>
                                     <div className="col-lg-1">
                                         <div className="dropdown">
@@ -54,21 +71,21 @@ const Home = ({children}) =>{
                                                 ...
                                             </button>
                                             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><Link className="dropdown-item" to={`/editPost/`+"BAIVIET1"}><i className="fas fa-wrench"></i>Chỉnh sửa</Link></li>
-                                                <li><Link className="dropdown-item" to="#" onClick={openModalDeletePost("BAIVIET1")}><i className="fas fa-times"></i>Xóa</Link></li>
+                                                <li><Link className="dropdown-item" to={`/editPost/`+value.id}><i className="fas fa-wrench"></i>Chỉnh sửa</Link></li>
+                                                <li><Link className="dropdown-item" to="#" onClick={openModalDeletePost(value.id)}><i className="fas fa-times"></i>Xóa</Link></li>
                                             </ul>
                                         </div>
-                                        <Modal_Delete_Post props={{id:"BAIVIET1"}}></Modal_Delete_Post>
+                                        <Modal_Delete_Post props={{id:value.id}}></Modal_Delete_Post>
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <p>Hôm nay tôi buồn vcl!</p>
+                                    <p>{value.content}</p>
                                 </div>
                                 <div className="row">
                                     <img src="/img/landing-background.jpg" id="img_post" hidden></img>
                                 </div>
                                 <div>
-                                    <iframe id="youtube_post"  height="400"  src="https://www.youtube.com/embed/vVhKA9Av6vA?controls=1" allowFullScreen></iframe>
+                                    <iframe id="youtube_post"  height="400"  src={value.video} allowFullScreen></iframe>
                                 </div>
                                 <hr/>
                                 <div className="row">
@@ -106,6 +123,9 @@ const Home = ({children}) =>{
                             </div>
                         </div> 
                     </div>
+                        )
+                    })}
+                    
                     {/* ----- */}
                 </div>
                 <div  className="col-lg-5" id="home_notification">

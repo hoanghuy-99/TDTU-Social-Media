@@ -78,10 +78,10 @@ const Notification = () =>{
                                 return(
                                     <div className="card">
                                         <div className="card-body">
-                                        <h5 className="card-title"><strong>Tiêu đề</strong></h5>
-                                        <p className="card-text noti_text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <Link to="#" className="btn btn-danger">Xem chi tiết thông báo</Link>
-                                        <p id="faculty_time">Công nghệ thông tin | Ngày đăng: 02/04/2021</p>
+                                        <h5 className="card-title"><strong>{value.title}</strong></h5>
+                                        <p className="card-text noti_text">{value.content}</p>
+                                        <Link to={`/notification/`+value.id} className="btn btn-danger">Xem chi tiết thông báo</Link>
+                                        <p id="faculty_time">{value.department.name} | Ngày đăng: {value.updatedAt}</p>
                                         <div className="clear"></div>
                                         </div>
                                     </div>

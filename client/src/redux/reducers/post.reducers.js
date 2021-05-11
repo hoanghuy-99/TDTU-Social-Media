@@ -37,12 +37,42 @@ export default (state = initialState , action)=>{
                 ...state,
                 requesting:false,
                 message:action.message,
-                data: "chưa biết là có trả gì không"
+                data: {
+                    ...state.data,
+                    items: [
+                        ...state.data.items,
+                        action.data
+                    ]
+                }
             }
         case postConstants.ADD_POST_FAILURE:
             return{
                 ...state,
                 requesting:false,
+                message: action.message
+            }
+        case postConstants.DELETE_POST:
+            return{
+                ...state,
+                requesting: true,
+            }
+        case postConstants.DELETE_POST_SUCCESS:
+            return{
+                ...state,
+                message: action.message,
+                data:{
+                    ...state.data,
+                    items: state.data.items.reduce((value,item)=>{
+                        if(item.id != action.id){
+                            value.push(item)
+                        }
+                        return value
+                    },[])
+                }
+            }
+        case postConstants.DELETE_POST_FAILURE:
+            return{
+                ...state,
                 message: action.message
             }
         default:
