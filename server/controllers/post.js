@@ -123,8 +123,8 @@ exports.getSinglePost = async (req, res)=>{
 }
 
 exports.editPost = async (req, res)=>{
-    
-    let post = await Post.findByIdAndUpdate(req.params.id, req.body).populate('comments')
+    await Post.findByIdAndUpdate(req.params.id, req.body)
+    let post = await Post.findById(req.params.id).populated('comment')
     res.json({
         code: 0,
         data:{
