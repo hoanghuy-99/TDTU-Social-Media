@@ -8,6 +8,7 @@ const studentRouter = require('./student')
 const teacherRouter = require('./teacher')
 const tokenRouter = require('./token')
 const passwordRouter = require('./password')
+const profileRouter = require('./profile')
 
 router.use(passwordRouter)
 router.use(tokenRouter)
@@ -17,5 +18,6 @@ router.use(notificationRouter)
 router.use(postRouter)
 router.use(studentRouter)
 router.use(teacherRouter)
+router.use(profileRouter)
 
 module.exports = router
