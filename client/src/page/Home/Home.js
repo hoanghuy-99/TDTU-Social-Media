@@ -55,11 +55,11 @@ const Home = ({children}) =>{
         if(minutes == 0){
             return seconds+"s"
         }
-        else if(hours >= 1){
-            return hours.toString().slice(0,1)+"h"
-        }
         else if (hours >= 24){
             return post_on_date
+        }
+        else if(hours >= 1){
+            return hours.toString().split('.')[0]+"h"
         }
         else{
             return minutes+"m"
