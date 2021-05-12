@@ -3,7 +3,9 @@ import formatDate from '../../utils/FormatDate'
 import Modal_Delete_Post from '../Modal_Delete_Post/index'
 import Modal_Edit_Comment from '../Modal_Edit_Comment/index'
 import Modal_Delete_Comment from '../Modal_Delete_Comment/index'
+import Modal_Edit_Post from '../Modal_Edit_Post/index'
 import { fetchPost } from '../../redux/actions/post.actions'
+import { getId } from '../../cookie'
 const {useDispatch,useSelector} = ReactRedux
 const {useState,useEffect} = React
 const Home = ({children}) =>{
@@ -30,7 +32,47 @@ const Home = ({children}) =>{
     const openModalDeleteComment= (id)=>(e)=>{
         document.getElementById(id).style.display='block'
     }
-    
+    const openModalEditPost= (id)=>(e)=>{
+        document.getElementById(id).style.display='block'
+    }
+    const formatDate = (date) =>{
+        var year = date.getFullYear().toString();
+        var month = (date.getMonth() + 101).toString().substring(1);
+        var day = (date.getDate() + 100).toString().substring(1);
+        return month + '/' + day + '/' + year;
+    }
+    const fromatPostOn = (time) =>{
+        const now = Date.now()
+        const createdAt = new Date(time).getTime()
+        const time_post = now - createdAt
+        const date = new Date(time_post)
+        const minutes = date.getMinutes().toString()
+        const hours = time_post/(3600*1000)
+        const seconds  = date.getSeconds().toString()
+        const date_post = new Date(createdAt)
+        const post_on_date = formatDate(date_post)
+        console.log(hours);
+        if(minutes == 0){
+            return seconds+"s"
+        }
+        else if(hours >= 1){
+            return hours.toString().slice(0,1)+"h"
+        }
+        else if (hours >= 24){
+            return post_on_date
+        }
+        else{
+            return minutes+"m"
+        } 
+    }
+    const checkIdUser = (id_user) =>{
+        if(getId() == id_user){
+            return false
+        }
+        else{
+            return true
+        }
+    }
     return(
         <div className=" col-12 col-lg-10" id="body_div">
             <div className="row">
@@ -62,19 +104,20 @@ const Home = ({children}) =>{
                                     </div>
                                     <div className="col-lg-10">
                                         <strong>{value.author.name}</strong>
-                                        <p>Posted on {value.updatedAt}</p>
+                                        <p>Posted on: {fromatPostOn(value.createdAt)}</p>
                                     </div>
                                     <div className="col-lg-1">
-                                        <div className="dropdown">
+                                        <div className="dropdown" hidden={checkIdUser(value.author.id)}>
                                             <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
                                              data-bs-toggle="dropdown" aria-expanded="false">
                                                 ...
                                             </button>
                                             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><Link className="dropdown-item" to={`/editPost/`+value.id}><i className="fas fa-wrench"></i>Chỉnh sửa</Link></li>
+                                                <li><Link className="dropdown-item" to="#" onClick={openModalEditPost("edit"+value.id)}><i className="fas fa-wrench"></i>Chỉnh sửa</Link></li>
                                                 <li><Link className="dropdown-item" to="#" onClick={openModalDeletePost(value.id)}><i className="fas fa-times"></i>Xóa</Link></li>
                                             </ul>
                                         </div>
+                                        <Modal_Edit_Post props={{edit:"edit"+value.id,id:value.id}}></Modal_Edit_Post>
                                         <Modal_Delete_Post props={{id:value.id}}></Modal_Delete_Post>
                                     </div>
                                 </div>

@@ -1,10 +1,13 @@
 const {useEffect,useState} = React
 const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM
+import { getId } from '../../cookie'
 //const {useDispatch, useSelector} = ReactRedux
 import { logout } from '../../redux/actions/user.actions'
+const {useDispatch,useSelector} = ReactRedux
 
 const Header = () =>{
-    //const dispatch = useDispatch()   
+    
+    const dispatch = useDispatch()
     const [date,setDate] = useState('')
     useEffect(()=>{
         var d = new Date().toDateString()

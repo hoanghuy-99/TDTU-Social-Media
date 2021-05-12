@@ -14,9 +14,10 @@ async function requestPost() {
 }
 
 async function requestNewPost(content,video) {
-    const req= {
+    const req = {
         content,video
     }
+    console.log("kết quả",req);
     const response = await fetch('http://localhost:8080/api/posts',{
         method: "POST",
         headers: {
@@ -30,13 +31,12 @@ async function requestNewPost(content,video) {
 }
 
 async function requestPostById(id) {
-    const response = await fetch(host + '/api/posts/'+id,{
+    const response = await fetch('http://localhost:8080/api/posts/'+id,{
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
             'Authorization': getToken(),
         },
-        body: JSON.stringify(req)
     })
     const data = await response.json()
     return data
