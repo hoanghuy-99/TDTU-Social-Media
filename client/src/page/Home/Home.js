@@ -3,7 +3,7 @@ import Modal_Delete_Post from '../Modal_Delete_Post/index'
 import Modal_Edit_Comment from '../Modal_Edit_Comment/index'
 import Modal_Delete_Comment from '../Modal_Delete_Comment/index'
 import Modal_Edit_Post from '../Modal_Edit_Post/index'
-import { fetchPost } from '../../redux/actions/post.actions'
+import { fetchPost, newPost } from '../../redux/actions/post.actions'
 import { getId } from '../../cookie'
 const {useDispatch,useSelector} = ReactRedux
 const {useState,useEffect} = React
@@ -53,16 +53,16 @@ const Home = ({children}) =>{
         const post_on_date = formatDate(date_post)
         console.log(hours);
         if(minutes == 0){
-            return seconds+"s"
+            return "vài giây trước"
         }
         else if (hours >= 24){
             return post_on_date
         }
         else if(hours >= 1){
-            return hours.toString().split('.')[0]+"h"
+            return hours.toString().split('.')[0]+"h"+" trước"
         }
         else{
-            return minutes+"m"
+            return minutes+"m"+" trước"
         } 
     }
     const checkIdUser = (id_user) =>{
@@ -71,6 +71,14 @@ const Home = ({children}) =>{
         }
         else{
             return true
+        }
+    }
+    const hiddenVideo = (video) =>{
+        if(video?.length == 0 || !video){
+            return true
+        }
+        else{
+            return false
         }
     }
     return(
@@ -100,11 +108,11 @@ const Home = ({children}) =>{
                                 <div className="row">
                                     <hr/>
                                     <div className="col-lg-1">
-                                        <img src="/img/avatar.jpg" id="avatar_post"/>
+                                        <img src="/img/avatar_mac_dinh.jpg" id="avatar_post"/>
                                     </div>
                                     <div className="col-lg-10">
                                         <strong>{value.author.name}</strong>
-                                        <p>Posted on: {fromatPostOn(value.createdAt)}</p>
+                                        <p>Được đăng: {fromatPostOn(value.createdAt)}</p>
                                     </div>
                                     <div className="col-lg-1">
                                         <div className="dropdown" hidden={checkIdUser(value.author.id)}>
@@ -128,7 +136,7 @@ const Home = ({children}) =>{
                                     <img src="/img/landing-background.jpg" id="img_post" hidden></img>
                                 </div>
                                 <div>
-                                    <iframe id="youtube_post"  height="400"  src={value.video} allowFullScreen></iframe>
+                                    <iframe id="youtube_post"  height="400"  src={value.video} hidden={hiddenVideo(value.video)} allowFullScreen></iframe>
                                 </div>
                                 <hr/>
                                 <div className="row">
@@ -146,22 +154,26 @@ const Home = ({children}) =>{
                                 </div>
                                 <hr/>
                                 {/* Comment */}
-                                <div className="row">
-                                    <div className="col-lg-1">
-                                        <img src="/img/avatar.jpg" id="avatar_comment"/>
+                                {value.comments?.map((new_value)=>{
+                                        return(
+                                    <div className="row">
+                                        <div className="col-lg-1">
+                                            <img src="/img/avatar_mac_dinh.jpg" id="avatar_comment"/>
+                                        </div>
+                                        <div className="col-lg-10">
+                                            <strong>{new_value.author.name}</strong>
+                                            <p id="comment">{new_value.content}</p>
+                                            <button onClick={openModalEditComment("edit"+new_value.id)} className="edit_cmt">Chỉnh sửa</button>
+                                            <button onClick={openModalDeleteComment(new_value.id)} className="edit_cmt">Xóa</button>
+                                        </div>
+                                        <Modal_Edit_Comment props={{id:"edit"+new_value,content:new_value.content}}></Modal_Edit_Comment>
+                                        <Modal_Delete_Comment props={{id:new_value.id}}></Modal_Delete_Comment>
+                                        <div className="col-lg-1">
+                                            <p>12/06/1999</p>
+                                        </div> 
                                     </div>
-                                    <div className="col-lg-10">
-                                       <strong>Tuấn Kiệt</strong>
-                                       <p id="comment">Mày ăn cơm chưa</p>
-                                       <button onClick={openModalEditComment("CMT1edit")} className="edit_cmt">Chỉnh sửa</button>
-                                       <button onClick={openModalDeleteComment("CMT1")} className="edit_cmt">Xóa</button>
-                                    </div>
-                                    <Modal_Edit_Comment props={{id:"CMT1"+"edit",content:"Mày ăn cơm chưa"}}></Modal_Edit_Comment>
-                                    <Modal_Delete_Comment props={{id:"CMT1"}}></Modal_Delete_Comment>
-                                    <div className="col-lg-1">
-                                        <p>12/06/1999</p>
-                                    </div>
-                                </div>
+                                    )
+                                })}
                                 {/* ------ */}
                             </div>
                         </div> 

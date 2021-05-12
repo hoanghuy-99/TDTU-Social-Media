@@ -1,12 +1,26 @@
+import { changeInfoPost } from "../../redux/actions/post.actions"
 import { requestPostById } from "../../services/post.services"
 const { useDispatch } = ReactRedux
-const { useState } = React
+const { useState,useEffect } = React
 
 const Modal_Edit_Post = (props)=>{
     const id = props
     const dispatch = useDispatch()
-    const postById = JSON.stringify(requestPostById(id.props.id))
-    console.log("data",postById);
+    const [postInfo,setpostInfo] = useState()
+    const handlePostInfo = async () =>{
+        const postById =  await requestPostById(id.props.id)
+        if(postById.code == 0){
+            setpostInfo(postById.data)
+            if(postById.data.video){
+                setHiddenVid(false)
+                setDisableImg(true)
+            }
+        }
+    }
+    useEffect(()=>{
+        handlePostInfo()
+    },[])
+    console.log("data",postInfo);
     function closeModal(){
         document.getElementById(id.props.edit).style.display='none'
     }
@@ -26,7 +40,6 @@ const Modal_Edit_Post = (props)=>{
             setDisableVid(true)
           }
     }
-    const [urlYTB,setUrlYTB] = useState()
     const [hiddenVid,setHiddenVid] = useState(true)
     const [hiddenImg,setHiddenImg] = useState(true)
     const [disableVid,setDisableVid] = useState(false)
@@ -34,8 +47,10 @@ const Modal_Edit_Post = (props)=>{
     const handleChangeVideo = (e) =>{
         const uploadVideo = document.getElementById("youtube_edit_embed")
         const url_ytb = e.target.value
-        const test ="https://www.youtube.com/embed/"+url_ytb.slice(32)+"?controls=1"
-        setUrlYTB(test)
+        setpostInfo(p => ({
+            ...p,
+            video: url_ytb
+        }))
         setHiddenVid(false)
         setDisableImg(true)
         if(url_ytb.length == 0){
@@ -43,9 +58,28 @@ const Modal_Edit_Post = (props)=>{
             setDisableImg(false)
         }
     }
+    const changeVideo = (url_link) =>{
+        if(url_link){
+            if(url_link.includes("https://www.youtube.com/embed/")){
+                 return url_link
+            }
+            else{
+                const test ="https://www.youtube.com/embed/"+url_link.slice(32)+"?controls=1"
+                return test
+            }
+        }
+        return undefined
+    }
+    const handleChangeContent = (e)=>{
+        const test = e.target.value
+        setpostInfo(p => ({
+            ...p,
+            content: test
+        }))
+    }
     const editPost = () => {
-        const content = document.getElementById('value_edit_post').value
-        const link_ytb = document.getElementById('youtube_edit_embed').getAttribute('src')
+        dispatch(changeInfoPost(id.props.id,postInfo?.content,changeVideo(postInfo?.video)))
+        console.log(id.props.id,postInfo?.content,postInfo?.video);
         closeModal()
     }
     const handleCancelImg = () =>{
@@ -65,25 +99,26 @@ const Modal_Edit_Post = (props)=>{
                     <div className="w3-container">
                     <div className="row">
                         <div className="col-lg-1">
-                            <img src="/img/avatar.jpg" id="avatar_post"/>
+                            <img src="/img/avatar_mac_dinh.jpg" id="avatar_post"/>
                         </div>
                         <div className="col-lg-11">
-                            <strong>Tuấn Kiệt</strong>
+                            <strong>{postInfo?.author?.name}</strong>
                         </div>
                     </div>
                     <div>
-                        <textarea placeholder="Bạn đang nghĩ gì?" id="value_edit_post"></textarea>
+                        <textarea onChange={handleChangeContent} placeholder="Bạn đang nghĩ gì?" 
+                        id="value_edit_post" value={postInfo?.content}></textarea>
                     </div>
                     <div className="form-group">
                         <input onChange={handleChangeVideo} type="text" disabled={disableVid} className="form-control" id="embed_video" 
-                        placeholder="Thêm đường dẫn youtube"/>
+                        placeholder="Thêm đường dẫn youtube" value={postInfo?.video}/>
                     </div>
                     <div>
                         <img src="" id="img_modal_edit_post" hidden={hiddenImg}/>
                         <button id="btn_cancel_img" onClick={handleCancelImg}><i className="fas fa-times"/></button>
                     </div>
                     <div>
-                        <iframe id="youtube_edit_embed" width="560" height="315" src={urlYTB} allowFullScreen hidden={hiddenVid} 
+                        <iframe id="youtube_edit_embed" width="560" height="315" src={changeVideo(postInfo?.video)} allowFullScreen hidden={hiddenVid} 
                         ></iframe>
                     </div>
                     <div className="row" id="div_modal_post_social">
@@ -96,7 +131,7 @@ const Modal_Edit_Post = (props)=>{
                     <hr/>
                     <div className="row">
                         <div className="col-lg-12">
-                        <button id="btn_modal_post" onClick={editPost} className="btn btn-primary">Đăng</button>
+                        <button id="btn_modal_post" onClick={editPost} className="btn btn-primary">Lưu</button>
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,6 @@
 const { Link, Redirect, Route, BrowserRouter, Switch } = ReactRouterDOM
+const { useDispatch,useSelector } = ReactRedux
+const {useEffect,useState} = React
 import Student_Info from './page/Student_Info/index'
 import Header from './page/Header/Header'
 import Navigation from './page/Navigation/Navigation'
@@ -15,8 +17,24 @@ import Login from './page/Login/Login'
 import Modal_Post from './page/Modal_Post/index'
 import EditNotification from './page/Edit_Notification/EditNotification'
 import EditPost from './page/Edit_Post/index'
+import { checkLogin, fetchUserById } from './redux/actions/user.actions'
+import { getId, getToken } from './cookie'
 
 const App = () =>{
+    const loggedIn = useSelector(state => state.user.loggedIn)
+    const dispatch = useDispatch()
+    
+    useEffect(()=>{
+        if(getToken()){
+        dispatch(checkLogin())
+        }
+    }, [getToken()])
+
+    useEffect(()=>{
+        if(loggedIn){
+        dispatch(fetchUserById(getId()))
+        }
+    }, [loggedIn])
     return (
         <div>
         <BrowserRouter>

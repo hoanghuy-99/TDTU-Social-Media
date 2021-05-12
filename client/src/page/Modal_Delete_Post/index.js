@@ -18,7 +18,7 @@ const Modal_Delete_Post = (props)=>{
                     <center><h2>Xóa bài viết</h2></center>
                 </div>
                 <div className="w3-container">
-                    <p>Bạn có muốn xóa bài viết <strong>{id.props.id}</strong></p>
+                    <p>Bạn có muốn xóa bài viết này?</p>
                     <div className="row" id="div_modal_post_social">
                         <div className="col-lg-6">
                             <button onClick={closeModal}  className="btn btn-dark btn_social">Hủy</button>

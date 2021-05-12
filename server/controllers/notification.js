@@ -57,7 +57,7 @@ exports.getManyNotification = async (req, res)=>{
         olderThan = parseInt(olderThan)
         notificationsQuery = notificationsQuery.where('createdAt').lte(olderThan)
     }
-    if(department){
+    if(departmentId){
         let department = await Department.findOne({id: departmentId})
         notificationsQuery = notificationsQuery.where('department', department?._id)
     }
@@ -66,7 +66,7 @@ exports.getManyNotification = async (req, res)=>{
         page = parseInt(page)
         notificationsQuery = notificationsQuery.skip(page*limit).limit(limit)
     }
-    const [notifications, count] = await Promise.all([notificationsQuery.exec(), Notification.populate('department').countDocuments()])
+    const [notifications, count] = await Promise.all([notificationsQuery.populate('department').exec(), Notification.find().countDocuments()])
     
     res.json({
         code:0,

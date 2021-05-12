@@ -2,7 +2,7 @@ import {getToken} from '../cookie.js'
 var host = window.location.protocol + "//" + window.location.host
 
 async function requestUserById() {
-    const response = await fetch(host + '/api/student/me',{
+    const response = await fetch('http://localhost:8080/api/profile',{
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -66,3 +66,4 @@ async function requestChangeImageById(){
     const data = await response.json()
     return data
 }
+export {requestUserById}

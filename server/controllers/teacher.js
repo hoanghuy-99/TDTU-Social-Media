@@ -31,6 +31,7 @@ exports.createTeachers =  async (req, res)=>{
 
 exports.getSingleTeacher = async (req, res)=>{
     let teacher = await User.findById(req.params.id).populate('departments')
+    console.log("kết quả",req.params);
     res.json({
         code: 0,
         data :{

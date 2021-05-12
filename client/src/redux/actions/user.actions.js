@@ -2,6 +2,7 @@ import userConstants from "../constants/user.constants"
 import setAlert  from './alert.actions'
 import { removeToken } from '../../cookie'
 import {requestToken} from '../../services/token.services'
+import { requestUserById } from "../../services/user.services"
 
 const fetchUser = () => {
     function request(){
@@ -37,7 +38,7 @@ const fetchUser = () => {
     }
 }
 
-const fetchUserById = () => {
+const fetchUserById = (id) => {
     function request(){
         return { type: userConstants.FETCH_USER }
     }
@@ -59,7 +60,7 @@ const fetchUserById = () => {
 
     return async (dispatch) => {
         dispatch(request())
-        const res = await requestUserById()
+        const res = await requestUserById(id)
         if(res.code === 0)
         {
             dispatch(success(res.data, 'Lấy dữ liệu thành công'))  
@@ -144,5 +145,9 @@ function logout(){
         type: userConstants.LOGOUT
     }
 }
-
-export { login, logout, register }
+function checkLogin(){
+    return {
+        type: userConstants.CHECK_LOGIN
+    }
+}
+export { login, logout, register,fetchUserById,checkLogin }

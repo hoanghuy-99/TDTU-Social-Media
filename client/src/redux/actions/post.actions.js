@@ -1,6 +1,6 @@
 import postConstants from '../constants/post.constants'
 import setAlert  from './alert.actions'
-import { requestPost, requestNewPost, requestDeletePost, requestPostById } from '../../services/post.services'
+import { requestPost, requestNewPost, requestDeletePost, requestPostById, requestChangePostById } from '../../services/post.services'
 
 const fetchPost = () => {
   function request(){
@@ -104,7 +104,38 @@ const newPost = (content, video) => {
     }
   }
 }
+function changeInfoPost(id,content,video){
+  function request(){
+    return { 
+      type: postConstants.CHANGE_POST
+    }
+  }
 
+  function success(data, message){
+    return {
+      type: postConstants.CHANGE_POST_SUCCESS,
+      data,
+      message
+    }
+  }
+
+  function failure(message){
+    return {
+      type: postConstants.CHANGE_POST_FAILURE,
+      message
+    }
+  }
+
+  return async(dispatch) => {
+    dispatch(request())
+    const res = await requestChangePostById(id,content,video)
+    if(res.code === 0){
+      dispatch(success(res.data, 'Lay du lieu thanh cong'))
+    } else {
+      dispatch(failure('Lay du lieu that bai'))
+    }
+  }
+}
 function deletePost(id){
   function request(){
     return { 
@@ -136,4 +167,4 @@ function deletePost(id){
   }
 }
 
-export {fetchPost, newPost,deletePost,fetchPostById}
+export {changeInfoPost,fetchPost, newPost,deletePost,fetchPostById}

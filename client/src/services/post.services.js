@@ -46,7 +46,7 @@ async function requestChangePostById(id,content,video) {
     const req= {
         content,video
     }
-    const response = await fetch(host + '/api/posts/'+id,{
+    const response = await fetch('http://localhost:8080/api/posts/'+id,{
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json',
@@ -166,4 +166,4 @@ async function requestDeleteImagePost(id) {
     return data
 }
 
-export {requestPost,requestPostById,requestNewPost,requestDeletePost}
+export {requestPost,requestPostById,requestNewPost,requestDeletePost,requestChangePostById}
