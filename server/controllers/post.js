@@ -178,20 +178,17 @@ exports.commentPost = async (req, res)=>{
     })
     post.comments.push(comment._id)
     await post.save()
-
     res.json({
         code: 0,
-        data: await Promise.all(post.comments.map(async comment =>{
-            let name = await getName(comment.author, comment.authorRole)
-            return {
+        data:{
             id: comment._id,
             content: comment.content,
             author:{
                 id: comment.author,
                 role: comment.authorRole,
-                name: name
+                name: await getName(comment.author, comment.authorRole)
             }
-        }})),
+        },
     })
 }
 
