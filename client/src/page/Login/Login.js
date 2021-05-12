@@ -1,11 +1,23 @@
-const {useState} = React
-const {useDispatch, useSelector} = ReactRedux
-const { Redirect } = ReactRouterDOM
 import { login } from '../../redux/actions/user.actions'
+const { useState } = React
+const { useDispatch, useSelector } = ReactRedux
+const { Redirect } = ReactRouterDOM
+const { useGoogleLogin } = GoogleLogin
 
 function Login(){
   const dispatch = useDispatch()
   const checkLogin = useSelector(state => state.user?.loggedIn)
+
+  //Student GoogleLogin
+  // const { signIn, loaded } = useGoogleLogin({
+  //   clientId,
+  //   scope,
+  //   onSuccess,
+  //   isSignedIn
+  // })
+  //console.log(signIn + " " + loaded)
+  
+  //Admin Login
   const [form, setForm] = useState({
     username: '', 
     password: ''

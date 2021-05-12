@@ -1,8 +1,8 @@
-const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
-const {useDispatch,useSelector} = ReactRedux
-const {useState,useEffect} = React
-import {fetchDepartment} from '../../redux/actions/department.actions'
-import { fetchNotification } from '../../redux/actions/notification.actions';
+const { Link } = ReactRouterDOM
+const { useDispatch,useSelector } = ReactRedux
+const { useState,useEffect } = React
+import { fetchDepartment } from '../../redux/actions/department.actions'
+import { fetchNotification } from '../../redux/actions/notification.actions'
 
 const Notification = () =>{
     const dispatch = useDispatch()
@@ -12,7 +12,8 @@ const Notification = () =>{
     },[])
     const departments = useSelector(state => state?.department?.data)
     const notifications = useSelector(state => state?.notification?.data)
-    console.log(notifications);
+    console.log(notifications)
+    
     return(
         <div>
             <div>

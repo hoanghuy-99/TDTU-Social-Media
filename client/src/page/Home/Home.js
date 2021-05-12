@@ -1,5 +1,4 @@
 const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM
-import formatDate from '../../utils/FormatDate'
 import Modal_Delete_Post from '../Modal_Delete_Post/index'
 import Modal_Edit_Comment from '../Modal_Edit_Comment/index'
 import Modal_Delete_Comment from '../Modal_Delete_Comment/index'
@@ -8,6 +7,7 @@ import { fetchPost } from '../../redux/actions/post.actions'
 import { getId } from '../../cookie'
 const {useDispatch,useSelector} = ReactRedux
 const {useState,useEffect} = React
+
 const Home = ({children}) =>{
     const dispatch = useDispatch()
     useEffect(()=>{

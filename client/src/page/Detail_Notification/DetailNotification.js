@@ -1,5 +1,6 @@
-const {useState,useEffect} = React
-const {useParams} = ReactRouterDOM
+const { useState,useEffect } = React
+const { useParams } = ReactRouterDOM
+
 const DetailNotification = () =>{
     const {id} = useParams()
     console.log(id);

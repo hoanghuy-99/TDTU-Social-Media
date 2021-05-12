@@ -1,7 +1,7 @@
 import { requestPostById } from "../../services/post.services"
+const { useDispatch } = ReactRedux
+const { useState } = React
 
-const {useDispatch,useSelector} = ReactRedux
-const {useState,useEffect} = React
 const Modal_Edit_Post = (props)=>{
     const id = props
     const dispatch = useDispatch()

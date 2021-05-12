@@ -1,9 +1,8 @@
 import setAlert from '../../redux/actions/alert.actions'
 import { register } from '../../redux/actions/user.actions'
-import {fetchDepartment} from '../../redux/actions/department.actions'
-
-const {useDispatch,useSelector} = ReactRedux
-const {useState,useEffect} = React
+import { fetchDepartment } from '../../redux/actions/department.actions'
+const { useDispatch, useSelector } = ReactRedux
+const { useEffect } = React
 
 const Admin = () =>{
     const dispatch = useDispatch()
@@ -25,10 +24,10 @@ const Admin = () =>{
                 department.push({id:checkbox[i].value})
             }
         }
-        if(password !== rePassword){
-            setAlert('Mật khẩu không trùng nhau', 'danger')
-        } else {
-            dispatch(register(username, username, password, email, name, department))
+        if(username && (password === rePassword) && email && name && department){
+            dispatch(register(username, password, email, name, department))
+        } else if(password !== rePassword) {
+            dispatch(setAlert('Mật khẩu không trùng nhau', 'danger'))
         }
     }
     

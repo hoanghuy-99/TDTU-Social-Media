@@ -1,4 +1,4 @@
-const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
+const { Link } = ReactRouterDOM
 
 const FacultyInfo = ({children}) =>{
     function openModal(){

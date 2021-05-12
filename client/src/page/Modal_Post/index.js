@@ -1,6 +1,7 @@
-const {useDispatch,useSelector} = ReactRedux
-const {useState,useEffect} = React
-import {newPost} from '../../redux/actions/post.actions'
+const { useDispatch } = ReactRedux
+const { useState } = React
+import { newPost } from '../../redux/actions/post.actions'
+
 const Modal_Post = ()=>{
     const dispatch = useDispatch()
     function closeModal(){

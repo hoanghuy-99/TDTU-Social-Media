@@ -1,9 +1,10 @@
-const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
-const {useDispatch,useSelector} = ReactRedux
-const {useState,useEffect} = React
+const { Link } = ReactRouterDOM
+const { useDispatch, useSelector } = ReactRedux
+const { useEffect } = React
 import { getId } from '../../cookie';
 import { fetchFacultyById } from '../../redux/actions/faculty.actions';
 import Modal_Delete from '../Modal_Delete/index'
+
 const FacultyHome = () =>{
     const dispatch = useDispatch()
     const openModal= (id)=>(e)=>{

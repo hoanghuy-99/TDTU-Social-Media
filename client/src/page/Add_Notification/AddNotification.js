@@ -1,6 +1,6 @@
-const {useState,useEffect} = React
-const {useDispatch,useSelector} = ReactRedux
+const {useDispatch} = ReactRedux
 import {newNotification} from '../../redux/actions/notification.actions'
+
 const AddNotification = () =>{
     const dispatch = useDispatch()
     const addNotification = () =>{

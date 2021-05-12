@@ -1,5 +1,6 @@
-const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
-const {useState,useEffect} = React
+const { Link } = ReactRouterDOM
+const { useState } = React
+
 const Student_Info = ({children}) =>{
     function openModal(){
         document.getElementById('modal_change_avatar').style.display='block'

@@ -1,6 +1,7 @@
-const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM
-const {useState,useEffec} = React
+const { Link } = ReactRouterDOM
+const {useState} = React
 const {useParams} = ReactRouterDOM
+
 const Edit_Post = () =>{
     const {id} = useParams()
     console.log(id);

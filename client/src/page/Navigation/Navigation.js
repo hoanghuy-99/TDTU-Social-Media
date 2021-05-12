@@ -1,11 +1,13 @@
-const { Link, Route, BrowserRouter, Switch } = ReactRouterDOM;
-const {useState,useEffect} = React 
-import {getRole} from '../../cookie'
+const { Link } = ReactRouterDOM
+const { useState,useEffect } = React 
+import { getRole } from '../../cookie'
+
 const Navigation = ({children}) =>{
     var hiddenStudent = true
     var hiddenTeacher = true
     var hiddenAdmin = true
     console.log(getRole());
+    
     if(getRole() == "admin"){
         hiddenAdmin = false;
     }
