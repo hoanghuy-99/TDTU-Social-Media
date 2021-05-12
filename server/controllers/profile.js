@@ -2,7 +2,7 @@ const { getSingleTeacher } = require("./teacher")
 const { getSingleStudent } = require("./student")
 const Student = require("../models/Student")
 exports.getProfile = async (req, res)=>{
-    req.params = {id: req.token.id}
+    req.params.id = req.token.id
     if(req.token.role === 'student'){
         getSingleStudent(req, res)
     }else{
