@@ -12,7 +12,7 @@ const socket = require('./socket')
 
 const server = socket(app)
 
-app.use(morgan())
+app.use(morgan('dev'))
 app.use(express.json())
 app.use(cors())
 const api = require('./routers/api')

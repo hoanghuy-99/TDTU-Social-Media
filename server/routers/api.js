@@ -20,4 +20,11 @@ router.use(studentRouter)
 router.use(teacherRouter)
 router.use(profileRouter)
 
+router.use((req, res)=>{
+    if(process.env.NODE_ENV !== 'production'){
+        console.log('API not found')
+    }
+    res.status(404).send('API not found')
+})
+
 module.exports = router
