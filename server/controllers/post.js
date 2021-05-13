@@ -83,7 +83,9 @@ exports.getManyPost = async (req, res)=>{
                     id: comment.author,
                     role: comment.authorRole,
                     name: name
-                }
+                },
+                createdAt: comment.createdAt,
+                updatedAt: comment.updatedAt,
             }})),
             content: post.content,
             video: post.video
@@ -114,7 +116,9 @@ exports.getSinglePost = async (req, res)=>{
                     id: comment.author,
                     role: comment.authorRole,
                     name: name
-                }
+                },
+                createdAt: comment.createdAt,
+                updatedAt: comment.updatedAt,
             }})),
             content: post.content,
             video: post.video
@@ -145,7 +149,10 @@ exports.editPost = async (req, res)=>{
                     id: comment.author,
                     role: comment.authorRole,
                     name: name
-                }
+                },
+                createdAt: comment.createdAt,
+                updatedAt: comment.updatedAt,
+
             }})),
             content: post.content,
             video: post.video

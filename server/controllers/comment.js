@@ -12,7 +12,9 @@ exports.editComment = async (req, res)=>{
                 id: comment.author,
                 role: comment.authorRole,
                 name: comment.authorRole === 'student' ? (await Student.findById(post.author)).name : (await User.findById(post.author)).name
-            }
+            },
+            createdAt: comment.createdAt,
+            updatedAt: comment.updatedAt,
         }
     })
 }
