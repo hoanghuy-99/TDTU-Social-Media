@@ -1,6 +1,8 @@
 import postConstants from '../constants/post.constants'
 import setAlert  from './alert.actions'
-import { requestPost, requestNewPost, requestDeletePost, requestPostById, requestChangePostById } from '../../services/post.services'
+import { requestPost, requestNewPost, requestDeletePost,
+   requestPostById, requestChangePostById, requestNewCommentPost,
+    requestDeleteComment,requestChangeComment } from '../../services/post.services'
 
 const fetchPost = () => {
   function request(){
@@ -167,4 +169,107 @@ function deletePost(id){
   }
 }
 
-export {changeInfoPost,fetchPost, newPost,deletePost,fetchPostById}
+const newCmtPost = (idPost,content) => {
+  function request(){
+    return { 
+      type: postConstants.ADD_CMT_POST
+    }
+  }
+
+  function success(data,idPost,message){
+    return {
+      type: postConstants.ADD_CMT_POST_SUCCESS,
+      data,
+      idPost,
+      message
+    }
+  }
+
+  function failure(message){
+    return {
+      type: postConstants.ADD_CMT_POST_FAILURE,
+      message
+    }
+  }
+
+  return async(dispatch) => {
+    dispatch(request())
+    const res = await requestNewCommentPost(idPost,content)
+    if(res.code === 0){
+      const message = res.message
+      dispatch(success(res.data,idPost,message))
+      dispatch(setAlert(message, 'success'))
+    } else {
+      const message = res.message
+      dispatch(failure(message))
+      dispatch(setAlert(message, 'danger'))
+    }
+  }
+}
+
+function deleteComment(idCmt,idPost){
+  function request(){
+    return { 
+      type: postConstants.DELETE_CMT_POST
+    }
+  }
+  function success(message,idCmt,idPost){
+    return {
+      type: postConstants.DELETE_CMT_POST_SUCCESS,
+      message,
+      idCmt,
+      idPost,
+    }
+  }
+  function failure(message){
+    return {
+      type: postConstants.DELETE_CMT_POST_FAILURE,
+      message
+    }
+  }
+  return async(dispatch) => {
+    dispatch(request())
+    const res = await requestDeleteComment(idCmt)
+    if(res.code == 0){
+      dispatch(success('Xóa thành công',idCmt,idPost))
+    }
+    else{
+      dispatch(failure('Xóa thất bại'))
+    }
+  }
+}
+
+function changeComment(idCmt,idPost,content){
+  function request(){
+    return { 
+      type: postConstants.CHANGE_CMT_POST
+    }
+  }
+
+  function success(data,idPost,message){
+    return {
+      type: postConstants.CHANGE_CMT_POST_SUCCESS,
+      data,
+      idPost,
+      message
+    }
+  }
+
+  function failure(message){
+    return {
+      type: postConstants.CHANGE_CMT_POST_FAILURE,
+      message
+    }
+  }
+
+  return async(dispatch) => {
+    dispatch(request())
+    const res = await requestChangeComment(idCmt,content)
+    if(res.code === 0){
+      dispatch(success(res.data,idPost,'Lay du lieu thanh cong'))
+    } else {
+      dispatch(failure('Lay du lieu that bai'))
+    }
+  }
+}
+export {changeInfoPost,fetchPost, newPost,deletePost,fetchPostById,newCmtPost,deleteComment,changeComment}

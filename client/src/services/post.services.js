@@ -86,7 +86,7 @@ async function requestNewCommentPost(id,content) {
     const req={
         content
     }
-    const response = await fetch(host + '/api/posts/'+id+'/comments',{
+    const response = await fetch('http://localhost:8080/api/posts/'+id+'/comments',{
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -103,8 +103,8 @@ async function requestChangeComment(id,content) {
     const req={
         content
     }
-    const response = await fetch(host + '/api/comments/'+id,{
-        method: "PUT",
+    const response = await fetch('http://localhost:8080/api/comments/'+id,{
+        method: "PATCH",
         headers: {
             'Content-Type': 'application/json',
             'Authorization': getToken(),
@@ -116,13 +116,12 @@ async function requestChangeComment(id,content) {
 }
 
 async function requestDeleteComment(id) {
-    const response = await fetch(host + '/api/comments/'+id,{
+    const response = await fetch('http://localhost:8080/api/comments/'+id,{
         method: "DELETE",
         headers: {
             'Content-Type': 'application/json',
             'Authorization': getToken(),
         },
-        body: ''
     })
     const data = await response.json()
     return data
@@ -166,4 +165,5 @@ async function requestDeleteImagePost(id) {
     return data
 }
 
-export {requestPost,requestPostById,requestNewPost,requestDeletePost,requestChangePostById}
+export {requestPost,requestPostById,requestNewPost,requestDeletePost,requestChangePostById,requestNewCommentPost
+,requestDeleteComment,requestChangeComment}

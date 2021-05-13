@@ -323,7 +323,7 @@ i {
                 color: grey;
                 background: #f0f2f5;
             }
-            #comment_post{
+            .comment_post{
                 border: none;
                 background: #f0f2f5;
             }
@@ -337,6 +337,9 @@ i {
                 background: transparent;
                 color: black;
                 border: none;
+            }
+            #div_cmt{
+                margin-top: 10px;
             }
         /* ----- */
         
