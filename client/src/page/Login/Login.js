@@ -2,7 +2,6 @@ import { login } from '../../redux/actions/user.actions'
 const { useState } = React
 const { useDispatch, useSelector } = ReactRedux
 const { Redirect } = ReactRouterDOM
-const { useGoogleLogin } = GoogleLogin
 
 function Login(){
   const dispatch = useDispatch()

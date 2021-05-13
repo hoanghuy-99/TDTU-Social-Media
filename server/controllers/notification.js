@@ -16,7 +16,7 @@ exports.createNotification = async (req, res)=>{
     
     notification = await Notification.findById(notification._id).populate('department')
 
-    req.io.sockets.emit('new_notification', {
+    req.socketIo.emitNewNotification({
         id: notification._id,
         author:{
             id:user.id,

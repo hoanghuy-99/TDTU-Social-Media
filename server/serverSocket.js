@@ -9,7 +9,11 @@ module.exports = (app) =>{
     const io = new Server(server)
     //Set up middleware for app
     app.use((req, res, next)=>{
-        req.io = io
+        req.socketIo = {
+            emitNewNotification: (data)=>{
+                io.emit('new_notification', data)
+            }
+        }
         next()
     })
 
