@@ -47,7 +47,7 @@ exports.createToken = async (req, res)=>{
     })
 }
 
-const CLIENT_ID = '130563548657-fcf2g4k6a9p4e6o2qk0ggi2ut9ir6ql6.apps.googleusercontent.com'
+const CLIENT_ID = process.env.CLIENT_ID
 const {OAuth2Client} = require('google-auth-library');
 const client = new OAuth2Client(CLIENT_ID);
 exports.createTokenByGoogle = async (req, res)=>{

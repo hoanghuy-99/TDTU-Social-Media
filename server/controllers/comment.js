@@ -3,7 +3,8 @@ const Post = require('../models/Post')
 const User = require('../models/User')
 const Student = require('../models/Student')
 exports.editComment = async (req, res)=>{
-    const comment = await Comment.findByIdAndUpdate(req.params.id, {content:req.body.content})
+    await Comment.findByIdAndUpdate(req.params.id, {content:req.body.content})
+    const comment = await Comment.findById(req.params.id)
     res.json({
         code: 0,
         data:{
