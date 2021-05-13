@@ -194,7 +194,9 @@ exports.commentPost = async (req, res)=>{
                 id: comment.author,
                 role: comment.authorRole,
                 name: await getName(comment.author, comment.authorRole)
-            }
+            },
+            createdAt: comment.createdAt,
+            updatedAt: comment.updatedAt,
         },
     })
 }
