@@ -8,7 +8,7 @@ const morgan = require('morgan')
 const PORT = process.env.PORT || 8080
 
 const connectDatabase = require('./db')
-const socket = require('./socket')
+const socket = require('./serverSocket')
 
 const server = socket(app)
 
