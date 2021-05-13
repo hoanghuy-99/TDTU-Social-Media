@@ -1,6 +1,7 @@
 const Comment = require('../models/Comment')
 const Post = require('../models/Post')
-
+const User = require('../models/User')
+const Student = require('../models/Student')
 exports.editComment = async (req, res)=>{
     const comment = await Comment.findByIdAndUpdate(req.params.id, {content:req.body.content})
     res.json({
@@ -11,7 +12,7 @@ exports.editComment = async (req, res)=>{
             author:{
                 id: comment.author,
                 role: comment.authorRole,
-                name: comment.authorRole === 'student' ? (await Student.findById(post.author)).name : (await User.findById(post.author)).name
+                name: comment.authorRole === 'student' ? (await Student.findById(comment.author)).name : (await User.findById(comment.author)).name
             },
             createdAt: comment.createdAt,
             updatedAt: comment.updatedAt,
