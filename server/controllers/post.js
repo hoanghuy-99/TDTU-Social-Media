@@ -168,7 +168,7 @@ exports.deletePost = async (req, res)=>{
     }else{
         user = await User.findById(post.author)
     }
-    user.posts = user.posts.filter(postId => postId !== post._id)
+    user.posts = user.posts.filter(postId => postId != post._id)
     await user.save()
     res.json({
         code: 0,

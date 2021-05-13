@@ -145,7 +145,7 @@ exports.deleteNotification = async (req, res)=>{
     const notification = await Notification.findByIdAndDelete(req.params.id)
     let user = await User.findById(notification.author)
     
-    user.notifications = user.notifications.filter(notificationId => notificationId !== notification._id)
+    user.notifications = user.notifications.filter(notificationId => notificationId != notification._id)
     await user.save()
     res.json({
         code: 0,
