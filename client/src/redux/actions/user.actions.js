@@ -176,10 +176,12 @@ function logout(){
         type: userConstants.LOGOUT
     }
 }
+
 function checkLogin(){
     return {
         type: userConstants.CHECK_LOGIN,
         token: getToken()
     }
 }
+
 export { login, loginGoogleAPI, logout, register, fetchUserById, checkLogin }
