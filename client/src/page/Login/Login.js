@@ -67,9 +67,7 @@ function Login(){
                       onInitFailure={loginFailure}
                       cookiePolicy="single_host_origin"
             >
-                <div>
-              	  <div><GoogleLogin onLoginSuccess={loginSuccess}/></div>
-              	</div>
+              <GoogleLogin onLoginSuccess={loginSuccess} text="Đăng nhập với Google"/>
             </GoogleAPI>
           </form>
         </div>
