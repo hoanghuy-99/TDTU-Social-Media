@@ -120,7 +120,8 @@ exports.editNotification = async (req, res)=>{
     if(req.body.department){
         req.body.department = (await Department.find({id:req.body.department}))._id 
     }
-    let notification = await Notification.findByIdAndUpdate(req.params.id, req.body).populate('department')
+    await Notification.findByIdAndUpdate(req.params.id, req.body)
+    let notification = await Notification.findById(req.params.id).populate('department')
     res.json({
         code: 0,
         data:{
