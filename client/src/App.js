@@ -23,10 +23,6 @@ import useSocket from './clientSocket'
 const App = () =>{
     const loggedIn = useSelector(state => state.user.loggedIn)
     const dispatch = useDispatch()
-    const socket = useSocket()
-    useEffect(()=>{
-        socket.handleDemo((data)=> console.log('Client',data))
-    },[])
     useEffect(()=>{
         if(getToken()){
         dispatch(checkLogin())
@@ -70,7 +66,7 @@ const App = () =>{
                             <Route path="/notification" exact>
                                 <Notification/>
                             </Route>
-                            <Route path="/addNotification" exact>
+                            <Route path="/addNotification/:id" exact>
                                 <AddNotification/>
                             </Route>
                             <Route path="/editPost/:id" exact>

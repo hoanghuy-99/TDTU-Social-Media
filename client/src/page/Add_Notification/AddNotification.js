@@ -1,8 +1,11 @@
-const {useDispatch} = ReactRedux
+const {useDispatch,useSelector} = ReactRedux
+const { useParams } = ReactRouterDOM
+const { useState,useEffect } = React
 import {newNotification} from '../../redux/actions/notification.actions'
 
 const AddNotification = () =>{
     const dispatch = useDispatch()
+    const {id} = useParams()
     const addNotification = () =>{
         const title = document.getElementById('noti_add_title').value
         const content = document.getElementById('noti_add_content').value
@@ -10,6 +13,16 @@ const AddNotification = () =>{
         console.log(title,content,faculty);
         dispatch(newNotification(title,content,faculty))
     }
+    const facultys = useSelector(state => state?.faculty?.data)
+    const [facultyInfo,setFacultyInfo] = useState()
+    useEffect(()=>{
+        facultys.departments?.map((value)=>{
+            if(id == value.id){
+                setFacultyInfo(value)
+            }
+        })
+    },)
+    console.log("fac",facultyInfo);
     return(
         <div>
             <div>
@@ -28,7 +41,7 @@ const AddNotification = () =>{
                         <div className="col-lg-8" id="select_facutly_home_div">
                                 <h2>Phòng/Khoa:</h2>
                                 <select id="select_facutly_home" className="form-select" disabled>
-                                    <option value="CTHSSV">Phòng CTHSSV</option>
+                                    <option value={facultyInfo?.id}>{facultyInfo?.name}</option>
                                 </select>
                             </div>
                         </div>

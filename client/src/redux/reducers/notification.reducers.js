@@ -38,13 +38,45 @@ export default (state = initialState , action)=>{
                 ...state,
                 requesting:false,
                 message:action.message,
-                data: "chưa biết là có trả gì không"
+                data: {
+                    ...state.data,
+                    items: [
+                        ...state.data.items,
+                        action.data
+                    ]
+                }
             }
         case notificationConstants.ADD_NOTIFICATION_FAILURE:
             return{
                 ...state,
                 requesting:false,
                 message: action.message
+            }
+        case notificationConstants.DELETE_NOTIFICATION:
+            return{
+                ...state,
+                requesting:true
+            }
+        case notificationConstants.DELETE_NOTIFICATION_SUCCESS:
+            return{
+                ...state,
+                requesting:false,
+                message:action.message,
+                data:{
+                    ...state.data,
+                    items: state.data.items.reduce((value,item)=>{
+                        if(item.id != action.idPost){
+                            value.push(item)
+                        }
+                        return value
+                    },[])
+                }
+            }
+        case notificationConstants.DELETE_NOTIFICATION_FAILURE:
+            return{
+                ...state,
+                requesting:false,
+                message:action.message
             }
         default:
             return state

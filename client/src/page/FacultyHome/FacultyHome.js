@@ -1,8 +1,9 @@
 const { Link } = ReactRouterDOM
 const { useDispatch, useSelector } = ReactRedux
-const { useEffect } = React
+const { useEffect,useState } = React
 import { getId } from '../../cookie';
 import { fetchFacultyById } from '../../redux/actions/faculty.actions';
+import { fetchNotificationByIdTeacher } from '../../redux/actions/notification.actions';
 import Modal_Delete from '../Modal_Delete/index'
 
 const FacultyHome = () =>{
@@ -12,10 +13,30 @@ const FacultyHome = () =>{
     }
     const id_teacher = getId()
     useEffect(()=>{
+        dispatch(fetchNotificationByIdTeacher(id_teacher))
         dispatch(fetchFacultyById(id_teacher))
     },[])
 
     const facultys = useSelector(state => state?.faculty?.data)
+    const notifications = useSelector(state => state?.notification?.data)
+    const formatDate = (new_date) =>{
+        const create_data = new Date(new_date).getTime()
+        const date = new Date(create_data)
+        var year = date.getFullYear().toString();
+        var month = (date.getMonth() + 101).toString().substring(1);
+        var day = (date.getDate() + 100).toString().substring(1);
+        return month + '/' + day + '/' + year;
+    }
+    const [getFaculty,setGetFaculty] = useState()
+    const [disabledAddNoti,setDisabledAddNoti] = useState("disabledCursor")
+    const handleGetFaculty = () =>{
+        const faculty = document.getElementById("select_facutly_home").value
+        setDisabledAddNoti("")
+        if(faculty == undefined || faculty == "allFaculty"){
+            setDisabledAddNoti("disabledCursor")
+        }
+        setGetFaculty(faculty)
+    }
     return(
         <div>
             <div>
@@ -33,8 +54,8 @@ const FacultyHome = () =>{
                         <div className="row justify-content-center">
                         <div className="col-lg-8" id="select_facutly_home_div">
                                 <h2>Phòng/Khoa:</h2>
-                                <select id="select_facutly_home" className="form-select" aria-label="Default select example">
-                                    <option value="" selected>Chọn Phòng/Khoa</option>
+                                <select onChange={handleGetFaculty} id="select_facutly_home" className="form-select" aria-label="Default select example">
+                                    <option value="allFaculty">Tất cả Phòng/Ban</option>
                                     {facultys?.departments?.map((value)=>{
                                         return(
                                             <option value={value.id}>{value.name}</option>
@@ -52,23 +73,28 @@ const FacultyHome = () =>{
                     <div id="noti_list_div">
                         <div className="row justify-content-center">
                             <div>
-                                <button className="btn btn-primary" id="btn_add_noti">Thêm thông báo</button>
+                                <Link to={`/addNotification/`+getFaculty} className={`btn btn-primary `+disabledAddNoti} id="btn_add_noti" 
+                                >Thêm thông báo</Link>
                             </div>
-                            <div className="card">
-                                <div className="card-body">
-                                    <h5 className="card-title" id="noti_title"><strong>Tiêu đề</strong></h5>
-                                    <div id="fix_delete_noti">
-                                        <Link to={`/editNotification/123`}><i className="fas fa-wrench"></i></Link>
-                                        <Link  id="btn_delete_noti" onClick={openModal("123")}><i className="fas fa-times"></i></Link>
+                            {notifications?.items?.map((value)=>{
+                                return(
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <h5 className="card-title" id="noti_title"><strong>{value.title}</strong></h5>
+                                            <div id="fix_delete_noti">
+                                                <Link to={`/editNotification/`+value.id}><i className="fas fa-wrench"></i></Link>
+                                                <Link  id="btn_delete_noti" onClick={openModal("delete_noti"+value.id)}><i className="fas fa-times"></i></Link>
+                                            </div>
+                                            <div className="clear"></div>
+                                            <p className="card-text noti_text">{value.content}</p>
+                                            <Link to={`/notification/`+value.id} className="btn btn-danger">Xem chi tiết thông báo</Link>
+                                            <p id="faculty_time">{value.department.name} | Ngày đăng:{formatDate(value.createdAt)} </p>
+                                            <div className="clear"></div>
+                                        </div>
+                                        <Modal_Delete props={{delete:"delete_noti"+value.id,id:value.id}}/>
                                     </div>
-                                    <div className="clear"></div>
-                                    <p className="card-text noti_text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <Link to={`/notification/`+ "123"} className="btn btn-danger">Xem chi tiết thông báo</Link>
-                                    <p id="faculty_time">Công nghệ thông tin | Ngày đăng: 02/04/2021</p>
-                                    <div className="clear"></div>
-                                </div>
-                                <Modal_Delete props={{id:"123"}}/>
-                            </div>
+                                )
+                            })}
                         </div>
                     </div>
                 </div>
