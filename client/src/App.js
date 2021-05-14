@@ -40,46 +40,43 @@ const App = () =>{
         <BrowserRouter>
             {!getToken() && <Redirect to="/login"/>}
             <Switch>
-                <Route path="/login" exact>
+                <Route exact={true} path="/login" >
                     <Login></Login>
                 </Route>
-                <Route path="/" exact>
+                <Route exact={true} path="/" >
+                    {
+                        console.log("Redirect to Home",window.location.pathname)
+                    }
                     <Redirect to="/home"/>
                 </Route>
                 <Route path="/">
                     <Header/>
                     <Navigation>
                         <Switch>
-                            <Route path="/home" exact>
+                            <Route exact={true} path="/home" >
                                 <Home>
                                 <Modal_Post/>
                                 </Home>
                             </Route>
-                            <Route path="/student" exact>
+                            <Route exact={true} path="/student" >
                                 <Student_Info>
                                     <Modal_Change_Avatar/>
                                 </Student_Info>
                             </Route>
-                            <Route path="/admin" exact>
+                            <Route exact={true} path="/admin" >
                                 <Admin></Admin>
                             </Route>
-                            <Route path="/notification" exact>
+                            <Route exact={true} path="/notification" >
                                 <Notification/>
                             </Route>
-                            <Route path="/editPost/:id" exact>
-                                <EditPost></EditPost>
-                            </Route>
-                            <Route path="/editNotification/:id">
-                                <EditNotification/>
-                            </Route>
-                            <Route path="/notification/:id" exact>
+                            <Route exact={true} path="/notification/:id" >
                                 <DetailNotification/>
                             </Route>
-                            <Route path="/faculty" exact>
+                            <Route exact={true} path="/faculty" >
                                 <FacultyHome>
                                 </FacultyHome>
                             </Route>
-                            <Route path="/facultyInfo" exact>
+                            <Route exact={true} path="/facultyInfo" >
                                 <FacultyInfo>
                                     <Modal_Change_Avatar/>
                                 </FacultyInfo>

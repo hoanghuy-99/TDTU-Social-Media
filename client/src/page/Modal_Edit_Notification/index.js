@@ -35,7 +35,6 @@ const Modal_Edit_Noti = (props)=>{
             content: content
         }))
     }
-    console.log("noti_",notiInfo);
     return(
         <div id={id.props.edit} className="w3-modal w3-animate-opacity">
                 <div className="w3-modal-content">

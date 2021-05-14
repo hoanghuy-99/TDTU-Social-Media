@@ -31,10 +31,11 @@ const Header = () =>{
     function handleLogout(){
         dispatch(logout())
     }
-    console.log(checkLogin);
+    if(!checkLogin){
+       return <Redirect to="/login"/>
+    }
     return(
         <>
-        { !checkLogin && <Redirect to='/login'/>}
         <header>
             <div id="header_logo_div">
                 <img src="/img/logoTDT.png" id="logo"/>

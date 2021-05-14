@@ -24,7 +24,6 @@ const Home = ({children}) =>{
         const timeB = new Date(b.createdAt).getTime()
         return timeB - timeA
     })
-    console.log(posts);
     function openModal(){
         document.getElementById('modal_change_avatar').style.display='block'
     }
@@ -56,7 +55,6 @@ const Home = ({children}) =>{
         const seconds  = date.getSeconds().toString()
         const date_post = new Date(createdAt)
         const post_on_date = formatDate(date_post)
-        console.log(hours);
         if(minutes == 0){
             return "vài giây trước"
         }

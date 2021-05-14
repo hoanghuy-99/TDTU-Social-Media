@@ -3,7 +3,7 @@ const { useDispatch, useSelector } = ReactRedux
 const { useEffect,useState } = React
 import { getId } from '../../cookie';
 import { fetchFacultyById } from '../../redux/actions/faculty.actions';
-import { fetchNotificationByIdTeacher } from '../../redux/actions/notification.actions';
+import { fetchNotificationByIdFacultyAndTeacher, fetchNotificationByIdTeacher } from '../../redux/actions/notification.actions';
 import Modal_Add_Noti from '../Modal_Add_Notification';
 import Modal_Delete from '../Modal_Delete/index'
 import Modal_Edit_Noti from '../Modal_Edit_Notification';
@@ -23,9 +23,20 @@ const FacultyHome = () =>{
         dispatch(fetchNotificationByIdTeacher(id_teacher))
         dispatch(fetchFacultyById(id_teacher))
     },[])
-
+    const handleGetFaculty = () =>{
+        const faculty = document.getElementById("select_facutly_home").value
+        setDisabledAddNoti("")
+        if(faculty == undefined || faculty == "allFaculty"){
+            setDisabledAddNoti("disabledCursor")
+            dispatch(fetchNotificationByIdTeacher(id_teacher))
+            return 
+        }
+        setGetFaculty(faculty)
+        dispatch(fetchNotificationByIdFacultyAndTeacher(id_teacher,faculty))
+    }
     const facultys = useSelector(state => state?.faculty?.data)
     const notifications = useSelector(state => state?.notification?.data)
+    console.log("new_noti",notifications);
     const formatDate = (new_date) =>{
         const create_data = new Date(new_date).getTime()
         const date = new Date(create_data)
@@ -36,14 +47,6 @@ const FacultyHome = () =>{
     }
     const [getFaculty,setGetFaculty] = useState()
     const [disabledAddNoti,setDisabledAddNoti] = useState("disabledCursor")
-    const handleGetFaculty = () =>{
-        const faculty = document.getElementById("select_facutly_home").value
-        setDisabledAddNoti("")
-        if(faculty == undefined || faculty == "allFaculty"){
-            setDisabledAddNoti("disabledCursor")
-        }
-        setGetFaculty(faculty)
-    }
     return(
         <div>
             <div>

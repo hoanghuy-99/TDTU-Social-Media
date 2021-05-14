@@ -1,4 +1,6 @@
-import { requestNewNotification, requestNotification, requestNotificationById,requestNotiByIdTeacher, requestDeleteNotification, requestChangeNotificationById } from "../../services/notification.services"
+import { requestNewNotification, requestNotification, requestNotificationById,
+    requestNotiByIdTeacher, requestDeleteNotification, requestNotiByIdFaculty,
+    requestChangeNotificationById, requestNotiByIdFacultyAndTeacher } from "../../services/notification.services"
 import notificationConstants from "../constants/notification.constants"
 
 
@@ -189,5 +191,69 @@ function changeNotification(idNoti,title,content,departmentId){
         }
     }
 }
-export {fetchNotification,newNotification,
+
+
+function fetchNotificationByIdFacultyAndTeacher(idTeacher,departmentId){
+    function request(){
+        return {
+            type: notificationConstants.FETCH_NOTIFICATION
+        }
+    }
+    function success(data,message){
+        return{
+            type: notificationConstants.FETCH_NOTIFICATION_SUCCESS,
+            message,
+            data,
+        }
+    }
+    function failure(message){
+        return{
+            type: notificationConstants.FETCH_NOTIFICATION_FAILURE,
+            message
+        }
+    }
+    return async (dispatch) => {
+        dispatch(request())
+        const res = await requestNotiByIdFacultyAndTeacher(idTeacher,departmentId)
+        console.log(res);
+        if(res.code == 0){
+            dispatch(success(res.data,'Lấy dữ liệu thành công'))
+        }
+        else{
+            dispatch(failure('Không lấy được dữ liệu'))
+        }
+    }
+}
+
+function fetchNotificationByIdFaculty(departmentId){
+    function request(){
+        return {
+            type: notificationConstants.FETCH_NOTIFICATION
+        }
+    }
+    function success(data,message){
+        return{
+            type: notificationConstants.FETCH_NOTIFICATION_SUCCESS,
+            message,
+            data,
+        }
+    }
+    function failure(message){
+        return{
+            type: notificationConstants.FETCH_NOTIFICATION_FAILURE,
+            message
+        }
+    }
+    return async (dispatch) => {
+        dispatch(request())
+        const res = await requestNotiByIdFaculty(departmentId)
+        if(res.code == 0){
+            dispatch(success(res.data,'Lấy dữ liệu thành công'))
+        }
+        else{
+            dispatch(failure('Không lấy được dữ liệu'))
+        }
+    }
+}
+export {fetchNotification,newNotification,fetchNotificationByIdFacultyAndTeacher,fetchNotificationByIdFaculty,
 fetchNotificationById,fetchNotificationByIdTeacher,deleteNotification,changeNotification}

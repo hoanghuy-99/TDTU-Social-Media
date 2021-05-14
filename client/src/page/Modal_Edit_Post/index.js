@@ -20,7 +20,6 @@ const Modal_Edit_Post = (props)=>{
     useEffect(()=>{
         handlePostInfo()
     },[])
-    console.log("data",postInfo);
     function closeModal(){
         document.getElementById(id.props.edit).style.display='none'
     }

@@ -9,7 +9,6 @@ const Modal_Edit_Comment = (props)=>{
         document.getElementById(id.props.edit).style.display='none'
     }
     const posts = useSelector(state => state?.post?.data)
-    console.log("kết quả",posts);
     const [infoComment,setInfoComment] = useState()
     useEffect(()=>{
         posts?.items?.map((value)=>{

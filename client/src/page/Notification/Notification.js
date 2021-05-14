@@ -1,8 +1,9 @@
 const { Link } = ReactRouterDOM
 const { useDispatch,useSelector } = ReactRedux
 const { useState,useEffect } = React
+import { getId } from '../../cookie'
 import { fetchDepartment } from '../../redux/actions/department.actions'
-import { fetchNotification } from '../../redux/actions/notification.actions'
+import { fetchNotification, fetchNotificationByIdFaculty } from '../../redux/actions/notification.actions'
 
 const Notification = () =>{
     const dispatch = useDispatch()
@@ -10,6 +11,15 @@ const Notification = () =>{
         dispatch(fetchDepartment())
         dispatch(fetchNotification())
     },[])
+    const handleClickNotiByFaculty = () =>{
+        const idDepartment = document.getElementById('select_facutly').value
+        if(idDepartment == undefined || idDepartment == "allFaculty"){
+            dispatch(fetchNotification())
+            return
+        }
+        console.log("idDepartment",idDepartment);
+        dispatch(fetchNotificationByIdFaculty(idDepartment))
+    }
     const departments = useSelector(state => state?.department?.data)
     const notifications = useSelector(state => state?.notification?.data)
     const formatDate = (new_date) =>{
@@ -20,6 +30,7 @@ const Notification = () =>{
         var day = (date.getDate() + 100).toString().substring(1);
         return month + '/' + day + '/' + year;
     }
+   
     return(
         <div>
             <div>
@@ -68,7 +79,7 @@ const Notification = () =>{
                                     <button type="button" className="btn btn-primary btn-form-control">Làm mới</button>
                                 </div>
                                 <div className="col-lg-4">
-                                    <button type="button" className="btn btn-success btn-form-control">Tìm kiếm</button>
+                                    <button onClick={handleClickNotiByFaculty} type="button" className="btn btn-success btn-form-control">Tìm kiếm</button>
                                 </div>
                             </div>
                         </div>

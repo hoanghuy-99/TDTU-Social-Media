@@ -8,7 +8,6 @@ const Modal_Add_Noti = (props)=>{
         document.getElementById(id.props.id).style.display='none'
     }
     const facultys = useSelector(state => state?.faculty?.data)
-    console.log("fac",facultys);
     const [facultyInfo,setFacultyInfo] = useState()
     useEffect(()=>{
         facultys?.departments?.map((value)=>{

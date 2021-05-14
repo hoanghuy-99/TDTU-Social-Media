@@ -53,6 +53,30 @@ async function requestNotiByIdTeacher(id) {
     return data
 }
 
+async function requestNotiByIdFacultyAndTeacher(id,departmentId) {
+    const response = await fetch('http://localhost:8080/api/teachers/'+id+'/notifications?departmentId='+departmentId,{
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getToken(),
+        },
+    })
+    const data = await response.json()
+    return data
+}
+
+async function requestNotiByIdFaculty(departmentId) {
+    const response = await fetch('http://localhost:8080/api/notifications?departmentId='+departmentId,{
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getToken(),
+        },
+    })
+    const data = await response.json()
+    return data
+}
+
 async function requestChangeNotificationById(id,title,content,departmentId) {
     const req = {
         title,content,departmentId
@@ -82,5 +106,6 @@ async function requestDeleteNotification(id) {
     return data
 }
 
-export { requestNotification, requestNotiByIdTeacher,
-requestNewNotification, requestChangeNotificationById, requestNotificationById, requestDeleteNotification }
+export { requestNotification, requestNotiByIdTeacher,requestNotiByIdFaculty,
+requestNewNotification, requestChangeNotificationById, requestNotiByIdFacultyAndTeacher,
+requestNotificationById, requestDeleteNotification }
