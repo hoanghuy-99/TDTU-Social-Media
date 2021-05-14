@@ -97,7 +97,7 @@ exports.getPosts = async (req, res)=>{
 
 exports.getManyNotification = async (req, res)=>{
     const {page, limit, olderThan, departmentId} = req.query
-    let notificationsQuery = Notification.find({author: req.body.id}).populate('department')
+    let notificationsQuery = Notification.find({author: req.params.id}).populate('department')
     if(olderThan){
         olderThan = parseInt(olderThan)
         notificationsQuery = notificationsQuery.where('createdAt').lte(olderThan)

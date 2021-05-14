@@ -11,7 +11,10 @@ module.exports = (app) =>{
     app.use((req, res, next)=>{
         req.socketIo = {
             emitNewNotification: (data)=>{
-                io.emit('new_notification', data)
+                io.sockets.emit('new_notification', data)
+            },
+            emitDemo: (data)=>{
+                io.sockets.emit('demo', data)
             }
         }
         next()

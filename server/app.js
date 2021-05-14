@@ -17,8 +17,16 @@ app.use(express.json())
 app.use(cors())
 const api = require('./routers/api')
 
+//URL for Demo
+app.use('/demo',(req, res)=>{
+    req.io.emitDemo('Dữ liệu từ server')
+    res.send('Đã gửi cho client qua socket')
+})
+
+//Serve API
 app.use('/api', api)
 
+//Serve React
 app.use(express.static(path.join(__dirname,'./public')))
 
 app.use((req, res)=>{
@@ -26,9 +34,9 @@ app.use((req, res)=>{
 })
 
 
-//Chạy server
+//Start server
 {(async ()=>{
-    //Kết nối database
+    //Connect database
     await connectDatabase().then(()=>{
         console.log('Database connected')
     })

@@ -19,11 +19,14 @@ import EditNotification from './page/Edit_Notification/EditNotification'
 import EditPost from './page/Edit_Post/index'
 import { checkLogin, fetchUserById } from './redux/actions/user.actions'
 import { getId, getToken } from './cookie'
-
+import useSocket from './clientSocket'
 const App = () =>{
     const loggedIn = useSelector(state => state.user.loggedIn)
     const dispatch = useDispatch()
-    
+    const socket = useSocket()
+    useEffect(()=>{
+        socket.handleDemo((data)=> console.log('Client',data))
+    },[])
     useEffect(()=>{
         if(getToken()){
         dispatch(checkLogin())
