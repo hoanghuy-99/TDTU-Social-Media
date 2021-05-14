@@ -34,7 +34,6 @@ const App = () =>{
         dispatch(fetchUserById(getId()))
         }
     }, [loggedIn])
-    console.log('loggedIn', loggedIn)
     return (
         <div>
         <BrowserRouter>
@@ -42,11 +41,9 @@ const App = () =>{
                 <Route exact strict path="/login" >
                     <Login></Login>
                 </Route>
-                <Route exact strict path="/" >
-                    <Redirect to="/home"/>
-                </Route>
+                <Redirect exact from="/" to="/home" />
                 <Route path="/">
-                    {!loggedIn && <Redirect to="/login"/>}
+                    {!getToken() && <Redirect to="/login"/>}
                     <Header/>
                     <Navigation>
                         <Switch>

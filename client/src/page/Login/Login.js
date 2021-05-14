@@ -1,3 +1,4 @@
+import { getToken } from '../../cookie'
 import { login, loginGoogleAPI } from '../../redux/actions/user.actions'
 const { useState } = React
 const { useDispatch, useSelector } = ReactRedux
@@ -42,7 +43,7 @@ function Login(){
     }
   }
 
-  if(loggedIn){
+  if(getToken()){
     return <Redirect to='/home'/>
   }
 
@@ -67,7 +68,6 @@ function Login(){
                       Scope="student.tdtu.edu.vn"
                       onUpdateSigninStatus={loginStatus}
                       onInitFailure={loginFailure}
-                      cookiePolicy="single_host_origin"
             >
               <GoogleLogin onLoginSuccess={loginSuccess} text="Đăng nhập với Google"/>
             </GoogleAPI>
