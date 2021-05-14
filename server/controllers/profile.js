@@ -10,6 +10,12 @@ exports.getProfile = async (req, res)=>{
     }
 }
 
+exports.editProfile = async (req, res)=>{
+    await Student.findByIdAndUpdate(req.token.user_id, req.body)
+    req.params.id = req.token.user_id
+    getSingleStudent(req, res)
+}
+
 exports.updateAvatar = async (req, res)=>{
     let student = await Student.findById(req.params.id)
     student.avatar = req.image
