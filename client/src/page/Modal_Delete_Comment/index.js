@@ -1,13 +1,18 @@
+import { deleteComment } from "../../redux/actions/post.actions"
+
+const {useDispatch,useSelector} = ReactRedux
 const Modal_Delete_Comment = (props)=>{
     const id = props
+    const dispatch = useDispatch()
     function closeModal(){
-        document.getElementById(id.props.id).style.display='none'
+        document.getElementById(id.props.delete).style.display='none'
     }
     const handleClick = ()=>{
-        // delete(id)
+        dispatch(deleteComment(id.props.id,id.props.idPost))
+        closeModal()
     }
     return(
-        <div id={id.props.id} className="w3-modal w3-animate-opacity">
+        <div id={id.props.delete} className="w3-modal w3-animate-opacity">
                 <div className="w3-modal-content" id="modal_post_delete">
                   <div className="w3-container w3-teal"> 
                     <center><h2>Xóa bình luận</h2></center>

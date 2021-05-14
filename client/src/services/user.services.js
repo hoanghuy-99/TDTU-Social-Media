@@ -66,4 +66,4 @@ async function requestChangeImageById(){
     const data = await response.json()
     return data
 }
-export {requestUserById}
+export { requestUserById }

@@ -3,7 +3,7 @@ import Modal_Delete_Post from '../Modal_Delete_Post/index'
 import Modal_Edit_Comment from '../Modal_Edit_Comment/index'
 import Modal_Delete_Comment from '../Modal_Delete_Comment/index'
 import Modal_Edit_Post from '../Modal_Edit_Post/index'
-import { fetchPost, newPost } from '../../redux/actions/post.actions'
+import { fetchPost, newCmtPost, newPost } from '../../redux/actions/post.actions'
 import { getId } from '../../cookie'
 const {useDispatch,useSelector} = ReactRedux
 const {useState,useEffect} = React
@@ -15,6 +15,11 @@ const Home = ({children}) =>{
     },[])
     let posts = useSelector(state => state?.post?.data)
     posts?.items?.sort((a,b)=>{
+        const timeA = new Date(a.createdAt).getTime()
+        const timeB = new Date(b.createdAt).getTime()
+        return timeB - timeA
+    })
+    posts?.items?.comments?.sort((a,b)=>{
         const timeA = new Date(a.createdAt).getTime()
         const timeB = new Date(b.createdAt).getTime()
         return timeB - timeA
@@ -81,6 +86,19 @@ const Home = ({children}) =>{
             return false
         }
     }
+    const hiddenComment = (cmtId) => {
+        if(getId() == cmtId){
+            return false
+        }
+        else{
+            return true
+        }
+    }
+    const addComment = (id)=>()=>{
+        const content = document.getElementById(id).value;
+        dispatch(newCmtPost(id,content))
+        console.log(id,content);
+    }
     return(
         <div className=" col-12 col-lg-10" id="body_div">
             <div className="row">
@@ -121,12 +139,12 @@ const Home = ({children}) =>{
                                                 ...
                                             </button>
                                             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><Link className="dropdown-item" to="#" onClick={openModalEditPost("edit"+value.id)}><i className="fas fa-wrench"></i>Chỉnh sửa</Link></li>
-                                                <li><Link className="dropdown-item" to="#" onClick={openModalDeletePost(value.id)}><i className="fas fa-times"></i>Xóa</Link></li>
+                                                <li><Link className="dropdown-item" to="#" onClick={openModalEditPost("edit_post_"+value.id)}><i className="fas fa-wrench"></i>Chỉnh sửa</Link></li>
+                                                <li><Link className="dropdown-item" to="#" onClick={openModalDeletePost("delete_post_"+value.id)}><i className="fas fa-times"></i>Xóa</Link></li>
                                             </ul>
                                         </div>
-                                        <Modal_Edit_Post props={{edit:"edit"+value.id,id:value.id}}></Modal_Edit_Post>
-                                        <Modal_Delete_Post props={{id:value.id}}></Modal_Delete_Post>
+                                        <Modal_Edit_Post props={{edit:"edit_post_"+value.id,id:value.id}}></Modal_Edit_Post>
+                                        <Modal_Delete_Post props={{delete:"delete_post_"+value.id,id:value.id}}></Modal_Delete_Post>
                                     </div>
                                 </div>
                                 <div className="row">
@@ -145,9 +163,10 @@ const Home = ({children}) =>{
                                     </div>
                                     <div className="col-lg-11" id="div_comment_post">
                                     <div className="input-group">
-                                        <input id="comment_post" type="text" className="form-control" placeholder="Viết bình luận..." aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                                        <input id={value.id} type="text" className="form-control comment_post"
+                                        placeholder="Viết bình luận..." aria-label="Recipient's username" aria-describedby="basic-addon2"/>
                                         <div className="input-group-append">
-                                            <button className="btn btn-primary" type="button">Bình luận</button>
+                                            <button onClick={addComment(value.id)} className="btn btn-primary" type="button">Bình luận</button>
                                         </div>  
                                     </div>
                                     </div>
@@ -156,18 +175,20 @@ const Home = ({children}) =>{
                                 {/* Comment */}
                                 {value.comments?.map((new_value)=>{
                                         return(
-                                    <div className="row">
+                                    <div className="row" id="div_cmt">   
                                         <div className="col-lg-1">
                                             <img src="/img/avatar_mac_dinh.jpg" id="avatar_comment"/>
                                         </div>
                                         <div className="col-lg-10">
                                             <strong>{new_value.author.name}</strong>
                                             <p id="comment">{new_value.content}</p>
-                                            <button onClick={openModalEditComment("edit"+new_value.id)} className="edit_cmt">Chỉnh sửa</button>
-                                            <button onClick={openModalDeleteComment(new_value.id)} className="edit_cmt">Xóa</button>
+                                            <button hidden={hiddenComment(new_value.author.id)} onClick={openModalEditComment("edit_cmt_"+new_value.id)}
+                                             className="edit_cmt">Chỉnh sửa</button>
+                                            <button hidden={hiddenComment(new_value.author.id)} onClick={openModalDeleteComment("delete_cmt_"+new_value.id)}
+                                             className="edit_cmt">Xóa</button>
                                         </div>
-                                        <Modal_Edit_Comment props={{id:"edit"+new_value,content:new_value.content}}></Modal_Edit_Comment>
-                                        <Modal_Delete_Comment props={{id:new_value.id}}></Modal_Delete_Comment>
+                                        <Modal_Edit_Comment props={{edit:"edit_cmt_"+new_value.id,id:new_value.id,content:new_value.content,idPost:value.id}}></Modal_Edit_Comment>
+                                        <Modal_Delete_Comment props={{delete:"delete_cmt_"+new_value.id,id:new_value.id,idPost:value.id}}></Modal_Delete_Comment>
                                         <div className="col-lg-1">
                                             <p>12/06/1999</p>
                                         </div> 

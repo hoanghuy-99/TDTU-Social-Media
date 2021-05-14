@@ -1,6 +1,6 @@
-const { Link, Redirect, Route, BrowserRouter, Switch } = ReactRouterDOM
+const { Redirect, Route, BrowserRouter, Switch } = ReactRouterDOM
 const { useDispatch,useSelector } = ReactRedux
-const {useEffect,useState} = React
+const { useEffect } = React
 import Student_Info from './page/Student_Info/index'
 import Header from './page/Header/Header'
 import Navigation from './page/Navigation/Navigation'
@@ -38,9 +38,11 @@ const App = () =>{
         dispatch(fetchUserById(getId()))
         }
     }, [loggedIn])
+    
     return (
         <div>
         <BrowserRouter>
+            {!getToken() && <Redirect to="/login"/>}
             <Switch>
                 <Route path="/login" exact>
                     <Login></Login>

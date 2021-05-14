@@ -70,4 +70,4 @@ async function requestDeleteNotification(id) {
     return data
 }
 
-export {requestNotification,requestNewNotification,requestChangeNotificationById,requestNotificationById,requestDeleteNotification}
+export { requestNotification, requestNewNotification, requestChangeNotificationById, requestNotificationById, requestDeleteNotification }

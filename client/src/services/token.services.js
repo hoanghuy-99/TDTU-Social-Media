@@ -1,4 +1,5 @@
 var host = window.location.protocol + "//" + window.location.host
+
 async function requestToken(username,password) {
     const requestOptions = {
         method: 'POST',
@@ -23,4 +24,4 @@ async function putToken(tokenId) {
     return data
 }
 
-export {requestToken,putToken}
+export { requestToken, putToken }
