@@ -102,7 +102,7 @@ exports.getManyNotification = async (req, res)=>{
         olderThan = parseInt(olderThan)
         notificationsQuery = notificationsQuery.where('createdAt').lte(olderThan)
     }
-    if(department){
+    if(departmentId){
         let department = await Department.findOne({id: departmentId})
         notificationsQuery = notificationsQuery.where('department', department?._id)
     }

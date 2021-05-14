@@ -12,8 +12,14 @@ const Notification = () =>{
     },[])
     const departments = useSelector(state => state?.department?.data)
     const notifications = useSelector(state => state?.notification?.data)
-    console.log(notifications)
-    
+    const formatDate = (new_date) =>{
+        const create_data = new Date(new_date).getTime()
+        const date = new Date(create_data)
+        var year = date.getFullYear().toString();
+        var month = (date.getMonth() + 101).toString().substring(1);
+        var day = (date.getDate() + 100).toString().substring(1);
+        return month + '/' + day + '/' + year;
+    }
     return(
         <div>
             <div>
@@ -34,7 +40,7 @@ const Notification = () =>{
                        </div>
                        <div className="col-lg-6">
                             <select id="select_facutly" className="form-select" aria-label="Default select example">
-                                <option value="" selected>Chọn Phòng/Khoa</option>
+                                <option value="allFaculty">Tất cả Phòng/Ban</option>
                                 {departments?.map((value)=>{
                                     return(
                                         <option value={value.id}>{value.name}</option>
@@ -82,7 +88,7 @@ const Notification = () =>{
                                         <h5 className="card-title"><strong>{value.title}</strong></h5>
                                         <p className="card-text noti_text">{value.content}</p>
                                         <Link to={`/notification/`+value.id} className="btn btn-danger">Xem chi tiết thông báo</Link>
-                                        <p id="faculty_time">{value.department.name} | Ngày đăng: {value.updatedAt}</p>
+                                        <p id="faculty_time">{value.department.name} | Ngày đăng: {formatDate(value.updatedAt)}</p>
                                         <div className="clear"></div>
                                         </div>
                                     </div>

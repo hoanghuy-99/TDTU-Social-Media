@@ -1,4 +1,4 @@
-import { requestNewNotification, requestNotification } from "../../services/notification.services"
+import { requestNewNotification, requestNotification, requestNotificationById,requestNotiByIdTeacher, requestDeleteNotification } from "../../services/notification.services"
 import notificationConstants from "../constants/notification.constants"
 
 
@@ -64,6 +64,37 @@ function fetchNotificationById(id){
     }
 }
 
+function fetchNotificationByIdTeacher(idTeacher){
+    function request(){
+        return {
+            type: notificationConstants.FETCH_NOTIFICATION
+        }
+    }
+    function success(data,message){
+        return{
+            type: notificationConstants.FETCH_NOTIFICATION_SUCCESS,
+            data,
+            message
+        }
+    }
+    function failure(message){
+        return{
+            type: notificationConstants.FETCH_NOTIFICATION_FAILURE,
+            message
+        }
+    }
+    return async (dispatch) => {
+        dispatch(request())
+        const res = await requestNotiByIdTeacher(idTeacher)
+        if(res.code == 0){
+            dispatch(success(res.data,'Lấy dữ liệu thành công'))
+        }
+        else{
+            dispatch(failure('Không lấy được dữ liệu'))
+        }
+    }
+}
+
 function newNotification(title,content,departmentId){
     function request(){
         return {
@@ -94,4 +125,36 @@ function newNotification(title,content,departmentId){
         }
     }
 }
-export {fetchNotification,newNotification}
+
+function deleteNotification(idPost){
+    function request(){
+        return {
+            type: notificationConstants.DELETE_NOTIFICATION
+        }
+    }
+    function success(idPost,message){
+        return{
+            type: notificationConstants.DELETE_NOTIFICATION_SUCCESS,
+            message,
+            idPost
+        }
+    }
+    function failure(message){
+        return{
+            type: notificationConstants.DELETE_NOTIFICATION_FAILURE,
+            message
+        }
+    }
+    return async (dispatch) => {
+        dispatch(request())
+        const res = await requestDeleteNotification(idPost)
+        if(res.code == 0){
+            dispatch(success(idPost,'Lấy dữ liệu thành công'))
+        }
+        else{
+            dispatch(failure('Không lấy được dữ liệu'))
+        }
+    }
+}
+export {fetchNotification,newNotification,
+fetchNotificationById,fetchNotificationByIdTeacher,deleteNotification}
