@@ -27,6 +27,7 @@ exports.createNotification = async (req, res)=>{
             name: notification.department.name
         },
         content: notification.content,
+        title: notification.title,
         createdAt: notification.createdAt,
         updatedAt: notification.updatedAt
     })
@@ -43,6 +44,7 @@ exports.createNotification = async (req, res)=>{
                 id: notification.department.id,
                 name: notification.department.name
             },
+            title: notification.title,
             content: notification.content,
             createdAt: notification.createdAt,
             updatedAt: notification.updatedAt
