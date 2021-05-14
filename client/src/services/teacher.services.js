@@ -53,9 +53,9 @@ async function requestChangeAvatarTeacher() {
     return data
 }
 
-async function requestChangePasswordTeacher(oldpass,newpass) {
+async function requestChangePasswordTeacher(oldpass, newpass) {
     const req = {
-        oldpass,newpass
+        oldpass, newpass
     }
     const response = await fetch(host + '/api/teachers/me/avatar',{
         method: "PUT",
@@ -69,4 +69,4 @@ async function requestChangePasswordTeacher(oldpass,newpass) {
     return data
 }
 
-export {requestTeacherById,requestAvatarTeacher,requestNewTeacher,requestChangePasswordTeacher,requestChangeAvatarTeacher}
+export { requestTeacherById, requestAvatarTeacher, requestNewTeacher, requestChangePasswordTeacher, requestChangeAvatarTeacher }

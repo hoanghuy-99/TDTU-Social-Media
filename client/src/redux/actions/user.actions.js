@@ -1,7 +1,7 @@
 import userConstants from "../constants/user.constants"
 import setAlert  from './alert.actions'
 import { removeToken } from '../../cookie'
-import {requestToken} from '../../services/token.services'
+import { requestToken, putToken } from '../../services/token.services'
 import { requestUserById } from "../../services/user.services"
 
 const fetchUser = () => {
@@ -103,6 +103,35 @@ function login(username, password){
     }
 }
 
+function loginGoogleAPI(tokenId){
+    function request(){
+        return {type: userConstants.LOGIN}
+    }
+    function success(message){
+        return {
+            type: userConstants.LOGIN_SUCCESS,
+            message
+        }
+    }
+    function failure(message){
+        return{
+            type: userConstants.LOGIN_FAILURE,
+            message
+        }
+    }
+    return async (dispatch) =>{
+        dispatch(request())
+        const res = await putToken(tokenId)
+        if(res.code === 0){
+            const token = res.data.token
+            dispatch(success('Đăng Nhập Thành Công'))
+        } else {
+            const message = res.message
+            dispatch(failure(message))
+        }
+    }
+}
+
 function register(username, password, email, name, department){
     function request(){
         return { 
@@ -150,4 +179,4 @@ function checkLogin(){
         type: userConstants.CHECK_LOGIN
     }
 }
-export { login, logout, register,fetchUserById,checkLogin }
+export { login, loginGoogleAPI, logout, register, fetchUserById, checkLogin }

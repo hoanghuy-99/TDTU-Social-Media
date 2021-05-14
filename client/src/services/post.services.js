@@ -165,5 +165,4 @@ async function requestDeleteImagePost(id) {
     return data
 }
 
-export {requestPost,requestPostById,requestNewPost,requestDeletePost,requestChangePostById,requestNewCommentPost
-,requestDeleteComment,requestChangeComment}
+export { requestPost, requestPostById, requestNewPost, requestDeletePost, requestChangePostById, requestNewCommentPost, requestDeleteComment, requestChangeComment }

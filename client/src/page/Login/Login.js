@@ -1,20 +1,23 @@
-import { login } from '../../redux/actions/user.actions'
+import { login, loginGoogleAPI } from '../../redux/actions/user.actions'
 const { useState } = React
 const { useDispatch, useSelector } = ReactRedux
 const { Redirect } = ReactRouterDOM
+const { GoogleAPI, GoogleLogin } = window['react-google-oauth']
 
 function Login(){
   const dispatch = useDispatch()
   const checkLogin = useSelector(state => state.user?.loggedIn)
-
-  //Student GoogleLogin
-  // const { signIn, loaded } = useGoogleLogin({
-  //   clientId,
-  //   scope,
-  //   onSuccess,
-  //   isSignedIn
-  // })
-  //console.log(signIn + " " + loaded)
+  
+  //Google Login
+  const loginStatus = (response) => console.log(response)
+  const loginFailure = (error) => console.log(error)
+  
+  const loginSuccess = (response) => {
+    const id_token = response.qc.id_token
+    if(id_token){
+      dispatch(loginGoogleAPI(id_token))
+    }
+  }
   
   //Admin Login
   const [form, setForm] = useState({
@@ -57,9 +60,17 @@ function Login(){
             </div>
             <input type="submit" value="Đăng Nhập" className="btn-login solid" />
             <p className="social-text">Hoặc đăng nhập với tài khoản Google</p>
-            <div className="google-login">
-              <button className="google-login-button"><i className="fab fa-google"></i>Đăng Nhập với Google</button>
-            </div>
+            <GoogleAPI clientId="130563548657-fcf2g4k6a9p4e6o2qk0ggi2ut9ir6ql6.apps.googleusercontent.com"
+                      hostedDomain="student.tdtu.edu.vn"
+                      Scope="student.tdtu.edu.vn"
+                      onUpdateSigninStatus={loginStatus}
+                      onInitFailure={loginFailure}
+                      cookiePolicy="single_host_origin"
+            >
+                <div>
+              	  <div><GoogleLogin onLoginSuccess={loginSuccess}/></div>
+              	</div>
+            </GoogleAPI>
           </form>
         </div>
       </div>
