@@ -15,18 +15,15 @@ function getToken(){
 function removeToken(){
     Cookie.remove('token')
 }
+
 function getRole(){
     const token = getToken()
     return jwt_decode(token).role
 }
+
 function getId(){
     const token = getToken()
     return jwt_decode(token).user_id
 }
-export {
-    setToken,
-    getToken,
-    removeToken,
-    getRole,
-    getId
-}
+
+export { setToken, getToken, removeToken, getRole, getId }
