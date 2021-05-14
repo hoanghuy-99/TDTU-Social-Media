@@ -57,7 +57,7 @@ async function requestChangeNotificationById(id,title,content,departmentId) {
     const req = {
         title,content,departmentId
     }
-    const response = await fetch(host + '/api/notifications/'+id,{
+    const response = await fetch('http://localhost:8080/api/notifications/'+id,{
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json',

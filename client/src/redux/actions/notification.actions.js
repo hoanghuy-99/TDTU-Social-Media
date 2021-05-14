@@ -1,4 +1,4 @@
-import { requestNewNotification, requestNotification, requestNotificationById,requestNotiByIdTeacher, requestDeleteNotification } from "../../services/notification.services"
+import { requestNewNotification, requestNotification, requestNotificationById,requestNotiByIdTeacher, requestDeleteNotification, requestChangeNotificationById } from "../../services/notification.services"
 import notificationConstants from "../constants/notification.constants"
 
 
@@ -156,5 +156,38 @@ function deleteNotification(idPost){
         }
     }
 }
+
+
+function changeNotification(idNoti,title,content,departmentId){
+    function request(){
+        return {
+            type: notificationConstants.EDIT_NOTIFICATION
+        }
+    }
+    function success(idNoti,data,message){
+        return{
+            type: notificationConstants.EDIT_NOTIFICATION_SUCCESS,
+            message,
+            data,
+            idNoti
+        }
+    }
+    function failure(message){
+        return{
+            type: notificationConstants.EDIT_NOTIFICATION_FAILURE,
+            message
+        }
+    }
+    return async (dispatch) => {
+        dispatch(request())
+        const res = await requestChangeNotificationById(idNoti,title,content,departmentId)
+        if(res.code == 0){
+            dispatch(success(idNoti,res.data,'Lấy dữ liệu thành công'))
+        }
+        else{
+            dispatch(failure('Không lấy được dữ liệu'))
+        }
+    }
+}
 export {fetchNotification,newNotification,
-fetchNotificationById,fetchNotificationByIdTeacher,deleteNotification}
+fetchNotificationById,fetchNotificationByIdTeacher,deleteNotification,changeNotification}

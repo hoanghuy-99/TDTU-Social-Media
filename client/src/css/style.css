@@ -225,6 +225,12 @@ i {
             #post_noti_btn{
                 margin-left: 10px;
             }
+            #div_modal_noti{
+                margin-bottom: 10px;
+            }
+            .div_btn_add_noti{
+                text-align: center;
+            }
         /* ----- */
 
         /* STUDENT INFO PAGE*/
@@ -342,7 +348,6 @@ i {
                 margin-top: 10px;
             }
         /* ----- */
-        
         /* EDIT POST*/
             #div_edit_post{
                 background: white;

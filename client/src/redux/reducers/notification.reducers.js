@@ -52,6 +52,36 @@ export default (state = initialState , action)=>{
                 requesting:false,
                 message: action.message
             }
+        case notificationConstants.EDIT_NOTIFICATION:
+            return{
+                ...state,
+                requesting: true,
+            }
+        case notificationConstants.EDIT_NOTIFICATION_SUCCESS:
+            return{
+                ...state,
+                requesting:false,
+                message:action.message,
+                data:{
+                    ...state.data,
+                    items: state.data.items.reduce((value,item)=>{
+                        if(item.id == action.idNoti){
+                            item = action.data
+                            value.push(item)
+                        }
+                        else{
+                            value.push(item)
+                        }
+                        return value
+                    },[])
+                }
+            }
+        case notificationConstants.EDIT_NOTIFICATION_FAILURE:
+            return{
+                ...state,
+                requesting:false,
+                message: action.message
+            }
         case notificationConstants.DELETE_NOTIFICATION:
             return{
                 ...state,

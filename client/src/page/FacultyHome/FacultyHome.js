@@ -4,11 +4,18 @@ const { useEffect,useState } = React
 import { getId } from '../../cookie';
 import { fetchFacultyById } from '../../redux/actions/faculty.actions';
 import { fetchNotificationByIdTeacher } from '../../redux/actions/notification.actions';
+import Modal_Add_Noti from '../Modal_Add_Notification';
 import Modal_Delete from '../Modal_Delete/index'
-
+import Modal_Edit_Noti from '../Modal_Edit_Notification';
 const FacultyHome = () =>{
     const dispatch = useDispatch()
     const openModal= (id)=>(e)=>{
+        document.getElementById(id).style.display='block'
+    }
+    const openModalAddNoti= (id)=>(e)=>{
+        document.getElementById(id).style.display='block'
+    }
+    const openModalEditNoti= (id)=>(e)=>{
         document.getElementById(id).style.display='block'
     }
     const id_teacher = getId()
@@ -73,8 +80,9 @@ const FacultyHome = () =>{
                     <div id="noti_list_div">
                         <div className="row justify-content-center">
                             <div>
-                                <Link to={`/addNotification/`+getFaculty} className={`btn btn-primary `+disabledAddNoti} id="btn_add_noti" 
+                                <Link onClick={openModalAddNoti(getFaculty)} className={`btn btn-primary `+disabledAddNoti} id="btn_add_noti" 
                                 >Thêm thông báo</Link>
+                                <Modal_Add_Noti props={{id:getFaculty}}></Modal_Add_Noti>
                             </div>
                             {notifications?.items?.map((value)=>{
                                 return(
@@ -82,7 +90,7 @@ const FacultyHome = () =>{
                                         <div className="card-body">
                                             <h5 className="card-title" id="noti_title"><strong>{value.title}</strong></h5>
                                             <div id="fix_delete_noti">
-                                                <Link to={`/editNotification/`+value.id}><i className="fas fa-wrench"></i></Link>
+                                                <Link onClick={openModalEditNoti("edit_noti"+value.id)}><i className="fas fa-wrench"></i></Link>
                                                 <Link  id="btn_delete_noti" onClick={openModal("delete_noti"+value.id)}><i className="fas fa-times"></i></Link>
                                             </div>
                                             <div className="clear"></div>
@@ -92,6 +100,7 @@ const FacultyHome = () =>{
                                             <div className="clear"></div>
                                         </div>
                                         <Modal_Delete props={{delete:"delete_noti"+value.id,id:value.id}}/>
+                                        <Modal_Edit_Noti props={{edit:"edit_noti"+value.id,id:value.id}}/>
                                     </div>
                                 )
                             })}
