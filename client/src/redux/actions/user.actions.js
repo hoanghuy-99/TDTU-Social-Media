@@ -2,7 +2,7 @@ import userConstants from "../constants/user.constants"
 import setAlert  from './alert.actions'
 import { getToken, removeToken, setToken } from '../../cookie'
 import { requestToken, putToken } from '../../services/token.services'
-import { requestUserById } from "../../services/user.services"
+import { requestChangePassword, requestUserById } from "../../services/user.services"
 
 const fetchUser = () => {
     function request(){
@@ -170,6 +170,40 @@ function register(username, password, email, name, department){
     }
 }
 
+function changePassword(oldPassword,newPassword){
+    function request(){
+        return { 
+            type: userConstants.CHANGE_PASSWORD
+        }
+    }
+
+    function success(message){
+        return {
+            type: userConstants.CHANGE_PASSWORD_SUCCESS,
+            message
+        }
+    }
+
+    function failure(message){
+        return {
+            type: userConstants.CHANGE_PASSWORD_FAILURE,
+            message
+        }
+    }
+
+    return async (dispatch) => {
+        dispatch(request())
+        const res = await requestChangePassword(oldPassword,newPassword)
+        if(res.code === 0){
+            const message = res.message
+            dispatch(success(message))
+        } else {
+            const message = res.message
+            dispatch(failure(message))
+        }
+    }
+}
+
 function logout(){
     removeToken()
     return {
@@ -183,5 +217,4 @@ function checkLogin(){
         token: getToken()
     }
 }
-
-export { login, loginGoogleAPI, logout, register, fetchUserById, checkLogin }
+export { login, loginGoogleAPI, logout, register, fetchUserById, checkLogin,changePassword }

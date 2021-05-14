@@ -13,6 +13,22 @@ async function requestUserById() {
     return data
 }
 
+async function requestChangePassword(oldPassword,newPassword){
+    const req= {
+        oldPassword,newPassword
+    }
+    const response = await fetch('http://localhost:8080/api/password',{
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getToken(),
+        },
+        body: JSON.stringify(req)
+    })
+    const data = await response.json()
+    return data
+}
+
 async function requestChangeInfoById(name,classroom,faculty){
     const req = {
         name,
@@ -66,4 +82,4 @@ async function requestChangeImageById(){
     const data = await response.json()
     return data
 }
-export { requestUserById }
+export { requestUserById,requestChangePassword }

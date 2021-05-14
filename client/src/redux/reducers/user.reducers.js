@@ -71,6 +71,23 @@ export default (state = initialState, action)=>{
                 loggedIn: false,
                 token:undefined
             }
+        case userConstants.CHANGE_PASSWORD:
+            return{
+                ...state,
+                requesting:true
+            }
+        case userConstants.CHANGE_PASSWORD_SUCCESS:
+            return{
+                ...state,
+                requesting:false,
+                message: action.message
+            }
+        case userConstants.CHANGE_PASSWORD_FAILURE:
+            return{
+                ...state,
+                requesting:false,
+                message: action.message
+            }
         case userConstants.CHECK_LOGIN:
             if(action.token){
                 return{
