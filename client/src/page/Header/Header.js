@@ -34,7 +34,7 @@ const Header = () =>{
     console.log(checkLogin);
     return(
         <>
-        { checkLogin && <Redirect to='/home'/>}
+        { !checkLogin && <Redirect to='/login'/>}
         <header>
             <div id="header_logo_div">
                 <img src="/img/logoTDT.png" id="logo"/>
