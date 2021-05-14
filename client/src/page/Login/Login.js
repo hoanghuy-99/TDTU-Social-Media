@@ -5,8 +5,10 @@ const { Redirect } = ReactRouterDOM
 const { GoogleAPI, GoogleLogin } = window['react-google-oauth']
 
 function Login(){
+  console.log(window.location.pathname)
   const dispatch = useDispatch()
-  const checkLogin = useSelector(state => state.user?.loggedIn)
+  
+  const loggedIn = useSelector(state => state.user.loggedIn)
   
   //Google Login
   const loginStatus = (response) => console.log(response)
@@ -40,7 +42,7 @@ function Login(){
     }
   }
 
-  if(checkLogin){
+  if(loggedIn){
     return <Redirect to='/home'/>
   }
 

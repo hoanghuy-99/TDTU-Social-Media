@@ -34,7 +34,6 @@ export default (state = initialState, action)=>{
                 requesting: true
             }
         case userConstants.LOGIN_SUCCESS:
-            setToken(action.token)
             return{
                 ...state,
                 loggedIn: true,
@@ -73,7 +72,7 @@ export default (state = initialState, action)=>{
                 token:undefined
             }
         case userConstants.CHECK_LOGIN:
-            if(getToken()){
+            if(action.token){
                 return{
                     ...state,
                     loggedIn: true

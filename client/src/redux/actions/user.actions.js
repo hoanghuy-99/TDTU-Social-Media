@@ -1,6 +1,6 @@
 import userConstants from "../constants/user.constants"
 import setAlert  from './alert.actions'
-import { removeToken } from '../../cookie'
+import { getToken, removeToken, setToken } from '../../cookie'
 import { requestToken, putToken } from '../../services/token.services'
 import { requestUserById } from "../../services/user.services"
 
@@ -94,6 +94,7 @@ function login(username, password){
         const res = await requestToken(username,password)
         if(res.code === 0){
             const token = res.data.token
+            setToken(token)
             dispatch(success(token, ''))
         } else {
             const message = res.message
@@ -124,6 +125,7 @@ function loginGoogleAPI(tokenId){
         const res = await putToken(tokenId)
         if(res.code === 0){
             const token = res.data.token
+            setToken(token)
             dispatch(success('Đăng Nhập Thành Công'))
         } else {
             const message = res.message
@@ -176,7 +178,8 @@ function logout(){
 }
 function checkLogin(){
     return {
-        type: userConstants.CHECK_LOGIN
+        type: userConstants.CHECK_LOGIN,
+        token: getToken()
     }
 }
 export { login, loginGoogleAPI, logout, register, fetchUserById, checkLogin }
