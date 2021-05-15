@@ -1,6 +1,7 @@
 const { getSingleTeacher } = require("./teacher")
 const { getSingleStudent } = require("./student")
 const Student = require("../models/Student")
+const User = require("../models/User")
 exports.getProfile = async (req, res)=>{
     const userId = req.token.user_id
     if(req.token.role === 'student'){
@@ -55,6 +56,6 @@ exports.updateAvatar = async (req, res)=>{
 }
 
 exports.getAvatar = async (req, res)=>{
-    let student = await Student.findById(req.params.id)
+    let student = await Student.findById(req.token.user_id)
     res.sendFile(path.join(__dirname, '../uploads/'+ student.avatar))
 }

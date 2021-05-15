@@ -35,7 +35,7 @@ async function requestChangeInfoById(name,classroom,faculty){
         class:classroom,
         faculty
     }
-    const response = await fetch(host + '/api/users/student/me',{
+    const response = await fetch('http://localhost:8080/api/profile',{
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json',
@@ -60,14 +60,14 @@ async function requestPostById(){
 }
 
 async function requestImageById(){
-    const response = await fetch(host + '/api/users/student/avatar',{
+    const response = await fetch('http://localhost:8080/api/profile/avatar',{
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
             'Authorization': getToken(),
         },
     })
-    const data = await response.json()
+    const data = await response.blob()
     return data
 }
 
@@ -82,4 +82,4 @@ async function requestChangeImageById(){
     const data = await response.json()
     return data
 }
-export { requestUserById,requestChangePassword }
+export { requestUserById,requestChangePassword,requestImageById,requestChangeInfoById}

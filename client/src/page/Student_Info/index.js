@@ -1,7 +1,18 @@
+import { getId } from "../../cookie"
+import { changeInfoStudent, fetchUserById } from "../../redux/actions/user.actions"
+
 const { Link } = ReactRouterDOM
-const { useState } = React
+const { useState,useEffect } = React
+const { useDispatch,useSelector } = ReactRedux
 
 const Student_Info = ({children}) =>{
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch(fetchUserById())
+    },[])
+    const users = useSelector(state => state?.user?.data)
+    const [userInfo,setUserInfo]= useState(users)
+    console.log("users",users);
     function openModal(){
         document.getElementById('modal_change_avatar').style.display='block'
     }
@@ -10,11 +21,30 @@ const Student_Info = ({children}) =>{
         setBoo(false)
     }
     const ChangeInfo = () =>{
-        const student_name = document.getElementById('student_name').value
-        const student_className = document.getElementById('student_className').value
-        const student_faculty = document.getElementById('student_faculty').value
         setBoo(true)
-        console.log(student_name,student_className,student_faculty);
+        console.log(userInfo?.name,userInfo?.class,userInfo?.faculty);
+        dispatch(changeInfoStudent(userInfo?.name,userInfo?.class,userInfo?.faculty))
+    }
+    const changeName = (e)=>{
+        const name = e.target.value
+        setUserInfo(p =>({
+            ...p,
+            name: name
+        }))
+    }
+    const changeClass = (e)=>{
+        const classRoom = e.target.value
+        setUserInfo(p =>({
+            ...p,
+            class: classRoom
+        }))
+    }
+    const changeFaculty = (e)=>{
+        const faculty = e.target.value
+        setUserInfo(p =>({
+            ...p,
+            faculty: faculty
+        }))
     }
     return(
         <div>
@@ -39,15 +69,15 @@ const Student_Info = ({children}) =>{
                             <div className="col-lg-6">
                                     <div className="form-group">
                                         <label htmlFor="name"><strong>Tên:</strong></label>
-                                        <input type="text" className="form-control" id="student_name" placeholder="Nhập họ tên" disabled={boo}/>
+                                        <input type="text" onChange={changeName} className="form-control" id="student_name" value={userInfo?.name} placeholder="Nhập họ tên" disabled={boo}/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="className"><strong>Lớp:</strong></label>
-                                        <input type="text" className="form-control" id="student_className" placeholder="Nhập lớp" disabled={boo}/>
+                                        <input type="text" onChange={changeClass} className="form-control" id="student_className" value={userInfo?.class} placeholder="Nhập lớp" disabled={boo}/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="faculty"><strong>Khoa:</strong></label>
-                                        <input type="text" className="form-control" id="student_faculty" placeholder="Nhập khoa" disabled={boo}/>
+                                        <input type="text" onChange={changeFaculty} className="form-control" id="student_faculty" value={userInfo?.faculty} placeholder="Nhập khoa" disabled={boo}/>
                                     </div>
                                     <div className="row space_btn">
                                         <div className="col-lg-4">

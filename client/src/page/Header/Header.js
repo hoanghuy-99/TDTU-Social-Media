@@ -1,9 +1,10 @@
 const {useEffect,useState} = React
 const { Link,Redirect } = ReactRouterDOM
-import { getId, getToken } from '../../cookie'
+import { getId, getRole, getToken } from '../../cookie'
 const { useDispatch,useSelector } = ReactRedux
 import { logout } from '../../redux/actions/user.actions'
 import {fetchUserById} from '../../redux/actions/user.actions'
+import { requestImageById } from '../../services/user.services'
 const DateAndTime = () =>{
     const [date,setDate] = useState('')
     useEffect(()=>{
@@ -22,11 +23,19 @@ const DateAndTime = () =>{
 }
 const Header = () =>{
     const dispatch = useDispatch()
+    const handleImageAvatar = async ()=>{
+        const img = await requestImageById()
+        console.log("img",img);
+        const imgUrl = URL.createObjectURL(img)
+        setImgAvatar(imgUrl)
+    }
+    const [imgAvatar,setImgAvatar] = useState()
+    console.log("avatar",imgAvatar);
     useEffect(()=>{
         dispatch(fetchUserById(getId()))
+        handleImageAvatar()
     },[])
     const users = useSelector(state => state?.user?.data)
-    console.log("user",users);
     function handleLogout(){
         dispatch(logout())
     }
@@ -43,10 +52,10 @@ const Header = () =>{
             <div id="info">
                 <div id="info_div">
                     <p id="info_name">{users?.name}</p>
-                    <Link className="button" id="btn_logout" onclick={handleLogout}><i className="fas fa-sign-out-alt"></i>Thoát</Link>
+                    <Link className="button" id="btn_logout" onClick={handleLogout}><i className="fas fa-sign-out-alt"></i>Thoát</Link>
                 </div>
                 <div id="info_avatar_div">
-                    <img src="/img/avatar_mac_dinh.jpg" id="info_avatar"/>
+                    <img src={imgAvatar} id="info_avatar"/>
                 </div>
             </div>
             <div>

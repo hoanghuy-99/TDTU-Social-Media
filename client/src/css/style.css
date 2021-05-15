@@ -441,19 +441,18 @@ i {
                 width: 100%;
                 margin-bottom: 10px;
             }
-            #img_modal_post{
+            .img_modal_post{
                 height: 20rem;
                 width: 30rem;
                 margin-bottom: 10px;
                 margin-top:10px;
                 position: relative;
             }
-            #btn_cancel_img{
+            .btn_cancel_img{
                 position: absolute;
                 left: 49%;
                 top: 35%;
                 background: transparent;
-                display: none;
                 border: none;
                 color: red;
                 font-size: 21px;
