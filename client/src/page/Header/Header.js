@@ -1,6 +1,6 @@
 const {useEffect,useState} = React
 const { Link,Redirect } = ReactRouterDOM
-import { getId } from '../../cookie'
+import { getId, getToken } from '../../cookie'
 const { useDispatch,useSelector } = ReactRedux
 import { logout } from '../../redux/actions/user.actions'
 import {fetchUserById} from '../../redux/actions/user.actions'
@@ -21,7 +21,6 @@ const DateAndTime = () =>{
     )
 }
 const Header = () =>{
-    const checkLogin = useSelector(state => state?.user?.loggedIn)
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(fetchUserById(getId()))
@@ -30,9 +29,6 @@ const Header = () =>{
     console.log("user",users);
     function handleLogout(){
         dispatch(logout())
-    }
-    if(!checkLogin){
-       return <Redirect to="/login"/>
     }
     return(
         <>

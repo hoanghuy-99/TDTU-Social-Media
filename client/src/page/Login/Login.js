@@ -43,10 +43,6 @@ function Login(){
     }
   }
 
-  if(getToken()){
-    return <Redirect to='/home'/>
-  }
-
   return (
     <div className="container">
       <div className="forms-container">

@@ -61,6 +61,7 @@ const fetchUserById = (id) => {
     return async (dispatch) => {
         dispatch(request())
         const res = await requestUserById(id)
+        console.log(res)
         if(res.code === 0)
         {
             dispatch(success(res.data, 'Lấy dữ liệu thành công'))  

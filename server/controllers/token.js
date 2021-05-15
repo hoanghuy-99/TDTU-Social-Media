@@ -49,6 +49,10 @@ exports.createToken = async (req, res)=>{
 
 const CLIENT_ID = process.env.CLIENT_ID
 const {OAuth2Client} = require('google-auth-library');
+const fetch = require('node-fetch')
+const fs = require('fs/promises')
+const path  = require('path')
+const { v4: uuidv4 } = require('uuid')
 const client = new OAuth2Client(CLIENT_ID);
 exports.createTokenByGoogle = async (req, res)=>{
     let idToken = req.body.idToken 
@@ -76,10 +80,16 @@ exports.createTokenByGoogle = async (req, res)=>{
     }
 
     let user = await Student.findOne({email:payload.email})
+    console.log(payload)
     if(!user){
+        let avatar = uuidv4()+'.jpg'
+        let response = await fetch(payload.picture)
+        let buffer = await response.buffer()
+        await fs.writeFile(path.join(__dirname, '../uploads', avatar ), buffer)
         user = await Student.create({
             name: payload.name,
-            email: payload.email
+            email: payload.email,
+            avatar: avatar
         })
     }
 

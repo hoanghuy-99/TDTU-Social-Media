@@ -39,6 +39,7 @@ const App = () =>{
         <BrowserRouter>
             <Switch>
                 <Route exact strict path="/login" >
+                    {loggedIn && <Redirect to="/home"/>}
                     <Login></Login>
                 </Route>
                 <Redirect exact from="/" to="/home" />

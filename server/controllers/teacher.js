@@ -31,7 +31,6 @@ exports.createTeachers =  async (req, res)=>{
 
 exports.getSingleTeacher = async (req, res)=>{
     let teacher = await User.findById(req.params.id).populate('departments')
-    console.log("kết quả",req.params);
     res.json({
         code: 0,
         data :{
@@ -39,10 +38,10 @@ exports.getSingleTeacher = async (req, res)=>{
             email: teacher.email,
             username: teacher.username,
             name: teacher.name,
-            departments: teacher.departments.map(d =>({
+            departments: teacher.departments?.map(d =>({
                 id: d.id,
                 name: d.name
-            }))
+            })) || []
         }
     })
 }

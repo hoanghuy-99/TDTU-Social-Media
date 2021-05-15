@@ -7,16 +7,16 @@ async function getName(id,role){
 
 
 exports.getSingleStudent = async (req, res)=>{
-    let teacher = User.findById(req.params.id)
+    let student = await Student.findById(req.params.id)
     res.json({
-        id: teacher._id,
-        email: teacher.email,
-        username: teacher.username,
-        name: teacher.name,
-        departments: teacher.departments.map(d =>({
-            id: d.id,
-            name: d.name
-        }))
+        code:0,
+        data:{
+            id: student._id,
+            email: student.email,
+            name: student.name,
+            class: student.class,
+            faculty: student.faculty
+        }
     })
 }
 

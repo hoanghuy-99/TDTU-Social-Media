@@ -2,11 +2,36 @@ const { getSingleTeacher } = require("./teacher")
 const { getSingleStudent } = require("./student")
 const Student = require("../models/Student")
 exports.getProfile = async (req, res)=>{
-    req.params.id = req.token.user_id
+    const userId = req.token.user_id
     if(req.token.role === 'student'){
-        getSingleStudent(req, res)
+        let student = await Student.findById(userId)
+        res.json({
+            code:0,
+            data:{
+                id: student._id,
+                email: student.email,
+                name: student.name,
+                class: student.class,
+                faculty: student.faculty,
+                role: req.token.role
+            }
+        })
     }else{
-        getSingleTeacher(req, res)
+        let teacher = await User.findById(userId).populate('departments')
+        res.json({
+            code: 0,
+            data :{
+                id: teacher._id,
+                email: teacher.email,
+                username: teacher.username,
+                name: teacher.name,
+                role: req.token.role,
+                departments: teacher.departments?.map(d =>({
+                    id: d.id,
+                    name: d.name
+                })) || []
+            }
+        })
     }
 }
 
@@ -16,10 +41,13 @@ exports.editProfile = async (req, res)=>{
     getSingleStudent(req, res)
 }
 
+const fs = require('fs/promises')
+const path = require('path')
 exports.updateAvatar = async (req, res)=>{
     let student = await Student.findById(req.params.id)
+    oldAvatar = student.avatar 
     student.avatar = req.image
-    student.save()
+    await Promise.all([student.save(), fs.unlink(path.join(__dirname, '../uploads/', oldAvatar))])
     res.json({
         code: 0,
         message:'Tải hình ảnh thành công'

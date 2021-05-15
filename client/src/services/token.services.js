@@ -12,11 +12,11 @@ async function requestToken(username,password) {
     return data
 }
 
-async function putToken(tokenId) {
+async function putToken(idToken) {
     const requestOptions = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tokenId })
+        body: JSON.stringify({ idToken })
     }
 
     let data = await fetch(host + '/api/tokens', requestOptions)
