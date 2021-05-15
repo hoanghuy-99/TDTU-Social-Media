@@ -1,18 +1,52 @@
 const { Link } = ReactRouterDOM
-
+const { useDispatch,useSelector } = ReactRedux
+const { useState,useEffect } = React
+import {changePassword} from '../../redux/actions/user.actions'
 const FacultyInfo = ({children}) =>{
+    const dispatch = useDispatch()
     function openModal(){
         document.getElementById('modal_change_avatar').style.display='block'
     }
-    const ChangePassword = () =>{
+    const handleClick = () =>{
         const old_password = document.getElementById('old_password').value
         const new_password = document.getElementById('new_password').value
         const re_password = document.getElementById('re_new_password').value
         if(new_password == re_password){
-            console.log("haha");
+            dispatch(changePassword(old_password,new_password))
+        }
+        else{
+            setError("2 mật khẩu không giống nhau")
         }
         console.log(old_password,new_password,re_password);
     }
+    const hiddenError= ()=>{
+        if(error == "Lấy dữ liệu thành công"){
+            return true
+        }
+        else if(error == "Mật khẩu sai"){
+            return false
+        }
+        else if(error == "2 mật khẩu không giống nhau"){
+            return false
+        }
+        else{
+            return true
+        }
+    }
+    const hiddenSuccess= ()=>{
+        if(error == "Đổi mật khẩu thành công"){
+            return false
+        }
+        else{
+            return true
+        }
+    }
+    const users = useSelector(state => state?.user?.message)
+    const [error,setError] = useState() 
+    useEffect(()=>{
+        setError(users)
+    },[users])
+    console.log(error);
     return(
         <div>
            <div>
@@ -52,10 +86,12 @@ const FacultyInfo = ({children}) =>{
                                         <label htmlFor="re_new_password"><strong>Nhập lại mật khẩu mới:</strong></label>
                                         <input type="password" className="form-control" id="re_new_password" placeholder="Nhập lại mật khẩu"/>
                                     </div>
+                                    <div className="alert alert-danger" hidden={hiddenError()}>{error}</div>
+                                    <div className="alert alert-success" hidden={hiddenSuccess()}>{error}</div>
                                     <div className="row space_btn">
                                         <div className="col-lg-4">
                                             <label htmlFor=""></label>
-                                            <button type="button" onClick={ChangePassword} className="btn btn-success btn-form-control">Xác nhận</button>
+                                            <button type="button" onClick={handleClick} className="btn btn-success btn-form-control">Xác nhận</button>
                                         </div>
                                     </div>
                             </div>

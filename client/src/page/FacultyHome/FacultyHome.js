@@ -36,7 +36,6 @@ const FacultyHome = () =>{
     }
     const facultys = useSelector(state => state?.faculty?.data)
     const notifications = useSelector(state => state?.notification?.data)
-    console.log("new_noti",notifications);
     const formatDate = (new_date) =>{
         const create_data = new Date(new_date).getTime()
         const date = new Date(create_data)
