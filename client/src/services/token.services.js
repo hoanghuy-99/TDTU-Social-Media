@@ -1,5 +1,6 @@
 var host = window.location.protocol + "//" + window.location.host
 host = 'http://localhost:8080'
+
 async function requestToken(username,password) {
     const requestOptions = {
         method: 'POST',
