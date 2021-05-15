@@ -151,10 +151,10 @@ const Home = ({children}) =>{
                         <div className="col-lg-11" id="div_post_social">
                             <div className="form-group">
                                 <div className="row">
-                                    <div className="col-lg-1">
+                                    <div className="col-2 col-lg-1">
                                         <img src="/img/avatar.jpg" id="avatar_post"/>
                                     </div>
-                                    <div className="col-lg-11" id="div_modal_post" onClick={openModal}>
+                                    <div className="col-10 col-lg-11" id="div_modal_post" onClick={openModal}>
                                         Bạn đang nghĩ gì?
                                     </div>
                                 </div>
@@ -169,14 +169,14 @@ const Home = ({children}) =>{
                             <div className="form-group">
                                 <div className="row">
                                     <hr/>
-                                    <div className="col-lg-1">
+                                    <div className="col-2 col-lg-1">
                                         <img src="/img/avatar_mac_dinh.jpg" id="avatar_post"/>
                                     </div>
-                                    <div className="col-lg-10">
+                                    <div className="col-8 col-lg-10">
                                         <strong>{value.author.name}</strong>
                                         <p>Được đăng: {fromatPostOn(value.createdAt)}</p>
                                     </div>
-                                    <div className="col-lg-1">
+                                    <div className="col-2 col-lg-1">
                                         <div className="dropdown" hidden={checkIdUser(value.author.id)}>
                                             <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
                                              data-bs-toggle="dropdown" aria-expanded="false">
@@ -202,10 +202,10 @@ const Home = ({children}) =>{
                                 </div>
                                 <hr/>
                                 <div className="row">
-                                    <div className="col-lg-1">
+                                    <div className="col-2 col-lg-1">
                                         <img src="/img/avatar_mac_dinh.jpg" id="avatar_comment"/>
                                     </div>
-                                    <div className="col-lg-11" id="div_comment_post">
+                                    <div className="col-10 col-lg-11" id="div_comment_post">
                                     <div className="input-group">
                                         <input id={value.id} type="text" className="form-control comment_post"
                                         placeholder="Viết bình luận..." aria-label="Recipient's username" aria-describedby="basic-addon2"/>
@@ -220,10 +220,10 @@ const Home = ({children}) =>{
                                 {value.comments?.map((new_value,new_index)=>{
                                         return(
                                     <div key={'comment-'+new_index} className="row" id="div_cmt">   
-                                        <div className="col-lg-1">
+                                        <div className="col-2 col-lg-1">
                                             <img src="/img/avatar_mac_dinh.jpg" id="avatar_comment"/>
                                         </div>
-                                        <div className="col-lg-10">
+                                        <div className="col-10 col-lg-10">
                                             <strong>{new_value.author.name}</strong>
                                             <p id="comment">{new_value.content}</p>
                                             <button hidden={hiddenComment(new_value.author.id)} onClick={openModalEditComment("edit_cmt_"+new_value.id)}
@@ -233,7 +233,7 @@ const Home = ({children}) =>{
                                         </div>
                                         <Modal_Edit_Comment props={{edit:"edit_cmt_"+new_value.id,id:new_value.id,content:new_value.content,idPost:value.id}}></Modal_Edit_Comment>
                                         <Modal_Delete_Comment props={{delete:"delete_cmt_"+new_value.id,id:new_value.id,idPost:value.id}}></Modal_Delete_Comment>
-                                        <div className="col-lg-1">
+                                        <div className="col-2 col-lg-1">
                                             <p>12/06/1999</p>
                                         </div> 
                                     </div>
