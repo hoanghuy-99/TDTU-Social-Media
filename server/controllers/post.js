@@ -213,7 +213,10 @@ exports.uploadImage = async (req, res)=>{
     let post = await Post.findById(req.params.id)
     oldImage = post.image
     post.image = req.image
-    await Promise.all([post.save(), fs.unlink(path.join(__dirname, '../uploads/', oldImage))])
+    if(oldImage){
+        await fs.unlink(path.join(__dirname, '../uploads/', oldImage))
+    }
+    await post.save()
     res.json({
         code: 0,
         message:'Tải hình ảnh thành công'
