@@ -2,6 +2,8 @@ const User = require('../models/User')
 const Student = require('../models/Student')
 const Post = require('../models/Post')
 const Comment = require('../models/Comment')
+const fs = require('fs/promises')
+const path = require('path')
 
 async function getName(id,role){
     return role === 'student' ? (await Student.findById(id)).name : (await User.findById(id)).name
@@ -160,8 +162,15 @@ exports.editPost = async (req, res)=>{
     })
 }
 
+async function deleteImage(image){
+    if(image){
+        await fs.unlink(path.join(__dirname, '../uploads/', image))
+    }
+}
+
 exports.deletePost = async (req, res)=>{
     const post = await Post.findByIdAndDelete(req.params.id)
+    await deleteImage(post.image)
     let user
     if(post.authorRole === 'student'){
         user = await Student.findById(post.author)
@@ -206,16 +215,12 @@ exports.getImage = async (req, res)=>{
     res.sendFile(path.join(__dirname, '../uploads/'+ post.image))
 }
 
-const fs = require('fs/promises')
-const path = require('path')
 
 exports.uploadImage = async (req, res)=>{
     let post = await Post.findById(req.params.id)
     oldImage = post.image
     post.image = req.image
-    if(oldImage){
-        await fs.unlink(path.join(__dirname, '../uploads/', oldImage))
-    }
+    await deleteImage(oldImage)
     await post.save()
     res.json({
         code: 0,
