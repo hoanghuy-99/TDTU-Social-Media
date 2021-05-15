@@ -93,9 +93,11 @@ const Home = ({children}) =>{
         }
     }
     const addComment = (id)=>()=>{
-        const content = document.getElementById(id).value;
-        dispatch(newCmtPost(id,content))
-        console.log(id,content);
+        const content = document.getElementById(id).value
+        if(content){
+            dispatch(newCmtPost(id,content))
+        }
+        console.log(id,content)
     }
     return(
         <div className=" col-12 col-lg-10" id="body_div">
