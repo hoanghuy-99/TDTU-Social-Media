@@ -7,7 +7,6 @@ import { fetchPost, newCmtPost, newPost } from '../../redux/actions/post.actions
 import { getId } from '../../cookie'
 import { fetchNotification } from '../../redux/actions/notification.actions'
 import { requestGetImagePost } from '../../services/post.services'
-import { requestImageById } from '../../services/user.services'
 const {useDispatch,useSelector} = ReactRedux
 const {useState,useEffect} = React
 
@@ -20,7 +19,6 @@ const Home = ({children}) =>{
     let posts = useSelector(state => state?.post?.data)
     let notifications = useSelector(state => state?.notification?.data)
     const avatar = useSelector(state => state?.user?.avatar)
-    console.log("notifications",notifications);
     notifications?.items?.sort((a,b)=>{
         const timeA = new Date(a.createdAt).getTime()
         const timeB = new Date(b.createdAt).getTime()
@@ -68,6 +66,14 @@ const Home = ({children}) =>{
             getImgPost(value.id)
         })
     },[posts?.items])
+    const getAvatarPostAndCmt = (role)=>{
+        if(role == "student"){
+            return avatar
+        }
+        else{
+            return '/img/avatar_mac_dinh.jpg'
+        }
+    }
     const [imgList,setImgList] = useState({})
     const checkImage = (id) =>{
         if(imgList[id]?.imgPost.type != "image/jpeg"){
@@ -149,7 +155,7 @@ const Home = ({children}) =>{
     return(
         <div className=" col-12 col-lg-10" id="body_div">
             <div className="row">
-                <div id="xahoi" className="col-lg-7" >  
+                <div id="xahoi" className="col-lg-7" >
                     <div className="row justify-content-center">
                         <div className="col-lg-11" id="div_post_social">
                             <div className="form-group">
@@ -173,7 +179,7 @@ const Home = ({children}) =>{
                                 <div className="row">
                                     <hr/>
                                     <div className="col-2 col-lg-1">
-                                        <img src="/img/avatar_mac_dinh.jpg" id="avatar_post"/>
+                                        <img src={getAvatarPostAndCmt(value.author.role)} id="avatar_post"/>
                                     </div>
                                     <div className="col-8 col-lg-10">
                                         <Link to={"/home/"+value.author.id}><strong>{value.author.name}</strong></Link>
@@ -206,7 +212,7 @@ const Home = ({children}) =>{
                                 <hr/>
                                 <div className="row">
                                     <div className="col-2 col-lg-1">
-                                        <img src="/img/avatar_mac_dinh.jpg" id="avatar_comment"/>
+                                        <img src={getAvatarPostAndCmt(value.author.role)} id="avatar_comment"/>
                                     </div>
                                     <div className="col-10 col-lg-11" id="div_comment_post">
                                     <div className="input-group">
@@ -224,7 +230,7 @@ const Home = ({children}) =>{
                                         return(
                                     <div key={'comment-'+new_index} className="row" id="div_cmt">   
                                         <div className="col-2 col-lg-1">
-                                            <img src="/img/avatar_mac_dinh.jpg" id="avatar_comment"/>
+                                            <img src={getAvatarPostAndCmt(new_value.author.role)} id="avatar_comment"/>
                                         </div>
                                         <div className="col-10 col-lg-10">
                                             <strong>{new_value.author.name}</strong>

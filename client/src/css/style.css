@@ -578,6 +578,10 @@ i {
     }
     #xahoi{
         position: unset!important;
+        overflow-y: unset;
+    }
+    #body_div{
+        overflow-y: unset!important;
     }
     #registerFaculty{
         width: 100%!important;
@@ -596,9 +600,14 @@ i {
     #noti_list_div{
         width: 100%;
     }
+    
     #post_noti_btn{
         margin-left: 0px;
     }
+
+}
+@media only screen and (max-width: 992px) {
+
 }
 @media only screen and (max-width: 767px) {
     #cmt{

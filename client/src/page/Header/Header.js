@@ -29,6 +29,14 @@ const Header = () =>{
     },[])
     const users = useSelector(state => state?.user?.data)
     const avatar = useSelector(state => state?.user?.avatar)
+    const getAvatarPostAndCmt = (role)=>{
+        if(role == "student"){
+            return avatar
+        }
+        else{
+            return '/img/avatar_mac_dinh.jpg'
+        }
+    }
     function handleLogout(){
         dispatch(logout())
     }
@@ -48,7 +56,7 @@ const Header = () =>{
                     <Link className="button" id="btn_logout" onClick={handleLogout}><i className="fas fa-sign-out-alt"></i>Thoát</Link>
                 </div>
                 <div id="info_avatar_div">
-                    <img src={avatar} id="info_avatar"/>
+                    <img src={getAvatarPostAndCmt(users?.role)} id="info_avatar"/>
                 </div>
             </div>
             <div>
