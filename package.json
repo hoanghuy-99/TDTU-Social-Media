@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd ./client && npm run build && ncp ./public/ ../server/public/",
     "preinstall": "cd ./client && npm install && cd ../server && npm install",
-    "prestart": "cd ./server && node prepareData.js"
+    "postinstall": "cd ./server && node prepareData.js"
   },
   "repository": {
     "type": "git",
