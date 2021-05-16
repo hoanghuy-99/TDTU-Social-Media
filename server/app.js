@@ -14,6 +14,9 @@ const socket = require('./serverSocket')
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(cors())
+
+const server = socket(app)
+
 const api = require('./routers/api')
 
 //URL for Demo
@@ -41,7 +44,6 @@ app.use((req, res)=>{
         console.log('Database connected')
     })
     
-    const server = socket(app)
     server.listen(PORT, ()=>{
         console.log('server running on http://localhost:'+PORT);
     })
