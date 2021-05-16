@@ -27,6 +27,11 @@ const Admin = () =>{
         if(username && (password === rePassword) && email && name && department){
             console.log(name,email,username,department)
             dispatch(register(username, password, email, name, department))
+            document.getElementById('name').value = ""
+            document.getElementById('email').value=""
+            document.getElementById('username').value=""
+            document.getElementById('password').value=""
+            document.getElementById('re_password').value=""
         } else if(password !== rePassword) {
             dispatch(setAlert('Mật khẩu không trùng nhau', 'danger'))
         }

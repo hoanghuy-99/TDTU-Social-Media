@@ -14,16 +14,22 @@ import useSocket from '../../clientSocket'
 const socket = useSocket()
 const Home = ({children}) =>{
     const dispatch = useDispatch()
+    const [hiddenNoti,setHiddenNoti] = useState(true)
+    const [notiRealTime,setNotiRealTime] = useState()
+    console.log(notiRealTime);
     useEffect(()=>{
         dispatch(fetchPost())
         dispatch(fetchNotification())
         socket.handleNewNotification((noti)=>{
-            setNotiRealTime("Khoa "+noti.department.name+" vừa thêm một thông báo mới")
+            console.log("socket_noti",noti);
+            setNotiRealTime(noti)
+            setTimeout(setHiddenNoti(false),5000)
             setHiddenNoti(false)
+            setTimeout(()=>{
+                setHiddenNoti(true)
+            },5000)
         })
     },[])
-    const [hiddenNoti,setHiddenNoti] = useState(true)
-    const [notiRealTime,setNotiRealTime] = useState()
     let posts = useSelector(state => state?.post?.data)
     let notifications = useSelector(state => state?.notification?.data)
     const avatar = useSelector(state => state?.user?.avatar)
@@ -190,7 +196,8 @@ const Home = ({children}) =>{
     }
     return(
         <div className=" col-12 col-lg-10" id="body_div">
-            <div className="alert alert-success" hidden={hiddenNoti}>{notiRealTime}</div>
+            <div className="alert alert-success" hidden={hiddenNoti}><Link to={"/notification/"+notiRealTime?.id}>{notiRealTime?.department?.name+" Vừa thêm 1 thông báo mới"}
+            </Link></div>
             <div className="row">
                 <div id="xahoi" className="col-lg-7" >
                     <div className="row justify-content-center">
