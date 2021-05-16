@@ -10,12 +10,11 @@ async function prepareData(){
     await User.deleteMany()
     await Department.deleteMany()
 
-    const hashed_password = await hasher.hash('123123')
+    const hashed_password = await hasher.hash('admin')
 
     const account = new User({
-        name:"TuanKiet",
-        avatar:"avatar_mac_dinh.jpg",
-        username:"tuankiet",
+        name:"Administrator",
+        username:"admin",
         password: hashed_password,
         departments:[],
         role:"admin",
@@ -140,7 +139,7 @@ async function prepareData(){
     }
 }
 prepareData().then(()=>{    
-    console.log('Fake data were created')
+    console.log('Data were created')
 }).catch(error => {
     console.log(error)
     
