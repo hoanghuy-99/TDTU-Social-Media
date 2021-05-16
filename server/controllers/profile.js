@@ -57,5 +57,8 @@ exports.updateAvatar = async (req, res)=>{
 
 exports.getAvatar = async (req, res)=>{
     let student = await Student.findById(req.token.user_id)
+    if(student.avatar){
+        return res.send('No image')
+    }
     res.sendFile(path.join(__dirname, '../uploads/'+ student.avatar))
 }

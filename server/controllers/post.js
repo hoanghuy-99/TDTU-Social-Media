@@ -213,7 +213,7 @@ exports.commentPost = async (req, res)=>{
 exports.getImage = async (req, res)=>{
     let post = await Post.findById(req.params.id)
     if(!post.image){
-        res.send('No image')
+        return res.send('No image')
     }
     res.sendFile(path.join(__dirname, '../uploads/'+ post.image))
 }
