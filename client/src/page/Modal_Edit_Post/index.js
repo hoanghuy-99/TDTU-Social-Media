@@ -1,5 +1,5 @@
 import { changeInfoPost } from "../../redux/actions/post.actions"
-import { requestPostById } from "../../services/post.services"
+import { requestGetImagePost, requestPostById } from "../../services/post.services"
 const { useDispatch } = ReactRedux
 const { useState,useEffect } = React
 
@@ -17,24 +17,33 @@ const Modal_Edit_Post = (props)=>{
             }
         }
     }
+    const handImgPost = async ()=>{
+        const img = await requestGetImagePost(id.props.id)
+        const imgUrl = URL.createObjectURL(img)
+        setImgPostById(imgUrl)
+        setHiddenImg(false)
+    }
+    const [imgPostById,setImgPostById] = useState()
     useEffect(()=>{
         handlePostInfo()
+        handImgPost()
     },[])
+    const [imagePost,setImagePost] = useState()
     function closeModal(){
         document.getElementById(id.props.edit).style.display='none'
     }
     function activeImage() {
-        const defautBtnPic = document.querySelector("#pic-file")
+        const defautBtnPic = document.querySelector("#pic-file-"+id.props.id)
         defautBtnPic.click()
     }
     const handleChange = ()=>{
-        const uploadAvatarFile = document.getElementById("pic-file")
-        const avatar = document.getElementById("img_modal_edit_post")
+        const uploadAvatarFile = document.getElementById("pic-file-"+id.props.id)
+        const avatar = document.getElementById("img_modal_edit_post_"+id.props.id)
           if(uploadAvatarFile.value){
             const img = event.target.files[0];
             const imgUrl = URL.createObjectURL(img);
             avatar.src =imgUrl
-            document.getElementById('btn_cancel_img').style.display ='block'
+            setImagePost(img)
             setHiddenImg(false)
             setDisableVid(true)
           }
@@ -77,13 +86,13 @@ const Modal_Edit_Post = (props)=>{
         }))
     }
     const editPost = () => {
-        dispatch(changeInfoPost(id.props.id,postInfo?.content,changeVideo(postInfo?.video)))
+        dispatch(changeInfoPost(id.props.id,postInfo?.content,changeVideo(postInfo?.video),imagePost))
         console.log(id.props.id,postInfo?.content,postInfo?.video);
         closeModal()
     }
     const handleCancelImg = () =>{
-        document.getElementById("img_modal_edit_post").setAttribute('src','')
-        document.getElementById('btn_cancel_img').style.display ='none'
+        document.getElementById("img_modal_edit_post_"+id.props.id).setAttribute('src','')
+        setImagePost(undefined)
         setHiddenImg(true)
         setDisableVid(false)
     }
@@ -113,8 +122,8 @@ const Modal_Edit_Post = (props)=>{
                         placeholder="Thêm đường dẫn youtube" value={postInfo?.video}/>
                     </div>
                     <div>
-                        <img src="" id="img_modal_edit_post" hidden={hiddenImg}/>
-                        <button id="btn_cancel_img" onClick={handleCancelImg}><i className="fas fa-times"/></button>
+                        <img src={imgPostById} id={`img_modal_edit_post_`+id.props.id} className="img_modal_post" hidden={hiddenImg}/>
+                        <button id={`btn_cancel_img_`+id.props.id} hidden={hiddenImg} className="btn_cancel_img" onClick={handleCancelImg}><i className="fas fa-times"/></button>
                     </div>
                     <div>
                         <iframe id="youtube_edit_embed" width="560" height="315" src={changeVideo(postInfo?.video)} allowFullScreen hidden={hiddenVid} 
@@ -122,7 +131,7 @@ const Modal_Edit_Post = (props)=>{
                     </div>
                     <div className="row" id="div_modal_post_social">
                         <div className="col-lg-12">
-                            <input onChange={handleChange} id="pic-file" type="file" hidden/>
+                            <input onChange={handleChange} id={`pic-file-`+id.props.id} type="file" hidden/>
                             <button id="custom_btn_pic" onClick={activeImage} disabled={disableImg} className="btn btn-success btn_social">
                                 <i className="far fa-images"></i>Ảnh</button>
                         </div>

@@ -2,7 +2,7 @@ import postConstants from '../constants/post.constants'
 import setAlert  from './alert.actions'
 import { requestPost, requestNewPost, requestDeletePost,
    requestPostById, requestChangePostById, requestNewCommentPost,
-    requestDeleteComment,requestChangeComment } from '../../services/post.services'
+    requestDeleteComment,requestChangeComment, requestImagePost } from '../../services/post.services'
 
 const fetchPost = () => {
   function request(){
@@ -70,7 +70,7 @@ const fetchPostById = (id) => {
   }
 }
 
-const newPost = (content, video) => {
+const newPost = (content,video,imgPost) => {
   function request(){
     return { 
       type: postConstants.ADD_POST
@@ -94,19 +94,24 @@ const newPost = (content, video) => {
 
   return async(dispatch) => {
     dispatch(request())
+    content = content || undefined
+    video = video || undefined
+    imgPost = imgPost || undefined
+    console.log("imgPost:123",imgPost);
     const res = await requestNewPost(content,video)
     if(res.code === 0){
       const message = res.message
       dispatch(success(res.data, message))
-      dispatch(setAlert(message, 'success'))
+      if(imgPost){
+        dispatch(addImagePost(res.data.id,imgPost))
+      }
     } else {
       const message = res.message
       dispatch(failure(message))
-      dispatch(setAlert(message, 'danger'))
     }
   }
 }
-function changeInfoPost(id,content,video){
+function changeInfoPost(id,content,video,imgPost){
   function request(){
     return { 
       type: postConstants.CHANGE_POST
@@ -129,10 +134,16 @@ function changeInfoPost(id,content,video){
   }
 
   return async(dispatch) => {
+    content = content || undefined
+    video = video || undefined
+    imgPost = imgPost || undefined
     dispatch(request())
     const res = await requestChangePostById(id,content,video)
     if(res.code === 0){
       dispatch(success(res.data, 'Lay du lieu thanh cong'))
+      if(imgPost){
+        dispatch(addImagePost(res.data.id,imgPost))
+      }
     } else {
       dispatch(failure('Lay du lieu that bai'))
     }
@@ -269,6 +280,44 @@ function changeComment(idCmt,idPost,content){
       dispatch(success(res.data,idPost,'Lay du lieu thanh cong'))
     } else {
       dispatch(failure('Lay du lieu that bai'))
+    }
+  }
+}
+
+const addImagePost = (idPost,image) => {
+  function request(){
+    return { 
+      type: postConstants.ADD_CMT_POST
+    }
+  }
+
+  function success(message){
+    return {
+      type: postConstants.ADD_CMT_POST_SUCCESS,
+      message
+    }
+  }
+
+  function failure(message){
+    return {
+      type: postConstants.ADD_CMT_POST_FAILURE,
+      message
+    }
+  }
+
+  return async(dispatch) => {
+    console.log("image123",image);
+    var dataImg = new FormData()
+    dataImg.append('image',image,'fileName')
+    console.log("dataImg",dataImg);
+    dispatch(request())
+    const res = await requestImagePost(idPost,dataImg)
+    if(res.code === 0){
+      const message = res.message
+      dispatch(success(message))
+    } else {
+      const message = res.message
+      dispatch(failure(message))
     }
   }
 }

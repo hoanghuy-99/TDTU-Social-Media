@@ -88,6 +88,24 @@ export default (state = initialState, action)=>{
                 requesting:false,
                 message: action.message
             }
+        case userConstants.CHANGE_INFO:
+            return{
+                ...state,
+                requesting:true
+            }
+        case userConstants.CHANGE_INFO_SUCCESS:
+            return{
+                ...state,
+                requesting:false,
+                data: action.data,
+                message: action.message
+            }
+        case userConstants.CHANGE_INFO_FAILURE:
+            return{
+                ...state,
+                requesting:false,
+                message: action.message
+            }
         case userConstants.CHECK_LOGIN:
             if(action.token){
                 return{

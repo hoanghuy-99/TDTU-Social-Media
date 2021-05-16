@@ -30,7 +30,11 @@ const Notification = () =>{
         var day = (date.getDate() + 100).toString().substring(1);
         return month + '/' + day + '/' + year;
     }
-   
+    notifications?.items?.sort((a,b)=>{
+        const timeA = new Date(a.createdAt).getTime()
+        const timeB = new Date(b.createdAt).getTime()
+        return timeB - timeA
+    })
     return(
         <div>
             <div>

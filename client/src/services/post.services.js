@@ -127,18 +127,28 @@ async function requestDeleteComment(id) {
     return data
 }
 
-async function requestImagePost(id) {
-    const response = await fetch(host + '/api/posts/'+id+'/image',{
-        method: "GET",
+async function requestImagePost(id,imgPost) {
+    const response = await fetch('http://localhost:8080/api/posts/'+id+'/image',{
+        method: "PUT",
         headers: {
-            'Content-Type': 'application/json',
             'Authorization': getToken(),
         },
+        body: imgPost
     })
     const data = await response.json()
     return data
 }
 
+async function requestGetImagePost(id) {
+    const response = await fetch('http://localhost:8080/api/posts/'+id+'/image',{
+        method: "GET",
+        headers: {
+            'Authorization': getToken(),
+        },
+    })
+    const data = await response.blob()
+    return data
+}
 async function requestChangeImagePost(id) {
     const response = await fetch(host + '/api/posts/'+id+'/image',{
         method: "PUT",
@@ -165,4 +175,6 @@ async function requestDeleteImagePost(id) {
     return data
 }
 
-export { requestPost, requestPostById, requestNewPost, requestDeletePost, requestChangePostById, requestNewCommentPost, requestDeleteComment, requestChangeComment }
+export { requestPost, requestPostById, requestNewPost, 
+    requestDeletePost, requestChangePostById, requestNewCommentPost, 
+    requestDeleteComment, requestChangeComment,requestImagePost,requestGetImagePost }

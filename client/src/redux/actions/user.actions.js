@@ -2,7 +2,7 @@ import userConstants from "../constants/user.constants"
 import setAlert  from './alert.actions'
 import { getToken, removeToken, setToken } from '../../cookie'
 import { requestToken, putToken } from '../../services/token.services'
-import { requestChangePassword, requestUserById } from "../../services/user.services"
+import { requestChangeInfoById, requestChangePassword, requestUserById } from "../../services/user.services"
 
 const fetchUser = () => {
     function request(){
@@ -205,6 +205,41 @@ function changePassword(oldPassword,newPassword){
     }
 }
 
+function changeInfoStudent(name,classRoom,faculty){
+    function request(){
+        return { 
+            type: userConstants.CHANGE_INFO
+        }
+    }
+
+    function success(data,message){
+        return {
+            type: userConstants.CHANGE_INFO_SUCCESS,
+            data,
+            message
+        }
+    }
+
+    function failure(message){
+        return {
+            type: userConstants.CHANGE_INFO_FAILURE,
+            message
+        }
+    }
+
+    return async (dispatch) => {
+        dispatch(request())
+        const res = await requestChangeInfoById(name,classRoom,faculty)
+        if(res.code === 0){
+            const message = res.message
+            dispatch(success(res.data,message))
+        } else {
+            const message = res.message
+            dispatch(failure(message))
+        }
+    }
+}
+
 function logout(){
     removeToken()
     return {
@@ -218,4 +253,5 @@ function checkLogin(){
         token: getToken()
     }
 }
-export { login, loginGoogleAPI, logout, register, fetchUserById, checkLogin,changePassword }
+
+export { login, loginGoogleAPI, logout, register, fetchUserById, checkLogin,changePassword,changeInfoStudent }

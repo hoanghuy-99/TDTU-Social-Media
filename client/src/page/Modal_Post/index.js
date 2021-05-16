@@ -8,16 +8,18 @@ const Modal_Post = ()=>{
         document.getElementById('modal_change_avatar').style.display='none'
     }
     function activeImage() {
-        const defautBtnPic = document.querySelector("#pic-file")
+        const defautBtnPic = document.querySelector("#pic-post-file")
         defautBtnPic.click()
     }
-    const handleChange = ()=>{
-        const uploadAvatarFile = document.getElementById("pic-file")
-        const avatar = document.getElementById("img_modal_post")
+    const [imagePost,setImagePost] = useState()
+    const handleChange = (event)=>{
+        const uploadAvatarFile = document.getElementById("pic-post-file")
+        const avatar = document.getElementById("img_modal_post_social")
           if(uploadAvatarFile.value){
             const img = event.target.files[0];
             const imgUrl = URL.createObjectURL(img);
             avatar.src =imgUrl
+            setImagePost(img)
             document.getElementById('btn_cancel_img').style.display ='block'
             setHiddenImg(false)
             setDisableVid(true)
@@ -29,8 +31,10 @@ const Modal_Post = ()=>{
     const [disableVid,setDisableVid] = useState(false)
     const [disableImg,setDisableImg] = useState(false)
     const handleChangeVideo = (e) =>{
-        const uploadVideo = document.getElementById("youtube_embed")
         const url_ytb = e.target.value
+        if(!url_ytb){
+            setUrlYTB(undefined)
+        }
         const test ="https://www.youtube.com/embed/"+url_ytb.slice(32)+"?controls=1"
         setUrlYTB(test)
         setHiddenVid(false)
@@ -43,16 +47,18 @@ const Modal_Post = ()=>{
     const addPost = () => {
         const content = document.getElementById('value_post').value
         const link_ytb = document.getElementById('youtube_embed').getAttribute('src')
-        console.log(content,link_ytb);
-        dispatch(newPost(content,link_ytb))
+        dispatch(newPost(content,link_ytb,imagePost))
+        console.log(content,link_ytb,imagePost);
         closeModal()
     }
     const handleCancelImg = () =>{
-        document.getElementById("img_modal_post").setAttribute('src','')
+        document.getElementById("img_modal_post_social").setAttribute('src','')
         document.getElementById('btn_cancel_img').style.display ='none'
         setHiddenImg(true)
+        setImagePost(undefined)
         setDisableVid(false)
     }
+    console.log("imageUrl: ",imagePost);
     return(
         <div id="modal_change_avatar" className="w3-modal w3-animate-opacity modal_post">
                 <div className="w3-modal-content modal_post_content">
@@ -78,8 +84,8 @@ const Modal_Post = ()=>{
                         placeholder="Thêm đường dẫn youtube"/>
                     </div>
                     <div>
-                        <img src="" id="img_modal_post" hidden={hiddenImg}/>
-                        <button id="btn_cancel_img" onClick={handleCancelImg}><i className="fas fa-times"/></button>
+                        <img src="" id="img_modal_post_social" className="img_modal_post" hidden={hiddenImg}/>
+                        <button id="btn_cancel_img" className="btn_cancel_img" onClick={handleCancelImg}><i className="fas fa-times"/></button>
                     </div>
                     <div>
                         <iframe id="youtube_embed" width="560" height="315" src={urlYTB} allowFullScreen hidden={hiddenVid} 
@@ -87,7 +93,7 @@ const Modal_Post = ()=>{
                     </div>
                     <div className="row" id="div_modal_post_social">
                         <div className="col-lg-12">
-                            <input onChange={handleChange} id="pic-file" type="file" hidden/>
+                            <input onChange={handleChange} id="pic-post-file" type="file" hidden/>
                             <button id="custom_btn_pic" onClick={activeImage} disabled={disableImg} className="btn btn-success btn_social">
                                 <i className="far fa-images"></i>Ảnh</button>
                         </div>

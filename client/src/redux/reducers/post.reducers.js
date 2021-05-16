@@ -107,6 +107,23 @@ export default (state = initialState , action)=>{
                 requesting:false,
                 message: action.message
             }
+        case postConstants.ADD_CMT_POST:
+            return{
+                ...state,
+                requesting:true
+            }
+        case postConstants.ADD_CMT_POST_SUCCESS:
+            return{
+                ...state,
+                requesting:false,
+                message: action.message
+            }
+        case postConstants.ADD_CMT_POST_FAILURE:
+            return{
+                ...state,
+                requesting:false,
+                message:action.message
+            }
         case postConstants.DELETE_POST:
             return{
                 ...state,
