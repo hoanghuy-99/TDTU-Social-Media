@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const schema = new mongoose.Schema({
+    _id: mongoose.Types.ObjectId,
     name: String,
     avatar: String,
     username: { type:String, required: true },

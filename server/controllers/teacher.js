@@ -3,6 +3,7 @@ const User = require('../models/User')
 const Post = require('../models/Post')
 const Notification = require('../models/Notification')
 const hasher = require('../utils/hasher')
+const { Types } = require('mongoose')
 
 async function getName(id,role){
     return role === 'student' ? (await Student.findById(id)).name : (await User.findById(id)).name
@@ -13,6 +14,7 @@ exports.createTeachers =  async (req, res)=>{
     let { departments } = req.body
     departments = await Promise.all(departments.map(async d => (await Department.findOne({id:d.id}))._id ))
     let teacher = await User.create({
+        _id: new Types.ObjectId(),
         name: req.body.name, 
         username: req.body.username,
         email: req.body.email, 
