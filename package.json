@@ -8,8 +8,7 @@
     "start": "cd ./server && npm start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd ./client && npm run build && ncp ./public/ ../server/public/",
-    "preinstall": "cd ./client && npm install && cd ../server && npm install",
-    "postinstall": "cd ./server && node prepareData.js"
+    "preinstall": "cd ./client && npm install && cd ../server && npm install"
   },
   "repository": {
     "type": "git",
