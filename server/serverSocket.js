@@ -7,6 +7,7 @@ const privateKey = process.env.PRIVATE_KEY
 module.exports = (app) =>{
     const server = createServer(app)
     const io = new Server(server, {
+        connectTimeout: 10000,
         cors: {
           origin: '*',
         }
@@ -15,8 +16,6 @@ module.exports = (app) =>{
     app.use((req, res, next)=>{
         req.socketIo = {
             emitNewNotification: (data)=>{
-                console.log(data);
-                console.log(io.sockets);
                 io.sockets.emit('new_notification', data)
             },
             emitDemo: (data)=>{

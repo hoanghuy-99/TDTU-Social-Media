@@ -2,7 +2,7 @@ import {getToken} from './cookie'
 let socket
 const useSocket = ()=>{
     if(!socket){
-        socket = io('wss://'+window.location.hostname, {
+        socket = io(`wss://${window.location.hostname}:${window.location.port}`, {
             auth: {
                 token: getToken()
             }
