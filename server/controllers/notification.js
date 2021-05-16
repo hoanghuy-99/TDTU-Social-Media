@@ -74,7 +74,7 @@ exports.getManyNotification = async (req, res)=>{
         code:0,
         data:{
           totalPages: page || 1,
-          totalItems: count, 
+          totalItems: notifications.length, 
           page: page || 1,
           limit: 2,
           items: await Promise.all(notifications.map(async (notification) =>({
