@@ -6,7 +6,11 @@ const privateKey = process.env.PRIVATE_KEY
 
 module.exports = (app) =>{
     const server = createServer(app)
-    const io = new Server(server)
+    const io = new Server(server, {
+        cors: {
+          origin: '*',
+        }
+      })
     //Set up middleware for app
     app.use((req, res, next)=>{
         req.socketIo = {
