@@ -227,3 +227,14 @@ exports.uploadImage = async (req, res)=>{
         message:'Tải hình ảnh thành công'
     })
 }
+
+exports.deleteImage = async (req, res)=>{
+    let post = await Post.findById(req.params.id)
+    await deleteImage(post.image)
+    post.image = null,
+    await post.save()
+    res.json({
+        code: 0,
+        message:'Xóa hình ảnh thành công'
+    })
+}
