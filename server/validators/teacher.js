@@ -23,16 +23,16 @@ const isUsernameValid =  (input)=>{
 }
 
 module.exports.TeacherCreateValidator = [
-    body('name').exists().withMessage({code: 10, message: 'Name is empty'}),
+    body('name').exists().notEmpty().withMessage({code: 10, message: 'Name is empty'}),
 
-    body('username').exists().withMessage({code: 20, message: 'Username is empty'})
+    body('username').exists().notEmpty().withMessage({code: 20, message: 'Username is empty'})
     .custom(isUsernameValid),
 
-    body('password').exists().withMessage({code: 30, message: 'Password is empty'}),
+    body('password').exists().notEmpty().withMessage({code: 30, message: 'Password is empty'}),
 
-    body('departments').exists().withMessage({code: 40, message: 'Departments is empty'})
+    body('departments').exists().notEmpty().withMessage({code: 40, message: 'Departments is empty'})
     .isArray({min:1}).withMessage({code: 41, message:'Departments must be array'})
     .custom(isDepartmentsValid),
 
-    body('email').isEmail().withMessage({code: 50, message: 'Email is invalid'})
+    body('email').notEmpty().isEmail().withMessage({code: 50, message: 'Email is invalid'})
 ]
