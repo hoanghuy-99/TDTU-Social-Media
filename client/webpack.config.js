@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const MergeIntoSingleFilePlugin = require('webpack-merge-and-include-globally');
 
 module.exports = {
@@ -28,6 +29,11 @@ module.exports = {
                 "../stylesheets/style.css": ['./src/css/*.css']
             }
         }),
+        new webpack.DefinePlugin({
+            "env": {
+                NODE_ENV:JSON.stringify(process.env.NODE_ENV || 'local')
+            }
+        })
         
     ]
 };

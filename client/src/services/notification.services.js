@@ -1,8 +1,8 @@
 import {getToken} from '../cookie.js'
-var host = window.location.protocol + "//" + window.location.host
+import host from './host'
 
 async function requestNotification() {
-    const response = await fetch('http://localhost:8080/api/notifications',{
+    const response = await fetch(host+'/api/notifications',{
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ async function requestNewNotification(title,content,departmentId) {
     const req = {
         title,content,departmentId
     }
-    const response = await fetch('http://localhost:8080/api/notifications',{
+    const response = await fetch(host+'/api/notifications',{
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ async function requestNewNotification(title,content,departmentId) {
 }
 
 async function requestNotificationById(id) {
-    const response = await fetch('http://localhost:8080/api/notifications/'+id,{
+    const response = await fetch(host+'/api/notifications/'+id,{
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ async function requestNotificationById(id) {
 }
 
 async function requestNotiByIdTeacher(id) {
-    const response = await fetch('http://localhost:8080/api/teachers/'+id+'/notifications',{
+    const response = await fetch(host+'/api/teachers/'+id+'/notifications',{
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ async function requestNotiByIdTeacher(id) {
 }
 
 async function requestNotiByIdFacultyAndTeacher(id,departmentId) {
-    const response = await fetch('http://localhost:8080/api/teachers/'+id+'/notifications?departmentId='+departmentId,{
+    const response = await fetch(host+'/api/teachers/'+id+'/notifications?departmentId='+departmentId,{
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ async function requestNotiByIdFacultyAndTeacher(id,departmentId) {
 }
 
 async function requestNotiByIdFaculty(departmentId) {
-    const response = await fetch('http://localhost:8080/api/notifications?departmentId='+departmentId,{
+    const response = await fetch(host+'/api/notifications?departmentId='+departmentId,{
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ async function requestChangeNotificationById(id,title,content,departmentId) {
     const req = {
         title,content,departmentId
     }
-    const response = await fetch('http://localhost:8080/api/notifications/'+id,{
+    const response = await fetch(host+'/api/notifications/'+id,{
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ async function requestChangeNotificationById(id,title,content,departmentId) {
 }
 
 async function requestDeleteNotification(id) {
-    const response = await fetch('http://localhost:8080/api/notifications/'+id,{
+    const response = await fetch(host+'/api/notifications/'+id,{
         method: "DELETE",
         headers: {
             'Content-Type': 'application/json',

@@ -22,6 +22,7 @@ import { getId, getToken } from './cookie'
 import useSocket from './clientSocket'
 import Home_User from './page/Home_User/Home_User'
 const App = () =>{
+    console.log(env.NODE_ENV);
     const loggedIn = useSelector(state => state.user.loggedIn)
     const dispatch = useDispatch()
     useEffect(()=>{

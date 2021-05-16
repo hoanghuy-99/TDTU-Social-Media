@@ -1,8 +1,8 @@
 import {getToken} from '../cookie.js'
-var host = window.location.protocol + "//" + window.location.host
+import host from './host'
 
 async function requestUserById() {
-    const response = await fetch('http://localhost:8080/api/profile',{
+    const response = await fetch(host+'/api/profile',{
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ async function requestChangePassword(oldPassword,newPassword){
     const req= {
         oldPassword,newPassword
     }
-    const response = await fetch('http://localhost:8080/api/password',{
+    const response = await fetch(host+'/api/password',{
         method: "PUT",
         headers: {
             'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ async function requestChangeInfoById(name,classroom,faculty){
         class:classroom,
         faculty
     }
-    const response = await fetch('http://localhost:8080/api/profile',{
+    const response = await fetch(host+'/api/profile',{
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ async function requestPostById(){
 }
 
 async function requestImageById(){
-    const response = await fetch('http://localhost:8080/api/profile/avatar',{
+    const response = await fetch(host+'/api/profile/avatar',{
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ async function requestImageById(){
 }
 
 async function requestChangeAvatarById(imgAvatar){
-    const response = await fetch('http://localhost:8080/api/profile/avatar',{
+    const response = await fetch(host+'/api/profile/avatar',{
         method: "PUT",
         headers: {
             'Authorization': getToken(),
@@ -84,7 +84,7 @@ async function requestChangeAvatarById(imgAvatar){
 }
 
 async function requestGetAvatarStudent(id){
-    const response = await fetch('http://localhost:8080/api/students/'+id+'/avatar',{
+    const response = await fetch(host+'/api/students/'+id+'/avatar',{
         method: "GET",
         headers: {
             'Authorization': getToken(),

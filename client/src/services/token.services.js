@@ -1,5 +1,4 @@
-var host = window.location.protocol + "//" + window.location.host
-host = 'http://localhost:8080'
+import host from './host'
 
 async function requestToken(username,password) {
     const requestOptions = {
@@ -8,7 +7,7 @@ async function requestToken(username,password) {
         body: JSON.stringify({ username, password })
     }
 
-    let data = await fetch('http://localhost:8080/api/tokens', requestOptions)
+    let data = await fetch(host+'/api/tokens', requestOptions)
     data = await data.json()
     return data
 }
