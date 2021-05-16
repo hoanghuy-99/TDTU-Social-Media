@@ -21,7 +21,9 @@ const Modal_Edit_Post = (props)=>{
         const img = await requestGetImagePost(id.props.id)
         const imgUrl = URL.createObjectURL(img)
         setImgPostById(imgUrl)
-        setHiddenImg(false)
+        if(img.type == "image/jpeg"){
+            setHiddenImg(false)
+        }
     }
     const [imgPostById,setImgPostById] = useState()
     useEffect(()=>{

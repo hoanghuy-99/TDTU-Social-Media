@@ -82,4 +82,15 @@ async function requestChangeAvatarById(imgAvatar){
     const data = await response.json()
     return data
 }
-export { requestUserById,requestChangePassword,requestImageById,requestChangeInfoById,requestChangeAvatarById}
+
+async function requestGetAvatarStudent(id){
+    const response = await fetch('http://localhost:8080/api/students/'+id+'/avatar',{
+        method: "GET",
+        headers: {
+            'Authorization': getToken(),
+        },
+    })
+    const data = await response.blob()
+    return data
+}
+export { requestUserById,requestChangePassword,requestImageById,requestChangeInfoById,requestChangeAvatarById,requestGetAvatarStudent}

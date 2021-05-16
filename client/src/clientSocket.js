@@ -1,7 +1,7 @@
 let socket
 const useSocket = ()=>{
     if(!socket){
-        socket = io('http://localhost:8080')
+        socket = io('ws://localhost:8080')
     }
     return{
         handleNewNotification: (action)=>{

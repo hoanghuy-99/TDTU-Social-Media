@@ -4,18 +4,26 @@ import Modal_Edit_Comment from '../Modal_Edit_Comment/index'
 import Modal_Delete_Comment from '../Modal_Delete_Comment/index'
 import Modal_Edit_Post from '../Modal_Edit_Post/index'
 import { fetchPost, newCmtPost, newPost } from '../../redux/actions/post.actions'
-import { getId } from '../../cookie'
+import { getId, getRole } from '../../cookie'
 import { fetchNotification } from '../../redux/actions/notification.actions'
 import { requestGetImagePost } from '../../services/post.services'
+import { requestGetAvatarStudent } from '../../services/user.services'
 const {useDispatch,useSelector} = ReactRedux
 const {useState,useEffect} = React
-
+import useSocket from '../../clientSocket'
+const socket = useSocket()
 const Home = ({children}) =>{
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(fetchPost())
         dispatch(fetchNotification())
+        socket.handleNewNotification((noti)=>{
+            setNotiRealTime("Khoa "+noti.department.name+" vừa thêm một thông báo mới")
+            setHiddenNoti(false)
+        })
     },[])
+    const [hiddenNoti,setHiddenNoti] = useState(true)
+    const [notiRealTime,setNotiRealTime] = useState()
     let posts = useSelector(state => state?.post?.data)
     let notifications = useSelector(state => state?.notification?.data)
     const avatar = useSelector(state => state?.user?.avatar)
@@ -61,14 +69,41 @@ const Home = ({children}) =>{
             }
         }))
     }
+    const getAvatarEachPost = async (id) =>{
+        const imgAvatar = await requestGetAvatarStudent(id)
+        const imgUrlAvatar = URL.createObjectURL(imgAvatar)
+        setAvatarList(list => ({
+            ...list,
+            [id]: {
+                imgUrlAvatar,
+                imgAvatar
+            }
+        }))
+    }
+    const [avatarList,setAvatarList] = useState({})
     useEffect(()=>{
         posts?.items?.map((value)=>{
             getImgPost(value.id)
         })
     },[posts?.items])
-    const getAvatarPostAndCmt = (role)=>{
-        if(role == "student"){
+    useEffect(()=>{
+        posts?.items?.map((value)=>{
+            if(value.author.role == "student"){
+                getAvatarEachPost(value.author.id)
+            }
+        })
+    },[posts?.items])
+    const getAvatarPostAndCmt = ()=>{
+        if(getRole() == "student"){
             return avatar
+        }
+        else{
+            return '/img/avatar_mac_dinh.jpg'
+        }
+    }
+    const checkAvatarEachPost = (id)=>{
+        if(avatarList[id]?.imgAvatar.type == "image/jpeg"){
+            return avatarList[id]?.imgUrlAvatar
         }
         else{
             return '/img/avatar_mac_dinh.jpg'
@@ -149,11 +184,13 @@ const Home = ({children}) =>{
         const content = document.getElementById(id).value
         if(content){
             dispatch(newCmtPost(id,content))
+            document.getElementById(id).value = "" 
         }
         console.log(id,content)
     }
     return(
         <div className=" col-12 col-lg-10" id="body_div">
+            <div className="alert alert-success" hidden={hiddenNoti}>{notiRealTime}</div>
             <div className="row">
                 <div id="xahoi" className="col-lg-7" >
                     <div className="row justify-content-center">
@@ -161,7 +198,7 @@ const Home = ({children}) =>{
                             <div className="form-group">
                                 <div className="row">
                                     <div className="col-2 col-lg-1">
-                                        <img src={avatar} id="avatar_post"/>
+                                        <img src={getAvatarPostAndCmt()} id="avatar_post"/>
                                     </div>
                                     <div className="col-10 col-lg-11" id="div_modal_post" onClick={openModal}>
                                         Bạn đang nghĩ gì?
@@ -179,7 +216,7 @@ const Home = ({children}) =>{
                                 <div className="row">
                                     <hr/>
                                     <div className="col-2 col-lg-1">
-                                        <img src={getAvatarPostAndCmt(value.author.role)} id="avatar_post"/>
+                                        <img src={checkAvatarEachPost(value.author.id)} id="avatar_post"/>
                                     </div>
                                     <div className="col-8 col-lg-10">
                                         <Link to={"/home/"+value.author.id}><strong>{value.author.name}</strong></Link>
@@ -230,7 +267,7 @@ const Home = ({children}) =>{
                                         return(
                                     <div key={'comment-'+new_index} className="row" id="div_cmt">   
                                         <div className="col-2 col-lg-1">
-                                            <img src={getAvatarPostAndCmt(new_value.author.role)} id="avatar_comment"/>
+                                            <img src={checkAvatarEachPost(new_value.author.id)} id="avatar_comment"/>
                                         </div>
                                         <div className="col-10 col-lg-10">
                                             <strong>{new_value.author.name}</strong>

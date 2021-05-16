@@ -1,5 +1,6 @@
 const { useDispatch,useSelector } = ReactRedux
 const { useState,useEffect } = React
+import { getRole } from '../../cookie'
 import { newPost } from '../../redux/actions/post.actions'
 import { requestImageById } from '../../services/user.services'
 const Modal_Post = ()=>{
@@ -57,6 +58,14 @@ const Modal_Post = ()=>{
         setImagePost(undefined)
         setDisableVid(false)
     }
+    const getAvatarPostAndCmt = ()=>{
+        if(getRole() == "student"){
+            return avatar
+        }
+        else{
+            return '/img/avatar_mac_dinh.jpg'
+        }
+    }
     console.log("imageUrl: ",imagePost);
     return(
         <div id="modal_change_avatar" className="w3-modal w3-animate-opacity modal_post">
@@ -69,7 +78,7 @@ const Modal_Post = ()=>{
                 <div className="w3-container">
                     <div className="row">
                         <div className="col-lg-1">
-                            <img src={avatar} id="avatar_post"/>
+                            <img src={getAvatarPostAndCmt()} id="avatar_post"/>
                         </div>
                         <div className="col-lg-11">
                             <strong>Tuấn Kiệt</strong>
