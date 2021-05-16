@@ -35,21 +35,22 @@ const Modal_Post = ()=>{
         const url_ytb = e.target.value
         if(!url_ytb){
             setUrlYTB(undefined)
-        }
-        const test ="https://www.youtube.com/embed/"+url_ytb.slice(32)+"?controls=1"
-        setUrlYTB(test)
-        setHiddenVid(false)
-        setDisableImg(true)
-        if(url_ytb.length == 0){
             setHiddenVid(true)
             setDisableImg(false)
         }
+        else{
+            const test ="https://www.youtube.com/embed/"+url_ytb.slice(32)+"?controls=1"
+            setUrlYTB(test)
+            setHiddenVid(false)
+            setDisableImg(true)
+        }
+        
     }
     const addPost = () => {
         const content = document.getElementById('value_post').value
         const link_ytb = document.getElementById('youtube_embed').getAttribute('src')
         dispatch(newPost(content,link_ytb,imagePost))
-        console.log(content,link_ytb,imagePost);
+        console.log(content,urlYTB,imagePost);
         closeModal()
     }
     const handleCancelImg = () =>{
