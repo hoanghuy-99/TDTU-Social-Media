@@ -27,7 +27,7 @@ const Home = ({children}) =>{
             setHiddenNoti(false)
             setTimeout(()=>{
                 setHiddenNoti(true)
-            },5000)
+            },10000)
         })
     },[])
     let posts = useSelector(state => state?.post?.data)
