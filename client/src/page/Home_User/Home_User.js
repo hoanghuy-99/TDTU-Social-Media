@@ -4,10 +4,10 @@ import Modal_Edit_Comment from '../Modal_Edit_Comment/index'
 import Modal_Delete_Comment from '../Modal_Delete_Comment/index'
 import Modal_Edit_Post from '../Modal_Edit_Post/index'
 import { fetchPost, newCmtPost, newPost } from '../../redux/actions/post.actions'
-import { getId } from '../../cookie'
+import { getId, getRole } from '../../cookie'
 import { fetchNotification } from '../../redux/actions/notification.actions'
 import { requestGetImagePost } from '../../services/post.services'
-import { requestImageById } from '../../services/user.services'
+import { requestGetAvatarStudent, requestImageById } from '../../services/user.services'
 const {useDispatch,useSelector} = ReactRedux
 const {useState,useEffect} = React
 const { useParams } = ReactRouterDOM
@@ -20,6 +20,7 @@ const Home_User = ({children}) =>{
     },[])
     let posts = useSelector(state => state?.post?.data)
     let notifications = useSelector(state => state?.notification?.data)
+    const avatar = useSelector(state => state?.user?.avatar)
     console.log("posts",posts);
     console.log("notifications",notifications);
     notifications?.items?.sort((a,b)=>{
@@ -144,6 +145,41 @@ const Home_User = ({children}) =>{
         }
         console.log(id,content)
     }
+    const getAvatarEachPost = async (id) =>{
+        const imgAvatar = await requestGetAvatarStudent(id)
+        const imgUrlAvatar = URL.createObjectURL(imgAvatar)
+        setAvatarList(list => ({
+            ...list,
+            [id]: {
+                imgUrlAvatar,
+                imgAvatar
+            }
+        }))
+    }
+    const [avatarList,setAvatarList] = useState({})
+    useEffect(()=>{
+        posts?.items?.map((value)=>{
+            if(value.author.role == "student"){
+                getAvatarEachPost(value.author.id)
+            }
+        })
+    },[posts?.items])
+    const checkAvatarEachPost = (id)=>{
+        if(avatarList[id]?.imgAvatar.type == "image/jpeg"){
+            return avatarList[id]?.imgUrlAvatar
+        }
+        else{
+            return '/img/avatar_mac_dinh.jpg'
+        }
+    }
+    const getAvatarPostAndCmt = ()=>{
+        if(getRole() == "student"){
+            return avatar
+        }
+        else{
+            return '/img/avatar_mac_dinh.jpg'
+        }
+    }
     return(
         <div className=" col-12 col-lg-10" id="body_div">
             <div className="row">
@@ -158,7 +194,7 @@ const Home_User = ({children}) =>{
                                     <div className="row">
                                         <hr/>
                                         <div className="col-2 col-lg-1">
-                                            <img src="/img/avatar_mac_dinh.jpg" id="avatar_post"/>
+                                            <img src={checkAvatarEachPost(value.author.id)} id="avatar_post"/>
                                         </div>
                                         <div className="col-8 col-lg-10">
                                             <strong>{value.author.name}</strong>
@@ -191,7 +227,7 @@ const Home_User = ({children}) =>{
                                     <hr/>
                                     <div className="row">
                                         <div className="col-2 col-lg-1">
-                                            <img src="/img/avatar_mac_dinh.jpg" id="avatar_comment"/>
+                                            <img src={getAvatarPostAndCmt()} id="avatar_comment"/>
                                         </div>
                                         <div className="col-10 col-lg-11" id="div_comment_post">
                                         <div className="input-group">
@@ -209,7 +245,7 @@ const Home_User = ({children}) =>{
                                             return(
                                         <div key={'comment-'+new_index} className="row" id="div_cmt">   
                                             <div className="col-2 col-lg-1">
-                                                <img src="/img/avatar_mac_dinh.jpg" id="avatar_comment"/>
+                                                <img src={checkAvatarEachPost(new_value.author.id)} id="avatar_comment"/>
                                             </div>
                                             <div className="col-10 col-lg-10">
                                                 <strong>{new_value.author.name}</strong>

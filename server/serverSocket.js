@@ -15,6 +15,8 @@ module.exports = (app) =>{
     app.use((req, res, next)=>{
         req.socketIo = {
             emitNewNotification: (data)=>{
+                console.log(data);
+                console.log(io.sockets);
                 io.sockets.emit('new_notification', data)
             },
             emitDemo: (data)=>{
