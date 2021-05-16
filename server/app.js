@@ -10,7 +10,6 @@ const PORT = process.env.PORT || 8080
 const connectDatabase = require('./db')
 const socket = require('./serverSocket')
 
-const server = socket(app)
 
 app.use(morgan('dev'))
 app.use(express.json())
@@ -34,6 +33,7 @@ app.use((req, res)=>{
 })
 
 
+
 //Start server
 {(async ()=>{
     //Connect database
@@ -41,6 +41,7 @@ app.use((req, res)=>{
         console.log('Database connected')
     })
     
+    const server = socket(app)
     server.listen(PORT, ()=>{
         console.log('server running on http://localhost:'+PORT);
     })
