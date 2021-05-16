@@ -13,6 +13,7 @@ const Modal_Post = ()=>{
         const defautBtnPic = document.querySelector("#pic-post-file")
         defautBtnPic.click()
     }
+    const users = useSelector(state => state?.user?.data)
     const [imagePost,setImagePost] = useState()
     const handleChange = (event)=>{
         const uploadAvatarFile = document.getElementById("pic-post-file")
@@ -82,7 +83,7 @@ const Modal_Post = ()=>{
                             <img src={getAvatarPostAndCmt()} id="avatar_post"/>
                         </div>
                         <div className="col-lg-11">
-                            <strong>Tuấn Kiệt</strong>
+                            <strong>{users?.name}</strong>
                         </div>
                     </div>
                     <div>
