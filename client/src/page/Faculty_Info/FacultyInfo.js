@@ -1,11 +1,20 @@
 const { Link } = ReactRouterDOM
 const { useDispatch,useSelector } = ReactRedux
 const { useState,useEffect } = React
+import { getRole } from '../../cookie'
 import {changePassword} from '../../redux/actions/user.actions'
 const FacultyInfo = ({children}) =>{
     const dispatch = useDispatch()
     function openModal(){
         document.getElementById('modal_change_avatar').style.display='block'
+    }
+    const getAvatarPostAndCmt = ()=>{
+        if(getRole() == "student"){
+            return avatar
+        }
+        else{
+            return '/img/avatar_mac_dinh.jpg'
+        }
     }
     const handleClick = () =>{
         const old_password = document.getElementById('old_password').value
@@ -13,6 +22,9 @@ const FacultyInfo = ({children}) =>{
         const re_password = document.getElementById('re_new_password').value
         if(new_password == re_password){
             dispatch(changePassword(old_password,new_password))
+            document.getElementById('old_password').value = ""
+            document.getElementById('new_password').value = ""
+            document.getElementById('re_new_password').value =""
         }
         else{
             setError("2 mật khẩu không giống nhau")
@@ -66,7 +78,7 @@ const FacultyInfo = ({children}) =>{
                                 <strong>Ảnh đại diện:</strong>
                             </h3>
                             <div className="col-lg-12" id="student_info_avatar_div">
-                                <img src="/img/avatar.jpg" id="student_info_avatar" alt=""/>
+                                <img src={getAvatarPostAndCmt()} id="student_info_avatar" alt=""/>
                                 <br/>
                                 <Link to="#" onClick={openModal} id="btn_student_info_avatar">Thay đổi ảnh đại diện</Link>
                             </div>

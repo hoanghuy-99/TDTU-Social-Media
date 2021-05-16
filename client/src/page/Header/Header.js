@@ -30,7 +30,7 @@ const Header = () =>{
     const users = useSelector(state => state?.user?.data)
     const avatar = useSelector(state => state?.user?.avatar)
     const getAvatarPostAndCmt = (role)=>{
-        if(role == "student"){
+        if(getRole() == "student"){
             return avatar
         }
         else{
@@ -56,7 +56,7 @@ const Header = () =>{
                     <Link className="button" id="btn_logout" onClick={handleLogout}><i className="fas fa-sign-out-alt"></i>Thoát</Link>
                 </div>
                 <div id="info_avatar_div">
-                    <img src={getAvatarPostAndCmt(users?.role)} id="info_avatar"/>
+                    <img src={getAvatarPostAndCmt()} id="info_avatar"/>
                 </div>
             </div>
             <div>

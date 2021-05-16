@@ -1,6 +1,6 @@
 const Student = require("../models/Student")
 const User = require('../models/User')
-
+const path = require('path')
 async function getName(id,role){
     return role === 'student' ? (await Student.findById(id)).name : (await User.findById(id)).name
 }
@@ -70,8 +70,8 @@ exports.getPosts = async (req, res)=>{
 
 exports.getAvatar = async (req, res)=>{
     let student = await Student.findById(req.params.id)
-    if(!student.image){
+    if(!student.avatar){
        return res.send('No image')
     }
-    res.sendFile(path.join(__dirname, '../uploads/'+ student.image))
+    res.sendFile(path.join(__dirname, '../uploads/'+ student.avatar))
 }
