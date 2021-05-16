@@ -21,6 +21,7 @@ async function prepareData(){
     const hashed_password = await hasher.hash('admin')
 
     const account = new User({
+        _id: new mongoose.Types.ObjectId(),
         name:"Administrator",
         username:"admin",
         password: hashed_password,
