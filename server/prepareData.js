@@ -5,10 +5,18 @@ const hasher = require('./utils/hasher')
 
 const User = require('./models/User')
 const Department = require('./models/Department')
+const Post = require('./models/Post')
+const Notification = require('./models/Notification')
+const Student = require('./models/Student')
+const Comment = require('./models/Comment')
 async function prepareData(){
     await connectDatabase()
     await User.deleteMany()
     await Department.deleteMany()
+    await Post.deleteMany()
+    await Notification.deleteMany()
+    await Student.deleteMany()
+    await Comment.deleteMany()
 
     const hashed_password = await hasher.hash('admin')
 

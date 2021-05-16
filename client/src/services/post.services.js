@@ -1,6 +1,5 @@
 import {getToken} from '../cookie.js'
 import host from './host'
-
 async function requestPost() {
     const response = await fetch(host+'/api/posts',{
         method: "GET",

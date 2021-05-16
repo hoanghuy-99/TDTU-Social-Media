@@ -6,7 +6,7 @@ const fs = require('fs/promises')
 const path = require('path')
 
 async function getName(id,role){
-    return role === 'student' ? (await Student.findById(id)).name : (await User.findById(id)).name
+    return role === 'student' ? (await Student.findById(id))?.name : (await User.findById(id))?.name
 }
 
 exports.createPost = async (req, res)=>{
@@ -45,10 +45,9 @@ exports.createPost = async (req, res)=>{
 }
 
 exports.getManyPost = async (req, res)=>{
-    const {page, limit, olderThan} = req.query
+    let {page, limit, olderThan} = req.query
    
-    
-    let postsQuery = Post.find().populate('comments')
+    let postsQuery = Post.find()
     if(olderThan){
         olderThan = parseInt(olderThan)
         postsQuery = postsQuery.where('createdAt').lte(olderThan)
@@ -58,13 +57,13 @@ exports.getManyPost = async (req, res)=>{
         page = parseInt(page)
         postsQuery = postsQuery.skip(page*limit).limit(limit)
     }
-    const [posts, count] = await Promise.all([postsQuery.exec(), Post.find().countDocuments()])
+    const posts = await postsQuery.populate('comments')
     
     res.json({
         code:0,
         data:{
           totalPages: page || 1,
-          totalItems: count, 
+          totalItems: posts.length, 
           page: page || 1,
           limit: 2,
           items: await Promise.all(posts.map(async (post) =>({

@@ -44,7 +44,7 @@ export default (state = initialState, action)=>{
         case userConstants.LOGIN_FAILURE:
             return{
                 ...state,
-                loggedIn: true,
+                loggedIn: false,
                 requesting: false,
                 token: undefined,
                 message: action.message

@@ -68,7 +68,7 @@ exports.getManyNotification = async (req, res)=>{
         page = parseInt(page)
         notificationsQuery = notificationsQuery.skip(page*limit).limit(limit)
     }
-    const [notifications, count] = await Promise.all([notificationsQuery.populate('department').exec(), Notification.find().countDocuments()])
+    const notifications = await notificationsQuery.populate('department')
     
     res.json({
         code:0,
@@ -83,7 +83,7 @@ exports.getManyNotification = async (req, res)=>{
             updatedAt: notification.updatedAt,
             author:{
                 id: notification.author,
-                name: (await User.findById(notification.author)).name
+                name: (await User.findById(notification.author))?.name
             },
             department: {
                 id: notification.department.id,
