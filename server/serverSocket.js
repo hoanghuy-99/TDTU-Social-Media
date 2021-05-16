@@ -1,5 +1,5 @@
 require('dotenv').config()
-const {createServer} = require(process.env.NODE_ENV == 'production'?'https':'http')
+const {createServer} = require('http')
 const { Server } = require('socket.io')
 const jwtUtil = require('./utils/jwt')
 const privateKey = process.env.PRIVATE_KEY
