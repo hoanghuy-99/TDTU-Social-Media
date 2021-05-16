@@ -1,9 +1,10 @@
-const { useDispatch } = ReactRedux
-const { useState } = React
+const { useDispatch,useSelector } = ReactRedux
+const { useState,useEffect } = React
 import { newPost } from '../../redux/actions/post.actions'
-
+import { requestImageById } from '../../services/user.services'
 const Modal_Post = ()=>{
     const dispatch = useDispatch()
+    const avatar = useSelector(state => state?.user?.avatar)
     function closeModal(){
         document.getElementById('modal_change_avatar').style.display='none'
     }
@@ -20,7 +21,6 @@ const Modal_Post = ()=>{
             const imgUrl = URL.createObjectURL(img);
             avatar.src =imgUrl
             setImagePost(img)
-            document.getElementById('btn_cancel_img').style.display ='block'
             setHiddenImg(false)
             setDisableVid(true)
           }
@@ -53,7 +53,6 @@ const Modal_Post = ()=>{
     }
     const handleCancelImg = () =>{
         document.getElementById("img_modal_post_social").setAttribute('src','')
-        document.getElementById('btn_cancel_img').style.display ='none'
         setHiddenImg(true)
         setImagePost(undefined)
         setDisableVid(false)
@@ -70,7 +69,7 @@ const Modal_Post = ()=>{
                 <div className="w3-container">
                     <div className="row">
                         <div className="col-lg-1">
-                            <img src="/img/avatar.jpg" id="avatar_post"/>
+                            <img src={avatar} id="avatar_post"/>
                         </div>
                         <div className="col-lg-11">
                             <strong>Tuấn Kiệt</strong>
@@ -85,7 +84,7 @@ const Modal_Post = ()=>{
                     </div>
                     <div>
                         <img src="" id="img_modal_post_social" className="img_modal_post" hidden={hiddenImg}/>
-                        <button id="btn_cancel_img" className="btn_cancel_img" onClick={handleCancelImg}><i className="fas fa-times"/></button>
+                        <button id="btn_cancel_img" className="btn_cancel_img" hidden={hiddenImg} onClick={handleCancelImg}><i className="fas fa-times"/></button>
                     </div>
                     <div>
                         <iframe id="youtube_embed" width="560" height="315" src={urlYTB} allowFullScreen hidden={hiddenVid} 
@@ -93,7 +92,7 @@ const Modal_Post = ()=>{
                     </div>
                     <div className="row" id="div_modal_post_social">
                         <div className="col-lg-12">
-                            <input onChange={handleChange} id="pic-post-file" type="file" hidden/>
+                            <input onChange={handleChange} id="pic-post-file" type="file" hidden accept="image/png, image/jpeg"/>
                             <button id="custom_btn_pic" onClick={activeImage} disabled={disableImg} className="btn btn-success btn_social">
                                 <i className="far fa-images"></i>Ảnh</button>
                         </div>

@@ -6,6 +6,7 @@ const initialState = {
     message: undefined,
     data: undefined,
     tokens: undefined,
+    avatar: undefined,
 }
 
 export default (state = initialState, action)=>{
@@ -71,6 +72,23 @@ export default (state = initialState, action)=>{
                 loggedIn: false,
                 token:undefined
             }
+        case userConstants.FETCH_USER_AVATAR:
+            return{
+                ...state,
+                requesting:true
+            }
+        case userConstants.FETCH_USER_AVATAR_SUCCESS:
+            return{
+                ...state,
+                requesting: false,
+                avatar: action.avatar
+            }
+        case userConstants.FETCH_USER_AVATAR_FAILURE:
+            return{
+                ...state,
+                requesting: false,
+                avatar: action.avatar
+            }
         case userConstants.CHANGE_PASSWORD:
             return{
                 ...state,
@@ -97,8 +115,8 @@ export default (state = initialState, action)=>{
             return{
                 ...state,
                 requesting:false,
-                data: action.data,
-                message: action.message
+                message: action.message,
+
             }
         case userConstants.CHANGE_INFO_FAILURE:
             return{

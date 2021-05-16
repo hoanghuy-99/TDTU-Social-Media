@@ -2,7 +2,7 @@ const {useEffect,useState} = React
 const { Link,Redirect } = ReactRouterDOM
 import { getId, getRole, getToken } from '../../cookie'
 const { useDispatch,useSelector } = ReactRedux
-import { logout } from '../../redux/actions/user.actions'
+import { getAvatar, logout } from '../../redux/actions/user.actions'
 import {fetchUserById} from '../../redux/actions/user.actions'
 import { requestImageById } from '../../services/user.services'
 const DateAndTime = () =>{
@@ -23,19 +23,12 @@ const DateAndTime = () =>{
 }
 const Header = () =>{
     const dispatch = useDispatch()
-    const handleImageAvatar = async ()=>{
-        const img = await requestImageById()
-        console.log("img",img);
-        const imgUrl = URL.createObjectURL(img)
-        setImgAvatar(imgUrl)
-    }
-    const [imgAvatar,setImgAvatar] = useState()
-    console.log("avatar",imgAvatar);
     useEffect(()=>{
         dispatch(fetchUserById(getId()))
-        handleImageAvatar()
+        dispatch(getAvatar())
     },[])
     const users = useSelector(state => state?.user?.data)
+    const avatar = useSelector(state => state?.user?.avatar)
     function handleLogout(){
         dispatch(logout())
     }
@@ -55,7 +48,7 @@ const Header = () =>{
                     <Link className="button" id="btn_logout" onClick={handleLogout}><i className="fas fa-sign-out-alt"></i>Thoát</Link>
                 </div>
                 <div id="info_avatar_div">
-                    <img src={imgAvatar} id="info_avatar"/>
+                    <img src={avatar} id="info_avatar"/>
                 </div>
             </div>
             <div>

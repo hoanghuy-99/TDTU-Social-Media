@@ -1,18 +1,18 @@
 import { getId } from "../../cookie"
 import { changeInfoStudent, fetchUserById } from "../../redux/actions/user.actions"
-
+import { requestImageById } from '../../services/user.services'
 const { Link } = ReactRouterDOM
 const { useState,useEffect } = React
 const { useDispatch,useSelector } = ReactRedux
 
 const Student_Info = ({children}) =>{
     const dispatch = useDispatch()
-    useEffect(()=>{
-        dispatch(fetchUserById())
-    },[])
+    const avatar = useSelector(state => state?.user?.avatar)
     const users = useSelector(state => state?.user?.data)
-    const [userInfo,setUserInfo]= useState(users)
-    console.log("users",users);
+    const [userInfo,setUserInfo]= useState()
+    useEffect(()=>{
+        setUserInfo(users)
+    },[users])
     function openModal(){
         document.getElementById('modal_change_avatar').style.display='block'
     }
@@ -62,7 +62,7 @@ const Student_Info = ({children}) =>{
                     <div id="student_info_div">
                         <div className="row justify-content-center">
                             <div className="col-lg-6" id="student_info_avatar_div">
-                                <img src="/img/avatar.jpg" id="student_info_avatar" alt=""/>
+                                <img src={avatar} id="student_info_avatar" alt=""/>
                                 <br/>
                                 <Link to="#" onClick={openModal} id="btn_student_info_avatar">Thay đổi ảnh đại diện</Link>
                             </div>

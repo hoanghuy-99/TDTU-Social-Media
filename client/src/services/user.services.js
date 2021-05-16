@@ -71,15 +71,15 @@ async function requestImageById(){
     return data
 }
 
-async function requestChangeImageById(){
-    const response = await fetch(host + '/api/student/me/avatar',{
+async function requestChangeAvatarById(imgAvatar){
+    const response = await fetch('http://localhost:8080/api/profile/avatar',{
         method: "PUT",
         headers: {
-            'Content-Type': 'application/json',
             'Authorization': getToken(),
         },
+        body: imgAvatar
     })
     const data = await response.json()
     return data
 }
-export { requestUserById,requestChangePassword,requestImageById,requestChangeInfoById}
+export { requestUserById,requestChangePassword,requestImageById,requestChangeInfoById,requestChangeAvatarById}

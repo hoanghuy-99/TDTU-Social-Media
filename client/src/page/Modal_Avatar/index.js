@@ -1,4 +1,10 @@
+const { useState,useEffect } = React
+const { useDispatch,useSelector } = ReactRedux
+import { changeAvatarUser } from '../../redux/actions/user.actions'
+import { requestImageById } from '../../services/user.services'
 const Modal_Change_Avatar = ()=>{
+    const dispatch = useDispatch()
+    const avatar = useSelector(state => state?.user?.avatar)
     function closeModal(){
         document.getElementById('modal_change_avatar').style.display='none'
     }
@@ -7,13 +13,19 @@ const Modal_Change_Avatar = ()=>{
         const uploadAvatarFile = document.getElementById("avatar_file")
         uploadAvatarFile.click();
     }
-    const handleChange = ()=>{
+    const [imgAvatar,setImgAvatar] = useState()
+    const handleChangeAvatar = ()=>{
+        dispatch(changeAvatarUser(imgAvatar))
+        closeModal()
+    }
+    const handleChange = (event)=>{
       const uploadAvatarFile = document.getElementById("avatar_file")
       const avatar = document.getElementById("change_avatar_img")
         if(uploadAvatarFile.value){
             const img = event.target.files[0];
             const imgUrl = URL.createObjectURL(img);
             avatar.src =imgUrl
+            setImgAvatar(img)
         }
     }
     return(
@@ -28,16 +40,16 @@ const Modal_Change_Avatar = ()=>{
                     <div className="row">
                         <div className="col-lg-12" id="change_avatar_div">
                                 <div>
-                                    <img src="/img/avatar.jpg" id="change_avatar_img"/>
+                                    <img src={avatar} id="change_avatar_img"/>
                                 </div>
                                 <div>
-                                    <input onChange={handleChange} type="file" id="avatar_file"/>
+                                    <input onChange={handleChange} type="file" id="avatar_file" accept="image/png, image/jpeg"/>
                                     <button onClick={handleClick} id="btn_up_avatar" className="btn btn-danger"><i className="fas fa-images"></i>Chọn ảnh</button>
                                 </div>
                         </div>
                         <div className="col-lg-12" id="confirm_avatar_div">
-                            <button className="btn btn-danger">Hủy</button>
-                            <button className="btn btn-success" id="btn_confirm_avatar">Xác nhận</button>
+                            <button onClick={closeModal} className="btn btn-danger">Hủy</button>
+                            <button onClick={handleChangeAvatar} className="btn btn-success" id="btn_confirm_avatar">Xác nhận</button>
                         </div>
                     </div>
                   </div>

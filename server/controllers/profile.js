@@ -45,7 +45,7 @@ exports.editProfile = async (req, res)=>{
 const fs = require('fs/promises')
 const path = require('path')
 exports.updateAvatar = async (req, res)=>{
-    let student = await Student.findById(req.params.id)
+    let student = await Student.findById(req.token.user_id)
     oldAvatar = student.avatar 
     student.avatar = req.image
     await Promise.all([student.save(), fs.unlink(path.join(__dirname, '../uploads/', oldAvatar))])

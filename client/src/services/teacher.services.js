@@ -1,11 +1,11 @@
 import {getToken} from '../cookie.js'
 var host = window.location.protocol + "//" + window.location.host
 
-async function requestNewTeacher(username, password, email, name, department) {
+async function requestNewTeacher(username, password, email, name, departments) {
     const req = {
-        username, password, email, name, department
+        username, password, email, name, departments
     }
-    const response = await fetch(host + '/api/teachers',{
+    const response = await fetch('http://localhost:8080/api/teachers',{
         method: "POST",
         headers: {
             'Content-Type': 'application/json',

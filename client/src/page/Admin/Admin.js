@@ -25,6 +25,7 @@ const Admin = () =>{
             }
         }
         if(username && (password === rePassword) && email && name && department){
+            console.log(name,email,username,department)
             dispatch(register(username, password, email, name, department))
         } else if(password !== rePassword) {
             dispatch(setAlert('Mật khẩu không trùng nhau', 'danger'))
@@ -74,7 +75,7 @@ const Admin = () =>{
                                                 {departments?.map((value)=>{
                                                     return(
                                                         <li>
-                                                            <input type="checkbox" name="faculty" value={value.name} className="form-check-input" id={value.id}/>
+                                                            <input type="checkbox" name="faculty" value={value.id} className="form-check-input" id={value.id}/>
                                                             {value.name}
                                                         </li>
                                                     )

@@ -2,7 +2,8 @@ import userConstants from "../constants/user.constants"
 import setAlert  from './alert.actions'
 import { getToken, removeToken, setToken } from '../../cookie'
 import { requestToken, putToken } from '../../services/token.services'
-import { requestChangeInfoById, requestChangePassword, requestUserById } from "../../services/user.services"
+import { requestChangeAvatarById, requestChangeInfoById, requestChangePassword, requestImageById, requestUserById } from "../../services/user.services"
+import { requestNewTeacher } from "../../services/teacher.services"
 
 const fetchUser = () => {
     function request(){
@@ -142,9 +143,10 @@ function register(username, password, email, name, department){
         }
     }
 
-    function success(message){
+    function success(message,data){
         return {
             type: userConstants.REGISTER_SUCCESS,
+            data,
             message
         }
     }
@@ -161,7 +163,7 @@ function register(username, password, email, name, department){
         const res = await requestNewTeacher(username, password, email, name, department)
         if(res.code === 0){
             const message = res.message
-            dispatch(success(message))
+            dispatch(success(res.data,message))
             dispatch(setAlert(message, 'success'))
         } else {
             const message = res.message
@@ -254,4 +256,77 @@ function checkLogin(){
     }
 }
 
-export { login, loginGoogleAPI, logout, register, fetchUserById, checkLogin,changePassword,changeInfoStudent }
+function getAvatar(){
+    function request(){
+        return { 
+            type: userConstants.FETCH_USER_AVATAR
+        }
+    }
+
+    function success(avatar){
+        return {
+            type: userConstants.FETCH_USER_AVATAR_SUCCESS,
+            avatar
+        }
+    }
+
+    function failure(avatar){
+        return {
+            type: userConstants.FETCH_USER_AVATAR_FAILURE,
+            avatar
+        }
+    }
+
+    return async (dispatch) => {
+        dispatch(request())
+        const res = await requestImageById()
+        if(res.type == "image/jpeg"){
+            dispatch(success(URL.createObjectURL(res)))
+        } else {
+            let mac_dinh = await fetch('/img/avatar_mac_dinh.jpg')
+            mac_dinh = await mac_dinh.blob()
+            dispatch(failure(URL.createObjectURL(mac_dinh)))
+        }
+    }
+}
+
+function changeAvatarUser(imgAvatar){
+    function request(){
+        return { 
+            type: userConstants.CHANGE_USER_AVATAR
+        }
+    }
+
+    function success(message){
+        return {
+            type: userConstants.CHANGE_USER_AVATAR_SUCCESS,
+            message
+        }
+    }
+
+    function failure(message){
+        return {
+            type: userConstants.CHANGE_USER_AVATAR_FAILURE,
+            message
+        }
+    }
+
+    return async (dispatch) => {
+        var dataAvatar = new FormData()
+        dataAvatar.append('image',imgAvatar,'fileName')
+        console.log(imgAvatar);
+        dispatch(request())
+        const res = await requestChangeAvatarById(dataAvatar)
+        if(res.code === 0){
+            const message = res.message
+            dispatch(success(message))
+            dispatch(getAvatar())
+        } else {
+            const message = res.message
+            dispatch(failure(message))
+        }
+    }
+}
+
+export { login, loginGoogleAPI, logout, register, fetchUserById, checkLogin,changePassword,changeInfoStudent,getAvatar,
+changeAvatarUser}

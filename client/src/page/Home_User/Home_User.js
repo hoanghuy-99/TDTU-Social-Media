@@ -10,16 +10,17 @@ import { requestGetImagePost } from '../../services/post.services'
 import { requestImageById } from '../../services/user.services'
 const {useDispatch,useSelector} = ReactRedux
 const {useState,useEffect} = React
-
-const Home = ({children}) =>{
+const { useParams } = ReactRouterDOM
+const Home_User = ({children}) =>{
     const dispatch = useDispatch()
+    const {id} = useParams()
     useEffect(()=>{
         dispatch(fetchPost())
         dispatch(fetchNotification())
     },[])
     let posts = useSelector(state => state?.post?.data)
     let notifications = useSelector(state => state?.notification?.data)
-    const avatar = useSelector(state => state?.user?.avatar)
+    console.log("posts",posts);
     console.log("notifications",notifications);
     notifications?.items?.sort((a,b)=>{
         const timeA = new Date(a.createdAt).getTime()
@@ -36,9 +37,6 @@ const Home = ({children}) =>{
         const timeB = new Date(b.createdAt).getTime()
         return timeB - timeA
     })
-    function openModal(){
-        document.getElementById('modal_change_avatar').style.display='block'
-    }
     const openModalDeletePost= (id)=>(e)=>{
         document.getElementById(id).style.display='block'
     }
@@ -150,103 +148,92 @@ const Home = ({children}) =>{
         <div className=" col-12 col-lg-10" id="body_div">
             <div className="row">
                 <div id="xahoi" className="col-lg-7" >  
-                    <div className="row justify-content-center">
-                        <div className="col-lg-11" id="div_post_social">
-                            <div className="form-group">
-                                <div className="row">
-                                    <div className="col-2 col-lg-1">
-                                        <img src={avatar} id="avatar_post"/>
-                                    </div>
-                                    <div className="col-10 col-lg-11" id="div_modal_post" onClick={openModal}>
-                                        Bạn đang nghĩ gì?
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-                    </div>
                     {/* Mỗi bài post */}
                     {posts?.items?.map((value,index)=>{
-                        return(
-                            <div key={`post-`+index} className="row justify-content-center">
-                        <div className="col-lg-11" id="div_post_social">
-                            <div className="form-group">
-                                <div className="row">
-                                    <hr/>
-                                    <div className="col-2 col-lg-1">
-                                        <img src="/img/avatar_mac_dinh.jpg" id="avatar_post"/>
-                                    </div>
-                                    <div className="col-8 col-lg-10">
-                                        <Link to={"/home/"+value.author.id}><strong>{value.author.name}</strong></Link>
-                                        <p>Được đăng: {fromatPostOn(value.createdAt)}</p>
-                                    </div>
-                                    <div className="col-2 col-lg-1">
-                                        <div className="dropdown" hidden={checkIdUser(value.author.id)}>
-                                            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                             data-bs-toggle="dropdown" aria-expanded="false">
-                                                ...
-                                            </button>
-                                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><Link className="dropdown-item" to="#" onClick={openModalEditPost("edit_post_"+value.id)}><i className="fas fa-wrench"></i>Chỉnh sửa</Link></li>
-                                                <li><Link className="dropdown-item" to="#" onClick={openModalDeletePost("delete_post_"+value.id)}><i className="fas fa-times"></i>Xóa</Link></li>
-                                            </ul>
+                        if(id == value.author.id){
+                            return(
+                                <div key={`post-`+index} className="row justify-content-center">
+                            <div className="col-lg-11" id="div_post_social">
+                                <div className="form-group">
+                                    <div className="row">
+                                        <hr/>
+                                        <div className="col-2 col-lg-1">
+                                            <img src="/img/avatar_mac_dinh.jpg" id="avatar_post"/>
                                         </div>
-                                        <Modal_Edit_Post props={{edit:"edit_post_"+value.id,id:value.id}}></Modal_Edit_Post>
-                                        <Modal_Delete_Post props={{delete:"delete_post_"+value.id,id:value.id}}></Modal_Delete_Post>
+                                        <div className="col-8 col-lg-10">
+                                            <strong>{value.author.name}</strong>
+                                            <p>Được đăng: {fromatPostOn(value.createdAt)}</p>
+                                        </div>
+                                        <div className="col-2 col-lg-1">
+                                            <div className="dropdown" hidden={checkIdUser(value.author.id)}>
+                                                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                                 data-bs-toggle="dropdown" aria-expanded="false">
+                                                    ...
+                                                </button>
+                                                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                    <li><Link className="dropdown-item" to="#" onClick={openModalEditPost("edit_post_"+value.id)}><i className="fas fa-wrench"></i>Chỉnh sửa</Link></li>
+                                                    <li><Link className="dropdown-item" to="#" onClick={openModalDeletePost("delete_post_"+value.id)}><i className="fas fa-times"></i>Xóa</Link></li>
+                                                </ul>
+                                            </div>
+                                            <Modal_Edit_Post props={{edit:"edit_post_"+value.id,id:value.id}}></Modal_Edit_Post>
+                                            <Modal_Delete_Post props={{delete:"delete_post_"+value.id,id:value.id}}></Modal_Delete_Post>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="row">
-                                    <p>{value.content}</p>
-                                </div>
-                                <div className="row">
-                                    <img src={imgList[value.id]?.imgUrl} id="img_post" hidden={checkImage(value.id)}></img>
-                                </div>
-                                <div>
-                                    <iframe id="youtube_post"  height="400"  src={value.video} hidden={hiddenVideo(value.video)} allowFullScreen></iframe>
-                                </div>
-                                <hr/>
-                                <div className="row">
-                                    <div className="col-2 col-lg-1">
-                                        <img src="/img/avatar_mac_dinh.jpg" id="avatar_comment"/>
+                                    <div className="row">
+                                        <p>{value.content}</p>
                                     </div>
-                                    <div className="col-10 col-lg-11" id="div_comment_post">
-                                    <div className="input-group">
-                                        <input id={value.id} type="text" className="form-control comment_post"
-                                        placeholder="Viết bình luận..." aria-label="Recipient's username" aria-describedby="basic-addon2"/>
-                                        <div className="input-group-append">
-                                            <button onClick={addComment(value.id)} className="btn btn-primary" type="button">Bình luận</button>
-                                        </div>  
+                                    <div className="row">
+                                        <img src={imgList[value.id]?.imgUrl} id="img_post" hidden={checkImage(value.id)}></img>
                                     </div>
+                                    <div>
+                                        <iframe id="youtube_post"  height="400"  src={value.video} hidden={hiddenVideo(value.video)} allowFullScreen></iframe>
                                     </div>
-                                </div>
-                                <hr/>
-                                {/* Comment */}
-                                {value.comments?.map((new_value,new_index)=>{
-                                        return(
-                                    <div key={'comment-'+new_index} className="row" id="div_cmt">   
+                                    <hr/>
+                                    <div className="row">
                                         <div className="col-2 col-lg-1">
                                             <img src="/img/avatar_mac_dinh.jpg" id="avatar_comment"/>
                                         </div>
-                                        <div className="col-10 col-lg-10">
-                                            <strong>{new_value.author.name}</strong>
-                                            <p id="comment">{new_value.content}</p>
-                                            <button hidden={hiddenComment(new_value.author.id)} onClick={openModalEditComment("edit_cmt_"+new_value.id)}
-                                             className="edit_cmt">Chỉnh sửa</button>
-                                            <button hidden={hiddenComment(new_value.author.id)} onClick={openModalDeleteComment("delete_cmt_"+new_value.id)}
-                                             className="edit_cmt">Xóa</button>
+                                        <div className="col-10 col-lg-11" id="div_comment_post">
+                                        <div className="input-group">
+                                            <input id={value.id} type="text" className="form-control comment_post"
+                                            placeholder="Viết bình luận..." aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                                            <div className="input-group-append">
+                                                <button onClick={addComment(value.id)} className="btn btn-primary" type="button">Bình luận</button>
+                                            </div>  
                                         </div>
-                                        <Modal_Edit_Comment props={{edit:"edit_cmt_"+new_value.id,id:new_value.id,content:new_value.content,idPost:value.id}}></Modal_Edit_Comment>
-                                        <Modal_Delete_Comment props={{delete:"delete_cmt_"+new_value.id,id:new_value.id,idPost:value.id}}></Modal_Delete_Comment>
-                                        <div className="col-2 col-lg-1">
-                                            <p>{fromatPostOn(new_value.createdAt)}</p>
-                                        </div> 
+                                        </div>
                                     </div>
-                                    )
-                                })}
-                                {/* ------ */}
-                            </div>
-                        </div> 
-                    </div>
-                        )
+                                    <hr/>
+                                    {/* Comment */}
+                                    {value.comments?.map((new_value,new_index)=>{
+                                            return(
+                                        <div key={'comment-'+new_index} className="row" id="div_cmt">   
+                                            <div className="col-2 col-lg-1">
+                                                <img src="/img/avatar_mac_dinh.jpg" id="avatar_comment"/>
+                                            </div>
+                                            <div className="col-10 col-lg-10">
+                                                <strong>{new_value.author.name}</strong>
+                                                <p id="comment">{new_value.content}</p>
+                                                <button hidden={hiddenComment(new_value.author.id)} onClick={openModalEditComment("edit_cmt_"+new_value.id)}
+                                                 className="edit_cmt">Chỉnh sửa</button>
+                                                <button hidden={hiddenComment(new_value.author.id)} onClick={openModalDeleteComment("delete_cmt_"+new_value.id)}
+                                                 className="edit_cmt">Xóa</button>
+                                            </div>
+                                            <Modal_Edit_Comment props={{edit:"edit_cmt_"+new_value.id,id:new_value.id,content:new_value.content,idPost:value.id}}></Modal_Edit_Comment>
+                                            <Modal_Delete_Comment props={{delete:"delete_cmt_"+new_value.id,id:new_value.id,idPost:value.id}}></Modal_Delete_Comment>
+                                            <div className="col-2 col-lg-1">
+                                                <p>{fromatPostOn(new_value.createdAt)}</p>
+                                            </div> 
+                                        </div>
+                                        )
+                                    })}
+                                    {/* ------ */}
+                                </div>
+                            </div> 
+                        </div>
+                            )
+                        }
+                        
                     })}
                     
                     {/* ----- */}
@@ -277,4 +264,4 @@ const Home = ({children}) =>{
         </div>
     )
 }
-export default Home
+export default Home_User

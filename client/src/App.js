@@ -20,6 +20,7 @@ import EditPost from './page/Edit_Post/index'
 import { checkLogin, fetchUserById } from './redux/actions/user.actions'
 import { getId, getToken } from './cookie'
 import useSocket from './clientSocket'
+import Home_User from './page/Home_User/Home_User'
 const App = () =>{
     const loggedIn = useSelector(state => state.user.loggedIn)
     const dispatch = useDispatch()
@@ -63,6 +64,9 @@ const App = () =>{
                             </Route>
                             <Route exact strict path="/notification">
                                 <Notification/>
+                            </Route>
+                            <Route exact strict path="/home/:id">
+                                <Home_User/>
                             </Route>
                             <Route exact strict path="/addNotification/:id">
                                 <AddNotification/>
