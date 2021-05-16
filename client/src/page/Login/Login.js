@@ -6,11 +6,10 @@ const { Redirect } = ReactRouterDOM
 const { GoogleAPI, GoogleLogin } = window['react-google-oauth']
 
 function Login(){
-  console.log(window.location.pathname)
   const dispatch = useDispatch()
   
   const loggedIn = useSelector(state => state.user.loggedIn)
-  
+  const users = useSelector(state => state?.user.message)
   //Google Login
   const loginStatus = (response) => console.log(response)
   const loginFailure = (error) => console.log(error)

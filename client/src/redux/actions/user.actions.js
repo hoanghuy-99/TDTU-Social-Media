@@ -163,12 +163,14 @@ function register(username, password, email, name, department){
         const res = await requestNewTeacher(username, password, email, name, department)
         if(res.code === 0){
             const message = res.message
-            dispatch(success(res.data,message))
-            dispatch(setAlert(message, 'success'))
-        } else {
+            dispatch(success(message,res.data))
+        }
+        else if(res.code == 20){
+            dispatch(failure(res.message))
+        } 
+        else {
             const message = res.message
             dispatch(failure(message))
-            dispatch(setAlert(message, 'danger'))
         }
     }
 }

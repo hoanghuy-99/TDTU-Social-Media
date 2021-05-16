@@ -20,7 +20,7 @@ const FacultyInfo = ({children}) =>{
         const old_password = document.getElementById('old_password').value
         const new_password = document.getElementById('new_password').value
         const re_password = document.getElementById('re_new_password').value
-        if(new_password == re_password){
+        if(old_password && new_password == re_password){
             dispatch(changePassword(old_password,new_password))
             document.getElementById('old_password').value = ""
             document.getElementById('new_password').value = ""
