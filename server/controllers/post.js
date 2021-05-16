@@ -67,7 +67,7 @@ exports.getManyPost = async (req, res)=>{
           totalItems: count, 
           page: page || 1,
           limit: 2,
-          items: await Promise.all(posts.map(async (post) =>({
+          items: count == 0 ? [] : await Promise.all(posts.map(async (post) =>({
             id: post._id,
             createdAt: post.createdAt,
             updatedAt: post.updatedAt,
