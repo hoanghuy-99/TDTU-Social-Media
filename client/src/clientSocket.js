@@ -1,7 +1,12 @@
+import {getToken} from './cookie'
 let socket
 const useSocket = ()=>{
     if(!socket){
-        socket = io('ws://localhost:8080')
+        socket = io('ws://localhost:8080', {
+            auth: {
+                token: getToken()
+            }
+        })
     }
     return{
         handleNewNotification: (action)=>{
