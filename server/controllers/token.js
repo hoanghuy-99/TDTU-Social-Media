@@ -80,7 +80,6 @@ exports.createTokenByGoogle = async (req, res)=>{
     }
 
     let user = await Student.findOne({email:payload.email})
-    console.log(payload)
     if(!user){
         let avatar = uuidv4()+'.jpg'
         let response = await fetch(payload.picture)
